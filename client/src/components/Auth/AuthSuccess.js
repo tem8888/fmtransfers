@@ -1,7 +1,8 @@
 import React from 'react'
 const images = {
 	Strømsgodset: require('../../assets/img/Strom.png'), 
-	Roma: require('../../assets/img/Roma.png')}
+  Roma: require('../../assets/img/Roma.png'),
+  'Nashe Pivo': require('../../assets/img/NashePivo.png')}
 
 export const AuthSuccess = ({club, money, nickname, submitLogoutHandler}) => {
 
