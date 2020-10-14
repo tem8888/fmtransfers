@@ -26,9 +26,9 @@ async function start(){
 
 		if (process.env.NODE_ENV === 'production') {
 			server.use(express.static(path.join(__dirname, '/client/build')));
-		// 	server.get('*', (req, res) => {
-		// 		res.sendFile(path.join(__dirname + '/client/build/index.html'));
-		// });
+			server.get('*', (req, res) => {
+				res.sendFile(path.join(__dirname + '/client/build/index.html'));
+		});
 		}
 		
 		server.listen(PORT, () => console.log(`App has been started on port ${PORT}...`))
