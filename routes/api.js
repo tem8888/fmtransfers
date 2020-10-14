@@ -38,7 +38,7 @@ setInterval(() => {
 /* Возвращает список всех игроков в базке */
 /* ------------------------------------- */
 router.get('/load', (req, res) => {
-		Player.find({ preferredfoot: 'Either' })
+		Player.find({ })
 				.then((data) => {
 						res.json(data);
 				})

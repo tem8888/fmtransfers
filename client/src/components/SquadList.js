@@ -15,7 +15,7 @@ const SquadList = (props) => {
 
 /*  При изменении ключа sortKey выполняем сортировку. Пропускаем первый рендер  */
   useEffect(() => {
-    if (!isLoading) 
+    if (sortKey.key) 
       sortSquadPlayers(sortKey)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortKey])

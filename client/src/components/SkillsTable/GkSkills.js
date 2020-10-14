@@ -31,12 +31,12 @@ export const GkSkills = ({playerInfo}) => {
 						<table>
 							<tbody className="striped">
 							 { 
-									Object.keys(playerInfo.skillsTec).map((key, i) => (
+									Object.keys(playerInfo.skillsGk).map((key, i) => (
 										<tr key={i}>
 											<td style={{
-												color: playerInfo.skillsTec[key] > 15? 'var(--excel)': playerInfo.skillsTec[key] > 10? 'var(--good)':
-															 playerInfo.skillsTec[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsTec[key]}
+												color: playerInfo.skillsGk[key] > 15? 'var(--excel)': playerInfo.skillsGk[key] > 10? 'var(--good)':
+															 playerInfo.skillsGk[key] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo.skillsGk[key]}
 											</td>
 										</tr>
 									))

@@ -11,22 +11,6 @@ const schema = new Schema({
 	preferredfoot: {type: String},
 	price: {type: Number, required: true},
 	bidStatus: {type: String},
-	skillsGk: {
-		cor: {type: String},
-		cro: {type: String},
-		dri: {type: String},
-		fin: {type: String},
-		fir: {type: String},
-		fre: {type: String},
-		hea: {type: String},
-		lon: {type: String},
-		lth: {type: String},
-		mar: {type: String},
-		pas: {type: String},
-		pen: {type: String},
-		tck: {type: String},
-		tec: {type: String}
-	},
 	skillsTec: {
 		cor: {type: String},
 		cro: {type: String},
@@ -75,6 +59,21 @@ const schema = new Schema({
 		prof: {type: String},
 		injpr: {type: String},
 		cons: {type: String}
+	},
+	skillsGk: {
+		thr: {type: String},
+		com: {type: String},
+		kic: {type: String},
+		cmd: {type: String},
+		tro: {type: String},
+		han: {type: String},
+		ovo: {type: String},
+		pun: {type: String},
+		pas: {type: String},
+		fir: {type: String},
+		ref: {type: String},
+		aer: {type: String},
+		ecc: {type: String}
 	}
 	
 })
