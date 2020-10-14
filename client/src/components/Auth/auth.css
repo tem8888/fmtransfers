@@ -1,0 +1,13 @@
+.auth__form, .auth__succes{
+	margin: 0.5rem auto 0;
+	padding: 0.5rem;
+}
+.auth__input.invalid {
+	border-bottom: 1px solid var(--red);
+}
+.btn-logout {
+	background-color: var(--grey) !important;
+}
+.btn-login {
+	margin-top: 10px;
+}

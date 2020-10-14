@@ -1,0 +1,57 @@
+{
+  "name": "fmtransfers",
+  "version": "1.0.0",
+  "description": "Transfers app for FM",
+  "main": "app.js",
+  "proxy": "http://localhost:5000",
+  "secure": "false",
+  "scripts": {
+    "build": "babel server.js -d dist && nodemon dist/server.js",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "mongoose",
+    "express",
+    "react",
+    "node"
+  ],
+  "author": "Artem Dmytrishyn <tem.isdev@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.6",
+    "nouislider": "^14.6.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-nouislider": "^2.0.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "wnumb": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
+    "@babel/polyfill": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/register": "^7.11.5",
+    "babel-preset-react-app": "^9.1.2",
+    "concurrently": "^5.3.0",
+    "ignore-styles": "^5.0.1",
+    "nodemon": "^2.0.4"
+  }
+}
