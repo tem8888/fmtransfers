@@ -1,5 +1,4 @@
 const express = require('express')
-const config = require('config')
 const mongoose = require('mongoose')
 const server = express()
 const path = require('path')

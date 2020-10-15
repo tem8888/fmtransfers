@@ -69,8 +69,15 @@ export const RadarAnalyzer = ({pi}) => {
 	//     Number(pi.skillsMen['bra'])/20*0.60 + Number(pi.skillsMen['cmp'])/20*0.40 + Number(pi.skillsMen['cnt'])/20*0.60 +
 	//     Number(pi.skillsMen['vis'])/20*0.15 + Number(pi.skillsMen['dec'])/20*0.50 + Number(pi.skillsMen['pos'])/20*1 +
 	//     Number(pi.skillsPhy['acc'])/20*0.15 + Number(pi.skillsPhy['bal'])/20*0.05 + Number(pi.skillsPhy['jum'])/20*0.85 +
-	//     Number(pi.skillsPhy['pac'])/20*0.40 + Number(pi.skillsPhy['str'])/20*0.85) * 1.07*10
-
+	//     Number(pi.skillsPhy['pac'])/20*0.40 + Number(pi.skillsPhy['str'])/20*0.85) * 1.07*100/20
+	// const rating = (
+	// 	Number(pi.skillsTec['fir'])/20*0.15*1.07 + Number(pi.skillsTec['hea'])/20*0.85*1.07 +
+	// 	Number(pi.skillsTec['mar'])/20*0.85*1.07 + Number(pi.skillsTec['pas'])/20*0.30*1.07 + Number(pi.skillsTec['tck'])/20*1*1.07 +
+	// 	Number(pi.skillsTec['tec'])/20*0.15*1.07 + Number(pi.skillsMen['agg'])/20*0.50*1.07 + Number(pi.skillsMen['ant'])/20*0.6*1.07 +
+	// 	Number(pi.skillsMen['bra'])/20*0.60*1.07 + Number(pi.skillsMen['cmp'])/20*0.40*1.07 + Number(pi.skillsMen['cnt'])/20*0.6*1.07 +
+	// 	Number(pi.skillsMen['vis'])/20*0.15*1.07 + Number(pi.skillsMen['dec'])/20*0.50*1.07 + Number(pi.skillsMen['pos'])/20*1*1.07 +
+	// 	Number(pi.skillsPhy['acc'])/20*0.15*1.07 + Number(pi.skillsPhy['jum'])/20*0.85*1.07 +
+	// 	Number(pi.skillsPhy['pac'])/20*0.40*1.07 + Number(pi.skillsPhy['str'])/20*0.85*1.07) *10
 	
 	const options = {
 		scale: {
