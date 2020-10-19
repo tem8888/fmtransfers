@@ -1,12 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux'
 import { Loader } from './Loader/Loader.js';
-const { sortPlayers } = require('../store/actions/playerListActions.js')
+const { sortPlayers, loadPlayers } = require('../store/actions/playerListActions.js')
 const { loadBids } = require('../store/actions/bidActions')
 
 const PlayersList = (props) => {
 
-  const {sortPlayers, playersList, idPlayer, setIdPlayer, isLoading } = props
+  const {sortPlayers, loadPlayers, playersList, idPlayer, setIdPlayer, isLoading } = props
 
 	const [sortKey, setSortKey] = useState({ // состояние ключа сортировки
 		key: '',
@@ -27,6 +27,13 @@ const PlayersList = (props) => {
       setSortKey({key: e.target.id, orderby: 'asc'})
     else
       setSortKey({key: e.target.id, orderby: 'desc'})
+  }
+
+/* Событие перезагрузки списка игроков по кнопке */
+  const reloadHandler = (e) => {
+    e.preventDefault()
+    setLoading(true)
+    loadPlayers().then(() => setLoading(false))
   }
 
 /* Функция вывода списка всех отфильтрованных игроков */
@@ -84,6 +91,7 @@ const PlayersList = (props) => {
             </tbody>
           </table>
           <div className="players-count">
+          <i className="tiny material-icons renew" onClick={reloadHandler}>autorenew</i>&nbsp;
             Игроков найдено: {playersList.filtered.length}
           </div>
           </>
@@ -100,6 +108,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, sortKey) => ({
   loadBids: () => dispatch(loadBids()),
+  loadPlayers: () => dispatch(loadPlayers()),
   sortPlayers: (sortKey) => dispatch(sortPlayers(sortKey))
 })
 
