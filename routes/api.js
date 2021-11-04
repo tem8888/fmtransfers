@@ -6,36 +6,6 @@ const Player = require('../models/Player') // модель игрока
 const Bid = require('../models/Bid') // модель бида
 const Squadplayer = require('../models/Squadplayer')  // модель игрока состава
 const discordSendMessage = require('../middleware/discordSendMessage') // функция отправки сообщения в дискорд
-const INTERVALSERVERPOLL = 45000 // интервал опроса
-
-/* ------------------------------------------------------------ */
-/* Каждые N секунд проверяем базу на наличие завершенных бидов */
-/* ---------------------------------------------------------- */
-setInterval(() => {
-    let timeNow = new Date()
-    Bid.find({})
-    .then((data) => {
-        data.map((bid) => {
-
-            if ((new Date(bid.dateEnd) - timeNow < 0) && (bid.bidStatus !== 'finished'))
-            {
-							Bid.findOneAndUpdate({bidId: bid.bidId}, {bidStatus: 'finished'}, {new: true, useFindAndModify: false})
-							.then((res) => {
-									discordSendMessage(res, 'finished')
-									
-							})
-							.catch((error) => console.log(error))	
-
-							Player.findOneAndUpdate({uid: bid.bidId}, {bidStatus: 'finished'}, {new: true, useFindAndModify: false})
-							.then((res) => {
-								console.log('Player status updated.')
-							})
-							.catch((error) => console.log(error))	
-            }
-        })
-    })
-    .catch((error) => { console.log('error: ', error) });
-}, INTERVALSERVERPOLL);
 
 /* -------------------------------------- */
 /* Возвращает список всех игроков в базе */
