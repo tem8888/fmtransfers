@@ -71,7 +71,7 @@ const BidForm = (props) => {
 		setLoading(true)
 
 		saveBid(bidInfo)
-		.then(() => loadCurrentBid(playerId))
+		.then(() => { loadCurrentBid(playerId)
 		.then(() => { 
 			if (bidState.currentBid.club === user.club)	{ /* Проверка, был ли сохранен отправленный бид */
 				const userId = user.userId
@@ -92,7 +92,7 @@ const BidForm = (props) => {
 			else { setErrMsg({...errMsg, bidSendErr: 'Не успели! Бид сделала другая команда!'}) }
 			
 			setLoading(false)
-		})
+		})})
 		
 		resetBidInput() /* Сбрасываем инпут */
 	}

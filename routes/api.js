@@ -1,13 +1,16 @@
 const {Router} = require('express')
 const router = Router()
+const path = require('path')
 const User = require('../models/User') // модель пользователя
 const Player = require('../models/Player') // модель игрока
 const Bid = require('../models/Bid') // модель бида
-const Squadplayer = require('../models/Squadplayer')
-const discordSendMessage = require('../models/discordSendMessage')
-const path = require('path');
-const CF = 1.15
+const Squadplayer = require('../models/Squadplayer')  // модель игрока состава
+const discordSendMessage = require('../middleware/discordSendMessage') // функция отправки сообщения в дискорд
+const INTERVALSERVERPOLL = 45000 // интервал опроса
 
+/* ------------------------------------------------------------ */
+/* Каждые N секунд проверяем базу на наличие завершенных бидов */
+/* ---------------------------------------------------------- */
 setInterval(() => {
     let timeNow = new Date()
     Bid.find({})
@@ -32,11 +35,11 @@ setInterval(() => {
         })
     })
     .catch((error) => { console.log('error: ', error) });
-}, 45000);
+}, INTERVALSERVERPOLL);
 
-/* --------------------------------------- */
-/* Возвращает список всех игроков в базке */
-/* ------------------------------------- */
+/* -------------------------------------- */
+/* Возвращает список всех игроков в базе */
+/* ------------------------------------ */
 router.get('/load', (req, res) => {
 		Player.find({ })
 				.then((data) => {
@@ -47,6 +50,9 @@ router.get('/load', (req, res) => {
 				});
 })
 
+/* ------------------------------------------------------------------ */
+/* Возвращает список игроков из команды авторизованного пользователя */
+/* ---------------------------------------------------------------- */
 router.get('/loadsquad', (req, res) => {
 		/* query { club: clubName } */
 		Squadplayer.find(req.query)
@@ -58,10 +64,9 @@ router.get('/loadsquad', (req, res) => {
 				});
 })
 
-
-/* --------------------------------------- */
-/* Возвращает список всех бидов в базке */
-/* ------------------------------------- */
+/* ------------------------------------ */
+/* Возвращает список всех бидов в базе */
+/* ---------------------------------- */
 router.get('/loadbid', (req, res) => {
 		Bid.find({  })
 				.then((data) => {
@@ -72,11 +77,10 @@ router.get('/loadbid', (req, res) => {
 				});
 })
 
-/* --------------------------------------- */
-/* Возвращает, если есть текущий бид на игрока */
-/* ------------------------------------- */
+/* ---------------------------------- */
+/* Возвращает, текущий бид на игрока */
+/* -------------------------------- */
 router.get('/loadcurrentbid', (req, res) => {
-
 		Bid.findOne(req.query)
 				.then((data) => {
 						res.json(data);
@@ -86,9 +90,9 @@ router.get('/loadcurrentbid', (req, res) => {
 				});
 })
 
-/* --------------------------------------------------- */
-/* Добавляет или заменяет сделанный бид */
-/* ------------------------------------------------- */
+/* ---------------------------------------- */
+/* Добавляет или изменяет существующий бид */
+/* -------------------------------------- */
 router.post('/bidsend', (req, res) => {
 	const data = req.body
 	const filter = req.query
@@ -139,6 +143,9 @@ router.post('/bidsend', (req, res) => {
 });
 });
 
+/* ------------------------- */
+/*     Отчисление игрока    */
+/* ----------------------- */
 router.get('/sellsquadplayer', (req, res) => {
 		const uid = req.query.uid
 		Squadplayer.find(

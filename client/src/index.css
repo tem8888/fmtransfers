@@ -119,6 +119,8 @@ table.striped > tbody > tr.active-player {
 }
 .players-count {
 	position: absolute;
+	display: flex;
+	align-items: center;
 	right: 20px;
 	top: 485px;
 	font-size: 0.8rem;
