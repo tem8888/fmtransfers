@@ -1,7 +1,7 @@
 import React from 'react'
 import {technical, mental, physical, hidden} from '../../skills.js'
 
-export const PlayerSkills = ({playerInfo}) => {
+export const PlayerSkillsNew = ({playerInfo}) => {
 	return (
 		<table className="skills-table">
 			<thead>
@@ -31,12 +31,12 @@ export const PlayerSkills = ({playerInfo}) => {
 						<table className="skills-margin">
 							<tbody className="striped">
 							 { 
-									Object.keys(playerInfo.skillsTec).map((key, i) => (
+									Object.entries(playerInfo).slice(14,28).map((key, i) => (
 										<tr key={i}>
 											<td style={{
-												color: playerInfo.skillsTec[key] > 15? 'var(--excel)': playerInfo.skillsTec[key] > 10? 'var(--good)':
-															 playerInfo.skillsTec[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsTec[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))
@@ -55,12 +55,12 @@ export const PlayerSkills = ({playerInfo}) => {
 						<table className="skills-margin">
 							<tbody className="striped">
 							{ 
-									Object.keys(playerInfo.skillsMen).map((key, i) => (
+									Object.entries(playerInfo).slice(28,42).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
-												color: playerInfo.skillsMen[key] > 15? 'var(--excel)': playerInfo.skillsMen[key] > 10? 'var(--good)':
-															 playerInfo.skillsMen[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsMen[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))
@@ -81,24 +81,24 @@ export const PlayerSkills = ({playerInfo}) => {
 						<table className="skills-margin">
 							<tbody className="striped">
 								{ 
-									Object.keys(playerInfo.skillsPhy).map((key, i) => (
+									Object.entries(playerInfo).slice(42,50).map((key, i) => (
 										<tr key={i}>
 											<td style={{
-												color: playerInfo.skillsPhy[key] > 15? 'var(--excel)': playerInfo.skillsPhy[key] > 10? 'var(--good)':
-															 playerInfo.skillsPhy[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsPhy[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))
 								}
 								<tr><td>&nbsp;</td></tr>
 								{ 
-									Object.keys(playerInfo.skillsHid).map((key, i) => (
+									Object.entries(playerInfo).slice(50,55).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
-												color: playerInfo.skillsHid[key] > 15? 'var(--excel)': playerInfo.skillsHid[key] > 10? 'var(--good)':
-															 playerInfo.skillsHid[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsHid[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))

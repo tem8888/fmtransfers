@@ -20,6 +20,21 @@
 	scrollbar-color: #7289d9 #1E232D !important;
   scrollbar-width: thin !important;
 }
+::-webkit-scrollbar {
+    height: 12px;
+    width: 10px;
+    background: #1E232D;
+}
+::-webkit-scrollbar-thumb {
+    background: #7289d9;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 5px;
+}
 * {
 	scrollbar-width: thin !important;
 }
@@ -57,12 +72,16 @@ hr {
 	border-top: 1px solid #626262;
 	box-sizing: border-box;
 }
+form {
+	font-size: 14px;
+}
 select {
 	padding: 0 !important;
 	height: 1.5rem !important;
 	border: none !important;
 	color: var(--white);
 	background: none !important;
+	font-family: 'Exo 2', sans-serif !important;
 }
 option {
 	color: var(--dark);
@@ -76,8 +95,17 @@ select:focus {
 .row {
 	position: relative;
 }
+ .row .col {
+	padding: 0 0.6rem !important;
+}
 .input-row {
 	margin-bottom: 10px !important;
+}
+.input-field {
+	margin: 0 !important;
+}
+.input-field-name {
+	padding: 5px 0px 5px 0px !important;
 }
 
 .table-skill-value {
@@ -98,18 +126,30 @@ select:focus {
 	font-size: 0.8rem;
 	user-select: none;
 }
+.uid-col {
+	user-select: all;
+}
 .skills td {
 	padding: 2px 5px 4px !important;
 	line-height: 1.4;
 	overflow: hidden;
 	white-space: nowrap;
 }
+.skills-margin {
+	margin-left: -10px;
+}
 
 table.striped > tbody > tr:nth-child(2n+1) {
 	background-color: rgb(65, 67, 72) !important;
 }
+/* table.striped > tbody > tr.active-player > *:not(:first-child) {
+	background-color: var(--blue) !important;
+} */
 table.striped > tbody > tr.active-player {
 	background-color: var(--blue) !important;
+}
+.bid-finished {
+	color: #480000;
 }
 
 .table-container {
@@ -159,6 +199,21 @@ table.striped > tbody > tr.active-player {
 	font-size: 1.5rem;
 }
 
+.modal {
+	border: 1px solid var(--blue);
+}
+
+#toast-container {
+	top: auto !important;
+	right: auto !important;
+	bottom: 10%;
+	right: 7% !important;
+}
+
+.my-toast {
+	background-color: var(--blue) !important;
+}
+
 @media only screen and (max-width: 1440px) {
 	.container {
 		width: 85% !important;
@@ -180,5 +235,8 @@ table.striped > tbody > tr.active-player {
 }
 
 
-@import "~materialize-css/dist/css/materialize.min.css"
+@import "~materialize-css/dist/css/materialize.min.css";
 
+.modal .modal-footer {
+	text-align: center;
+}

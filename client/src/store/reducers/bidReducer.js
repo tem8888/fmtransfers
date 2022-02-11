@@ -17,28 +17,26 @@ const bidReducer = (state = initialState, action) => {
       state.currentBid = action.payload 
       return state
 
-    /* При отправке бида, если Бид существует, то перезаписываем новые данные, если нет, то создаем новый объект */
+    /* Добавляем игрока в шортлист */
     case 'BID_LIST_UPDATE':
-      if (action.payload.isExisting) 
-        return {...state, bidList: state.bidList.map((bid) => {
+        return {...state, bidList: [...state.bidList, action.payload.playerShortlistData]}
 
-            if(bid.bidId === action.payload.bidData.bidId) {
-              bid.curPrice = action.payload.bidData.curPrice
-              
-            }
-            return bid
-          })
-        }
+    /* Удаляем игрока из шортлиста */
+    case 'BID_LIST_REMOVE':
+     // state.bidList = state.bidList.filter((player) => player.club === action.payload.club && player.uid === action.payload.uid)
+      return {...state, bidList: state.bidList.filter((player) => player.club === action.payload.club && player.uid !== action.payload.uid)}
+      //  return {...state, bidList: [...state.bidList, action.payload.playerShortlistData]}
+
+    
+    case 'SORT_SHORTLIST':
+      if (action.payload.orderby === 'asc')
+        return {...state, bidList: state.bidList.sort((a,b) => a[action.payload.key] - b[action.payload.key])}
       else
-        return {...state, bidList: [...state.bidList, action.payload.bidData]}
+        return {...state, bidList: state.bidList.sort((a,b) => b[action.payload.key] - a[action.payload.key])}
 
     case 'BID_LATE_ERROR':
       return state
 
-
-  //  case 'UPDATE_CURRENT_BID':
-  //    return action.payload
-    
     case 'BID_ERROR':
       return state
 

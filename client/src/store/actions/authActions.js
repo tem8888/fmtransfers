@@ -17,14 +17,14 @@ export const loadUser = () => async (dispatch) => {
 }
 
 // Login User
-export const login = ({ nickname, password }) => async (dispatch) => {
+export const login = ({ username, password }) => async (dispatch) => {
   // Headers
   const config = {
     headers: {'Content-Type': 'application/json'}
   };
 
   // Request body
-  const body = JSON.stringify({ nickname, password });
+  const body = JSON.stringify({ username, password });
 
   await axios
     .post('/auth/login', body, config)

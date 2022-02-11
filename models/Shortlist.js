@@ -4,15 +4,13 @@ const schema = new Schema({
 	uid: {type: String, required: true},
 	name: {type: String, required: true},
 	nation: {type: String},
-	club: {type: String},
-	mins: {type: Number},
 	ca: {type: Number},
 	pa: {type: Number},
 	age: {type: Number},
 	position: {type: String},
 	preferredfoot: {type: String},
 	price: {type: Number, required: true},
-	bidStatus: {type: String},
+	teamShort: {type: String},
 	skillsTec: {
 		cor: {type: String},
 		cro: {type: String},
@@ -24,7 +22,7 @@ const schema = new Schema({
 		lon: {type: String},
 		lth: {type: String},
 		mar: {type: String},
-		pas: {type: String},
+		pas: {type: Number},
 		pen: {type: String},
 		tck: {type: String},
 		tec: {type: String}
@@ -61,8 +59,37 @@ const schema = new Schema({
 		prof: {type: String},
 		injpr: {type: String},
 		cons: {type: String}
-	}
+	},
+	skillsGk: {
+		thr: {type: String},
+		com: {type: String},
+		kic: {type: String},
+		cmd: {type: String},
+		tro: {type: String},
+		han: {type: String},
+		ovo: {type: String},
+		pun: {type: String},
+		pas: {type: String},
+		fir: {type: String},
+		ref: {type: String},
+		aer: {type: String},
+		ecc: {type: String}
+	},
+	club: {type: String},
 	
 })
 
-module.exports = model('Squadplayer', schema)
+// const schema = new Schema({
+// 	playerId: {type: String, required: true},
+// 	price: {type: String, required: true},
+// 	nation: {type: String},
+// 	playerName: {type: String},
+// 	age: {type: String},
+// 	position: {type: String},
+// 	foot: {type: String},
+// 	ca: {type: String},
+// 	pa: {type: String},
+// 	club: {type: String},
+// })
+
+module.exports = model('Shortlist', schema)

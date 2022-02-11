@@ -1,34 +1,53 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
 import { useLocation } from "react-router-dom"
-import BidForm from './BidForm/BidForm.js'
-import SellForm from './SellForm.js'
 import styles from '../assets/styles/styles.module.css'
 import playerImg from '../assets/img/player.png'
 import { RadarAnalyzer } from './RadarAnalyzer.js';
-import { PlayerSkills} from './SkillsTable/PlayerSkills.js';
+import { PlayerSkillsNew } from './SkillsTable/PlayerSkillsNew.js';
 import { GkSkills} from './SkillsTable/GkSkills.js';
+import AddToList from './AddToList.js';
 
 const PlayerProfile = (props) => {
 
-  const {playersList, squadList, idPlayer} = props
-
+  const {playersList, squadList, idPlayer, auth, bidState} = props
   const [playerInfo, setPlayerInfo] = useState()
+  const [shortlistInfo, setShortlistInfo] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const location = useLocation()
+
+
 
   useEffect (() => {
 
     if (idPlayer) {
-      location.pathname === '/transfers' || location.pathname === '/bids' ?
+      if (location.pathname === '/transfers' || location.pathname === '/shortlist')
+      {
         setPlayerInfo(playersList.initial.filter((player) => player.uid === idPlayer))
-      :
+        if (auth.isAuthenticated) setShortlistInfo(bidState.bidList.filter((player) => (player.uid === idPlayer && player.club === auth.user.club)))
+      } 
+      else {
         setPlayerInfo(squadList.initial.filter((player) => player.uid === idPlayer))
-
+        if (auth.isAuthenticated) setShortlistInfo(bidState.bidList.filter((player) => (player.uid === idPlayer && player.club === auth.user.club)))
+      }
         setIsLoading(isLoading => false)
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[idPlayer])
+  },[idPlayer, bidState])
+
+  useEffect(()=> {
+    //	let mounted = true /* Переменная для сброса эффекта */
+    //	setLoading(true) /* Блокируем компонент, пока ждем ответа сервера */
+         // setShortInfo({...shortInfo, playerId: playerId})
+          console.log('check playerprofile]') 
+        //  console.log(shortInfo.playerId)
+          
+    //	return () => { /* Сбрасываем эффект только после того, как асинхронный loadCurrentBid будет выполнен*/
+    //		mounted = false
+    //	}
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[bidState]) /* Запрос делаем при выборе игрока из списка */
 
   return (
  <>
@@ -59,22 +78,20 @@ const PlayerProfile = (props) => {
         {playerInfo[0].position === 'GK' ?
           <GkSkills playerInfo={playerInfo[0]}/>
         :
-          <PlayerSkills playerInfo={playerInfo[0]}/>
+          <PlayerSkillsNew playerInfo={playerInfo[0]}/>
         }
       </div>
     </div>
-        <div className="col l2 m4 s6">
+        <div className="col l2 m5 s7">
             <RadarAnalyzer pi={playerInfo[0]}/>
+            {(auth.isAuthenticated) ? <AddToList playerId={idPlayer} shortlistInfo={shortlistInfo} playerInfo={playerInfo[0]} club={auth.user.club}/> : 
+            <div style={{textAlign:"center"}}>Нужна авторизация, чтобы добавлять игроков в список.</div>}
+            
         </div>
-        <div className="col l2 m8 s6">
-          {/*console.log(playerInfo) //MANY RE-RENDERS */}
-          {!playerInfo[0].club ?
-            <BidForm startPrice={playerInfo[0].price} playerId={idPlayer} playerName={playerInfo[0].name}/>
-          :
-            <SellForm price={playerInfo[0].price} playerId={idPlayer} playerName={playerInfo[0].name}/>
-          }
+        {/* <div className="col l2 m8 s6">
+
           
-        </div>
+        </div> */}
 </>
       ) : <div className='help-msg'>Выберите игрока</div>} 
 </>
@@ -82,8 +99,10 @@ const PlayerProfile = (props) => {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   playersList: state.playersList,
-  squadList: state.squadList
+  squadList: state.squadList,
+  bidState: state.bidState
 })
 
 export default connect(mapStateToProps)(PlayerProfile)

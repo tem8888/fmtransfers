@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-export const loadSquadPlayers = (userTeam) => async (dispatch) => {
-
+export const loadSquad = (userTeam) => async (dispatch) => {
 	await axios({
 		method: 'get',
 		url: '/api/loadsquad',

@@ -9,20 +9,19 @@ const auth = require('../middleware/auth.js') // middleware для провер�
 // @desc Auth user
 
 router.post('/login', async (req, res) => {
-	const {nickname, password} = req.body
-
+	const {username, password} = req.body
 	//Check fields
-	if (!nickname || !password) {
+	if (!username || !password) {
 		return res.status(400).json({msg: 'Введите все поля.'})
 	}
 
-	User.findOne({nickname})
+	User.findOne({username})
 		.then(user => {
 			if(!user) return res.status(400).json({msg: 'Пользователь не найден'})
 			//Validate password
 			bcrypt.compare(password, user.password)
 				.then(isMatch => {
-					if(!isMatch) return res.status(400).json({msg: 'Неправльный пароль'})
+					if(!isMatch) return res.status(400).json({msg: 'Неправильный пароль'})
 
 					jwt.sign(
 						{id: user.userId},
@@ -34,7 +33,7 @@ router.post('/login', async (req, res) => {
 								token,
 								user: {
 									userId: user.userId,
-									nickname: user.nickname,
+									username: user.username,
 									club: user.club,
 									money: user.money
 								}

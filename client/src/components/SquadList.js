@@ -33,27 +33,19 @@ const SquadList = (props) => {
 	const displaySquadList = squadList => {
     if (!squadList.length) return null
 
-    const setClass = (playerBidStatus, idPlayer, playerUid) => {
-      switch(playerBidStatus) {
-        case 'active': 
-          return idPlayer === playerUid ? 'bid-active active-player' : 'bid-active'
-        case 'finished':
-          return idPlayer === playerUid ? 'bid-finished active-player' : 'bid-finished'
-        default:
-          return idPlayer === playerUid ? 'active-player' : ''
-      }
-    }
-
     return squadList.map((player, i) => 
-          <tr className={setClass(player.bidStatus, idPlayer, player.uid)} 
-           id={player.uid} key={i} 
+          <tr className={idPlayer === player.uid ? 'active-player' : ''}
+            id={player.uid} key={i} 
            onClick={(e)=>setIdPlayer(e.currentTarget.id)}>
+            <td className={'uid-col'}>{player.uid}</td>
             <td>{player.nation}</td>
             <td>{player.name}</td>
             <td>{player.position}</td>
             <td>{player.age}</td>
             <td>{player.ca}</td>
             <td>{player.pa}</td>
+            <td>{player.height}</td>
+            <td>{player.weight}</td>
             <td>{player.preferredfoot}</td>
             <td>{player.mins}</td>
             <td>{player.price}</td>
@@ -67,7 +59,6 @@ const SquadList = (props) => {
       {!auth.isAuthenticated ? <div className='help-msg'>Необходима авторизация</div> : 
       isLoading ? 
         <Loader /> :
-        <>
           <table className="striped players-table">
             <thead>
               <tr>
@@ -77,6 +68,8 @@ const SquadList = (props) => {
                   <th id="age" className='sort-col' onClick={sortHandler}>Age</th>
                   <th id="ca" className='sort-col' onClick={sortHandler}>CA</th>
                   <th id="pa" className='sort-col' onClick={sortHandler}>PA</th>
+                  <th>Height</th>
+                  <th>Weight</th>
                   <th>Foot</th>
                   <th id="mins" className='sort-col' onClick={sortHandler}>Minutes</th>
                   <th id="price" className='sort-col' onClick={sortHandler}>Price</th>
@@ -86,10 +79,6 @@ const SquadList = (props) => {
               {displaySquadList(squadList.filtered)}
             </tbody>
           </table>
-          <div className="players-count">
-            Игроков найдено: {squadList.filtered.length}
-          </div>
-          </>
       }
 		</>
 	)

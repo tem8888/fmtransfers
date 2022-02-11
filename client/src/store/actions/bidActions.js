@@ -1,9 +1,14 @@
 import axios from 'axios'
 
 /* Предварительный запрос на загрузку всех бидов */
-export const loadBids = () => async (dispatch, getState) => {
+export const loadBids = (userTeam) => async (dispatch) => {
 
-	await axios.get('/api/loadbid', getState)
+	await axios({
+		method: 'get',
+		url: '/api/loadbid',
+		params: { club: userTeam },
+		headers: { 'Content-Type': 'application/json; charset=utf-8' } 
+	})
 		.then(res => {
 			dispatch({
 				type: 'BID_LOADED',
@@ -57,13 +62,61 @@ export const saveBid = (playerBid) => async (dispatch) => {
 				type: 'BID_LIST_UPDATE',
 				payload: {bidData: response.data.value, isExisting: response.data.lastErrorObject.updatedExisting}
 			})
-			console.log(response)
+			//console.log(response)
 
 		})
 	.catch(() => {
 			dispatch({
 				type: 'BID_ERROR'
 			})
+	})
+}
+
+/* Добавление игрока в шортлист */
+export const shortListUpdate = (playerInfo, club) => async (dispatch) => {
+
+	const data = {...playerInfo, club: club}
+
+	//await axios.post('/api/shortlistupdate', data)
+	await axios({
+		url: '/api/shortlistupdate',
+		method: 'post',
+		//params: {uid: 1},
+		data: data
+	})
+	.then(res => {
+		console.log('response '+{res})
+		console.log('response value '+res.data)
+		dispatch({
+			type: 'BID_LIST_UPDATE',
+			payload: {playerShortlistData: res.data}
+		})
+		})
+	.catch(() => {
+			dispatch({
+				type: 'BID_ERROR'
+			})
+	})
+}
+
+/* Удаление игрока из шортлиста */
+export const shortListRemove = (playerId, club) => async (dispatch) => {
+
+	await axios({
+		url: '/api/shortlistremove',
+		method: 'post',
+		params: {uid: playerId, club: club},
+	})
+	.then((res) => {
+		dispatch({
+			type: 'BID_LIST_REMOVE',
+			payload: {uid: playerId, club: club}
+		})
+	})
+	.catch(() => {
+		dispatch({
+			type: 'BID_ERROR'
+		})
 	})
 }
 
@@ -84,4 +137,14 @@ export const updateUser = (price, userId) => async (dispatch) => {
 			})
 	})
 	.catch(() => { console.log("Something wrong.") })	
+}
+
+/*---------------------*/
+/* Сортировка игроков */
+/*-------------------*/
+export const sortShortList = (sortKey) => dispatch => {
+	dispatch({
+		type: 'SORT_SHORTLIST',
+		payload: { key: sortKey.key, orderby: sortKey.orderby }
+	})
 }

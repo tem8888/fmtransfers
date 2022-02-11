@@ -3,15 +3,16 @@ const router = Router()
 const path = require('path')
 const User = require('../models/User') // модель пользователя
 const Player = require('../models/Player') // модель игрока
-const Bid = require('../models/Bid') // модель бида
-const Squadplayer = require('../models/Squadplayer')  // модель игрока состава
+const Shortlist= require('../models/Shortlist') // модель бида
+const Transferlist= require('../models/Transferlist') // модель бида
+const Squad = require('../models/Squad')  // модель игрока состава
 const discordSendMessage = require('../middleware/discordSendMessage') // функция отправки сообщения в дискорд
 
 /* -------------------------------------- */
 /* Возвращает список всех игроков в базе */
 /* ------------------------------------ */
 router.get('/load', (req, res) => {
-		Player.find({ })
+		Transferlist.find({ })
 				.then((data) => {
 						res.json(data);
 				})
@@ -25,7 +26,7 @@ router.get('/load', (req, res) => {
 /* ---------------------------------------------------------------- */
 router.get('/loadsquad', (req, res) => {
 		/* query { club: clubName } */
-		Squadplayer.find(req.query)
+		Squad.find(req.query)
 				.then((data) => {
 						res.json(data);
 				})
@@ -38,7 +39,7 @@ router.get('/loadsquad', (req, res) => {
 /* Возвращает список всех бидов в базе */
 /* ---------------------------------- */
 router.get('/loadbid', (req, res) => {
-		Bid.find({  })
+		Shortlist.find(req.query)
 				.then((data) => {
 						res.json(data);
 				})
@@ -113,12 +114,35 @@ router.post('/bidsend', (req, res) => {
 });
 });
 
+/* ----------------------------------- */
+/*     Добавление игрока в шортлист    */
+/* ----------------------------------- */
+router.post('/shortlistupdate', async (req, res) => {
+	const data = req.body
+	const newShortPlayer = await Shortlist.create(data)
+	res.json(newShortPlayer)
+})
+
+/* ----------------------------------- */
+/*     Удаление игрока из шортлиста    */
+/* ----------------------------------- */
+router.post('/shortlistremove', (req, res) => {
+	const filter = req.query
+	Shortlist.deleteOne(filter, (err, doc) => {
+		if (err) {
+			res.status(500).json({ msg: 'Sorry, internal server errors' });
+			return; 
+		}
+		res.json(doc)
+	 })
+})
+
 /* ------------------------- */
 /*     Отчисление игрока    */
 /* ----------------------- */
 router.get('/sellsquadplayer', (req, res) => {
 		const uid = req.query.uid
-		Squadplayer.find(
+		Squad.find(
 				{uid: {$nin: uid}, club: req.query.club},
 				(error, doc) => {
 						if (error) {

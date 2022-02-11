@@ -5,9 +5,9 @@ export const AuthForm = ({submitLoginHandler, inputLoginHandler, inputLogin, err
     <form className="auth__form" onSubmit={submitLoginHandler}>
       <div className="col s5 offset-s2">
 
-        <input className={!errors.nickname ? "auth__input" : "auth__input invalid"}
-          type="text" placeholder="nickname" name="nickname"
-          value={inputLogin.nickname} onChange={inputLoginHandler}
+        <input className={!errors.username ? "auth__input" : "auth__input invalid"}
+          type="text" placeholder="username" name="username"
+          value={inputLogin.username} onChange={inputLoginHandler}
         />
         <input className={!errors.password ? "auth__input" : "auth__input invalid"} 
         type="password" placeholder="password" name="password"

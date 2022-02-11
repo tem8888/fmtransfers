@@ -56,7 +56,10 @@ export const setFilter = (inputFilter) => dispatch => {
 	if (inputFilter.name || inputFilter.ca.atleast || inputFilter.ca.atmost || 
 			inputFilter.pa.atleast ||	inputFilter.pa.atmost || 
 			inputFilter.age.atleast ||	inputFilter.age.atmost || 
-			inputFilter.price.atleast ||	inputFilter.price.atmost ||	inputFilter.position !== '') {
+			inputFilter.price.atleast ||	inputFilter.price.atmost ||	
+			inputFilter.preferredFoot !== '' || inputFilter.position !== '' || inputFilter.side !== '' ||
+			inputFilter.skill !== '' || inputFilter.skillNum !== ''
+			) {
 	dispatch({
 		type: 'FILTER',
 		payload: {inputFilter: inputFilter}

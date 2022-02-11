@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PlayersList from './components/PlayersList.js'
-import BidList from './components/BidList.js';
+import Shortlist from './components/Shortlist.js';
 import SquadList from './components/SquadList.js';
 import PlayerProfile from './components/PlayerProfile.js'
 import SearchForm from './components/SearchForm.js'
@@ -10,15 +10,26 @@ import { BrowserRouter as Router,
 				 Switch,	Route, Redirect } from "react-router-dom"
 import { NavLinks } from './components/NavLinks/NavLinks.js'
 const { loadPlayers } = require('./store/actions/playerListActions.js')
-const { loadSquadPlayers } = require('./store/actions/squadListActions.js')
+const { loadSquad } = require('./store/actions/squadListActions.js')
+const { loadBids } = require('./store/actions/bidActions')
 
-function App({loadPlayers, loadSquadPlayers, auth}) {
-
+function App({loadPlayers, loadSquad, loadBids, auth, playersList, bidState, squadList}) {
+	
 	/* Определение состояния загрузки данных из БД. */
-  /* Ждем пока произойдет загрузка, меняем isLoading на false и рендерим контент */
-  const [isLoading, setLoading] = useState(true)
+  	/* Ждем пока произойдет загрузка, меняем isLoading на false и рендерим контент */
+  	const [isLoading, setLoading] = useState(true)
+	const [isLoadingS, setLoadingS] = useState(true)
 
 	const [idPlayer, setIdPlayer] = useState('')
+
+	/* При первом рендере загружаем список игроков, список бидов и устанавливаем статус загрузки в False */
+	useEffect(() => {
+		if (auth.isAuthenticated) {
+			const userTeam = auth.user.club
+			loadBids(userTeam).then(() => setLoadingS(false))
+
+		}
+	},[auth, loadBids]);
 
 	/* При первом рендере загружаем список игроков, список бидов и устанавливаем статус загрузки в False */
 	useEffect(() => { 
@@ -34,31 +45,36 @@ function App({loadPlayers, loadSquadPlayers, auth}) {
 	useEffect(() => {
 		if (auth.isAuthenticated) {
 			const userTeam = auth.user.club
-			loadSquadPlayers(userTeam).then(() => setLoading(false))
+			loadSquad(userTeam).then(() => setLoading(false))
+
 		}
-	},[auth, loadSquadPlayers]);
+	},[auth, loadSquad]);
 
   return (
 	<Router history={Router.browserHistory}>
 		<div className="App">
+		
 		<div className="container">
 			<div className="row">
-				<div className="col l4 m12 s12">
-					<Auth />
+				<div className="col l3 m12 s12">
+					<Auth setIdPlayer={setIdPlayer}/>
 					<SearchForm />
 				</div>
-				<div className="col l8 m12 s12">
-					<NavLinks />
+				<div className="col l9 m12 s12">
+					<NavLinks listLength={playersList.filtered.length} shortlistLength={bidState.bidList.length} squadlistLength={squadList.filtered.length}/>
 					<div className="table-container">
 						<Switch>
+						<Route path='/admin'>
+			<div>ADMIN</div>
+		</Route>
 							<Route exact path='/transfers'>
 								<PlayersList idPlayer={idPlayer} setIdPlayer={setIdPlayer} isLoading={isLoading}/>
 							</Route>
-							<Route path='/bids'>
-								<BidList idPlayer={idPlayer} setIdPlayer={setIdPlayer}/>
+							<Route path='/shortlist'>
+								<Shortlist idPlayer={idPlayer} setIdPlayer={setIdPlayer} isLoadingS={isLoadingS}/>
 							</Route>
 							<Route path='/squad'>
-								<SquadList idPlayer={idPlayer} setIdPlayer={setIdPlayer} isLoading={isLoading}/>
+								<SquadList idPlayer={idPlayer} setIdPlayer={setIdPlayer} isLoading={isLoading} />
 							</Route>
 							<Redirect to="/transfers" />
 						</Switch>
@@ -66,7 +82,7 @@ function App({loadPlayers, loadSquadPlayers, auth}) {
 				</div>
 			</div>
 			<div className="row">
-				<PlayerProfile idPlayer={idPlayer}/>
+				{idPlayer ? <PlayerProfile idPlayer={idPlayer}/> : null}
 			</div>
 			</div>
 		</div>		
@@ -74,12 +90,16 @@ function App({loadPlayers, loadSquadPlayers, auth}) {
 )}
   
 const mapStateToProps = state => ({
-	auth: state.auth
+	auth: state.auth,
+	squadList: state.squadList,
+	playersList: state.playersList,
+	bidState: state.bidState
 })
 
 const mapDispatchToProps = (dispatch) => ({
 	loadPlayers: () => dispatch(loadPlayers()),
-	loadSquadPlayers: (userTeam) => dispatch(loadSquadPlayers(userTeam)),
+	loadSquad: (userTeam) => dispatch(loadSquad(userTeam)),
+	loadBids: (userTeam) => dispatch(loadBids(userTeam))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

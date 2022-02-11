@@ -6,17 +6,17 @@ import './auth.css';
 const {login, logout, loadUser} = require('../../store/actions/authActions.js')
 
 const Auth = (props) => {
-	const {login, logout, auth, loadUser} = props
+	const {login, logout, auth, loadUser, setIdPlayer} = props
 
 	useEffect(() => { loadUser() 
 	}, [loadUser]); /* Загрузка данных авторизации пользователя */
 
 	const [inputLogin, setInputLogin] = useState({
-		nickname: '',
+		username: '',
 		password: ''
 	})
 	const [errors, setErrors] = useState({
-		nickname: '',
+		username: '',
 		password: ''
 	})
 
@@ -36,14 +36,15 @@ const Auth = (props) => {
 	const submitLoginHandler = (e) => {
 		e.preventDefault()
 
-		if (!inputLogin.nickname && !inputLogin.password) 
-			return setErrors({nickname: "Не введен логин",  password: "Не введен пароль"})
-		if (!inputLogin.nickname) 
-			return setErrors({...errors, nickname: "Не введен логин"})
+		if (!inputLogin.username && !inputLogin.password) 
+			return setErrors({username: "Не введен логин",  password: "Не введен пароль"})
+		if (!inputLogin.username) 
+			return setErrors({...errors, username: "Не введен логин"})
 		if (!inputLogin.password) 
 			return setErrors({...errors, password: "Не введен пароль"})
 
 		login(inputLogin)
+		setIdPlayer('')
 	}
 
 /* -------------------------------- */
@@ -52,6 +53,7 @@ const Auth = (props) => {
 	const submitLogoutHandler = (e) => {
 		e.preventDefault()
 		logout()
+	
 	}
 
 	return (
@@ -68,7 +70,7 @@ const Auth = (props) => {
 					submitLogoutHandler={submitLogoutHandler}
 					club={auth.user.club}
 					money={auth.user.money}
-					nickname={auth.user.nickname}/>
+					username={auth.user.username}/>
       }
     </div>
 	)
