@@ -15,7 +15,7 @@ const { loadSquadPlayers } = require('./store/actions/squadListActions.js')
 function App({loadPlayers, loadSquadPlayers, auth}) {
 
 	/* Определение состояния загрузки данных из БД. */
-  /* Ждем пока произойдет загрузка, меняем isLoading на false и рендерим контент */
+  /* Ждем пока произойдет загрузка, меняем isLoading на false и рендерим контент*/
   const [isLoading, setLoading] = useState(true)
 
 	const [idPlayer, setIdPlayer] = useState('')
