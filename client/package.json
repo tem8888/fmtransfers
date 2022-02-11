@@ -2,8 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "engines": {
-    "node": "16.x",
-    "npm": "8.x"
+    "node": "16.13.0",
+    "npm": "8.1.0"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
