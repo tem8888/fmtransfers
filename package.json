@@ -4,7 +4,8 @@
   "description": "Transfers app for FM",
   "main": "server.js",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "8.x"
   },
   "scripts": {
     "build": "cd client && npm run build",
