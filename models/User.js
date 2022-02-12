@@ -6,8 +6,6 @@ const schema = new Schema ({
 	username: {type: String, required: true},
 	club: {type: String},
 	place: {type: Number},
-	currentRound: {type: Number},
-	nextRound: {type: Number},
 	coeff: {type: Number},
 	money: {type: Number},
 	players: {type: Number},

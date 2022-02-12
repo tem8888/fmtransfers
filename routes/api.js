@@ -5,7 +5,7 @@ const User = require('../models/User') // модель пользователя
 const Player = require('../models/Player') // модель игрока
 const Shortlist= require('../models/Shortlist') // модель бида
 const Transferlist= require('../models/Transferlist') // модель бида
-const Squad = require('../models/Squad')  // модель игрока состава
+const Squadlist = require('../models/Squadlist')  // модель игрока состава
 const discordSendMessage = require('../middleware/discordSendMessage') // функция отправки сообщения в дискорд
 
 /* -------------------------------------- */
@@ -26,7 +26,7 @@ router.get('/load', (req, res) => {
 /* ---------------------------------------------------------------- */
 router.get('/loadsquad', (req, res) => {
 		/* query { club: clubName } */
-		Squad.find(req.query)
+		Squadlist.find(req.query)
 				.then((data) => {
 						res.json(data);
 				})
@@ -142,7 +142,7 @@ router.post('/shortlistremove', (req, res) => {
 /* ----------------------- */
 router.get('/sellsquadplayer', (req, res) => {
 		const uid = req.query.uid
-		Squad.find(
+		Squadlist.find(
 				{uid: {$nin: uid}, club: req.query.club},
 				(error, doc) => {
 						if (error) {
