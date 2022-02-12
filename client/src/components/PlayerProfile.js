@@ -5,7 +5,7 @@ import styles from '../assets/styles/styles.module.css'
 import playerImg from '../assets/img/player.png'
 import { RadarAnalyzer } from './RadarAnalyzer.js';
 import { PlayerSkillsNew } from './SkillsTable/PlayerSkillsNew.js';
-import { GkSkills} from './SkillsTable/GkSkills.js';
+import { GkSkillsNew} from './SkillsTable/GkSkillsNew.js';
 import AddToList from './AddToList.js';
 
 const PlayerProfile = (props) => {
@@ -76,7 +76,7 @@ const PlayerProfile = (props) => {
       </div>
       <div className="col s12 m9">
         {playerInfo[0].position === 'GK' ?
-          <GkSkills playerInfo={playerInfo[0]}/>
+          <GkSkillsNew playerInfo={playerInfo[0]}/>
         :
           <PlayerSkillsNew playerInfo={playerInfo[0]}/>
         }

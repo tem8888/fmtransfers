@@ -6,15 +6,15 @@ export const RadarAnalyzer = ({pi}) => {
 
 	if (pi.position === 'GK') {
 
-		const sst = (Number(pi.skillsGk['ref']) + Number(pi.skillsGk['ovo'])) / 2
-		const phy = (Number(pi.skillsPhy['agi']) + Number(pi.skillsPhy['str']) + Number(pi.skillsPhy['sta']) + Number(pi.skillsPhy['bal'])) / 4
-		const spd = (Number(pi.skillsPhy['acc']) + Number(pi.skillsPhy['pac']) + Number(pi.skillsPhy['agi'])) / 3
-		const men = (Number(pi.skillsMen['ant']) + Number(pi.skillsMen['bra']) + Number(pi.skillsMen['cnt']) + 
-					Number(pi.skillsMen['dec']) + Number(pi.skillsMen['det']) + Number(pi.skillsMen['tea'])) / 6
-		const com = (Number(pi.skillsGk['com']) + Number(pi.skillsGk['cmd'])) / 2
-		const ecc = Number(pi.skillsGk['ecc'])
-		const aer = (Number(pi.skillsGk['aer']) + Number(pi.skillsGk['han'])) / 2
-		const dis = (Number(pi.skillsGk['thr']) + Number(pi.skillsGk['kic'])) / 2
+		const sst = (Number(pi['ref']) + Number(pi['ovo'])) / 2
+		const phy = (Number(pi['agi']) + Number(pi['str']) + Number(pi['sta']) + Number(pi['bal'])) / 4
+		const spd = (Number(pi['acc']) + Number(pi['pac']) + Number(pi['agi'])) / 3
+		const men = (Number(pi['ant']) + Number(pi['bra']) + Number(pi['cnt']) + 
+					Number(pi['dec']) + Number(pi['det']) + Number(pi['tea'])) / 6
+		const com = (Number(pi['com']) + Number(pi['cmd'])) / 2
+		const ecc = Number(pi['ecc'])
+		const aer = (Number(pi['aer']) + Number(pi['han'])) / 2
+		const dis = (Number(pi['thr']) + Number(pi['kic'])) / 2
 
 		data = {
 			labels: ['SST', 'PHY', 'SPD', 'MEN', 'COM', 'ECC', 'AER', 'DIS'],

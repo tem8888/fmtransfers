@@ -1,7 +1,7 @@
 import React from 'react'
-import {technical, mental, physical, hidden} from '../../skills.js'
+import {gk, mental, physical, hidden} from '../../skills.js'
 
-export const PlayerSkills = ({playerInfo}) => {
+export const GkSkillsNew = ({playerInfo}) => {
 	return (
 		<table className="skills-table">
 			<thead>
@@ -19,7 +19,7 @@ export const PlayerSkills = ({playerInfo}) => {
 					<td className="col s3 table-skill-name">
 						<table className="striped">
 							<tbody>
-								{technical.map((skill, i) => ( 
+								{gk.map((skill, i) => ( 
 									<tr key={i}>
 										<td>{skill}</td>
 									</tr> 
@@ -28,15 +28,15 @@ export const PlayerSkills = ({playerInfo}) => {
 						</table>
 					</td>
 					<td className="col s1 table-skill-value">
-						<table className="skills-margin">
+						<table>
 							<tbody className="striped">
 							 { 
-									Object.keys(playerInfo.skillsTec).map((key, i) => (
+									Object.entries(playerInfo).slice(14,27).map((key, i) => (
 										<tr key={i}>
 											<td style={{
-												color: playerInfo.skillsTec[key] > 15? 'var(--excel)': playerInfo.skillsTec[key] > 10? 'var(--good)':
-															 playerInfo.skillsTec[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsTec[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))
@@ -52,15 +52,15 @@ export const PlayerSkills = ({playerInfo}) => {
 						</table>
 					</td>
 					<td className="col s1 table-skill-value">
-						<table className="skills-margin">
+						<table>
 							<tbody className="striped">
 							{ 
-									Object.keys(playerInfo.skillsMen).map((key, i) => (
+									Object.entries(playerInfo).slice(27,41).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
-												color: playerInfo.skillsMen[key] > 15? 'var(--excel)': playerInfo.skillsMen[key] > 10? 'var(--good)':
-															 playerInfo.skillsMen[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsMen[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))
@@ -78,27 +78,27 @@ export const PlayerSkills = ({playerInfo}) => {
 						</table>
 					</td>
 					<td className="col s1 table-skill-value">
-						<table className="skills-margin">
+						<table>
 							<tbody className="striped">
 								{ 
-									Object.keys(playerInfo.skillsPhy).map((key, i) => (
+									Object.entries(playerInfo).slice(41,49).map((key, i) => (
 										<tr key={i}>
 											<td style={{
-												color: playerInfo.skillsPhy[key] > 15? 'var(--excel)': playerInfo.skillsPhy[key] > 10? 'var(--good)':
-															 playerInfo.skillsPhy[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsPhy[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))
 								}
 								<tr><td>&nbsp;</td></tr>
 								{ 
-									Object.keys(playerInfo.skillsHid).map((key, i) => (
+									Object.entries(playerInfo).slice(49,54).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
-												color: playerInfo.skillsHid[key] > 15? 'var(--excel)': playerInfo.skillsHid[key] > 10? 'var(--good)':
-															 playerInfo.skillsHid[key] > 5? 'var(--badly)': 'var(--bad)'}}>
-												{playerInfo.skillsHid[key]}
+												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
+												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+												{playerInfo[key[0]]}
 											</td>
 										</tr>
 									))
