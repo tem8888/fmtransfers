@@ -65,6 +65,8 @@ const schema = new Schema({
 	han: {type: String},
 	ovo: {type: String},
 	pun: {type: String},
+	pasgk: {type: String},
+	firgk: {type: String},
 	ref: {type: String},
 	aer: {type: String},
 	ecc: {type: String}
