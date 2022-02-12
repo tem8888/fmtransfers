@@ -241,14 +241,14 @@ const SearchForm = (props) => {
           >
             Clear
           </button>
-          <button
+          {/* <button
             data-target="modal1" 
             className='btn modal-trigger waves-effect waves-light btn-small deep-purple lighten-2'
             onClick={console.log('object')}
             style={{ margin: '15px' }}
           >
             +Attributes
-          </button>
+          </button> */}
         </div>
 
         <ModalAttributeSearch inputFilter={inputFilter} inputHandler={inputHandler}/>
