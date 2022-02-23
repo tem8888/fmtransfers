@@ -62,6 +62,7 @@ const SquadList = (props) => {
           <table className="striped players-table">
             <thead>
               <tr>
+                  <th>UID</th>
                   <th>Nat</th>
                   <th>Name</th>
                   <th>Position</th>

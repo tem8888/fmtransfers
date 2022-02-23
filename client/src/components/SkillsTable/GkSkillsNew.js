@@ -31,7 +31,8 @@ export const GkSkillsNew = ({playerInfo}) => {
 						<table>
 							<tbody className="striped">
 							 { 
-									Object.entries(playerInfo).slice(14,27).map((key, i) => (
+							 
+									Object.entries(playerInfo).slice(57,70).map((key, i) => (
 										<tr key={i}>
 											<td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
@@ -55,7 +56,7 @@ export const GkSkillsNew = ({playerInfo}) => {
 						<table>
 							<tbody className="striped">
 							{ 
-									Object.entries(playerInfo).slice(27,41).map((key, i) => (
+									Object.entries(playerInfo).slice(30,44).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
@@ -81,7 +82,7 @@ export const GkSkillsNew = ({playerInfo}) => {
 						<table>
 							<tbody className="striped">
 								{ 
-									Object.entries(playerInfo).slice(41,49).map((key, i) => (
+									Object.entries(playerInfo).slice(44,52).map((key, i) => (
 										<tr key={i}>
 											<td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
@@ -93,7 +94,7 @@ export const GkSkillsNew = ({playerInfo}) => {
 								}
 								<tr><td>&nbsp;</td></tr>
 								{ 
-									Object.entries(playerInfo).slice(49,54).map((key, i) => (
+									Object.entries(playerInfo).slice(52,57).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
