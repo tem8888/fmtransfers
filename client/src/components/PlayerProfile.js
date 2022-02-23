@@ -6,6 +6,8 @@ import playerImg from '../assets/img/player.png'
 import { RadarAnalyzer } from './RadarAnalyzer.js';
 import { PlayerSkillsNew } from './SkillsTable/PlayerSkillsNew.js';
 import { GkSkillsNew} from './SkillsTable/GkSkillsNew.js';
+import { PlayerSkillsSquad } from './SkillsTable/PlayerSkillsSquad.js';
+import { GkSkillsSquad} from './SkillsTable/GkSkillsSquad.js';
 import AddToList from './AddToList.js';
 
 const PlayerProfile = (props) => {
@@ -75,11 +77,18 @@ const PlayerProfile = (props) => {
         </div>
       </div>
       <div className="col s12 m9">
-        {playerInfo[0].position === 'GK' ?
+        {location.pathname === '/squad' ?
+        
+        playerInfo[0].position === 'GK' ?
+            <GkSkillsSquad playerInfo={playerInfo[0]}/>
+          :
+            <PlayerSkillsSquad playerInfo={playerInfo[0]}/>
+          :
+          playerInfo[0].position === 'GK' ?
           <GkSkillsNew playerInfo={playerInfo[0]}/>
         :
           <PlayerSkillsNew playerInfo={playerInfo[0]}/>
-        }
+      }
       </div>
     </div>
         <div className="col l2 m5 s7">

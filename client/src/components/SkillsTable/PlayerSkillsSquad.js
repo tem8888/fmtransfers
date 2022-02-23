@@ -1,7 +1,7 @@
 import React from 'react'
-import {gk, mental, physical, hidden} from '../../skills.js'
+import {technical, mental, physical, hidden} from '../../skills.js'
 
-export const GkSkillsNew = ({playerInfo}) => {
+export const PlayerSkillsSquad = ({playerInfo}) => {
 	return (
 		<table className="skills-table">
 			<thead>
@@ -19,7 +19,7 @@ export const GkSkillsNew = ({playerInfo}) => {
 					<td className="col s3 table-skill-name">
 						<table className="striped">
 							<tbody>
-								{gk.map((skill, i) => ( 
+								{technical.map((skill, i) => ( 
 									<tr key={i}>
 										<td>{skill}</td>
 									</tr> 
@@ -28,15 +28,14 @@ export const GkSkillsNew = ({playerInfo}) => {
 						</table>
 					</td>
 					<td className="col s1 table-skill-value">
-						<table>
+						<table className="skills-margin">
 							<tbody className="striped">
 							 { 
-							 
-									Object.entries(playerInfo).slice(55,68).map((key, i) => (
+									Object.entries(playerInfo).slice(16,30).map((key, i) => (
 										<tr key={i}>
 											<td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
-												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
 												{playerInfo[key[0]]}
 											</td>
 										</tr>
@@ -53,14 +52,14 @@ export const GkSkillsNew = ({playerInfo}) => {
 						</table>
 					</td>
 					<td className="col s1 table-skill-value">
-						<table>
+						<table className="skills-margin">
 							<tbody className="striped">
 							{ 
-									Object.entries(playerInfo).slice(28,42).map((key, i) => (
+									Object.entries(playerInfo).slice(30,44).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
-												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
 												{playerInfo[key[0]]}
 											</td>
 										</tr>
@@ -79,14 +78,14 @@ export const GkSkillsNew = ({playerInfo}) => {
 						</table>
 					</td>
 					<td className="col s1 table-skill-value">
-						<table>
+						<table className="skills-margin">
 							<tbody className="striped">
 								{ 
-									Object.entries(playerInfo).slice(42,50).map((key, i) => (
+									Object.entries(playerInfo).slice(44,52).map((key, i) => (
 										<tr key={i}>
 											<td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
-												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
 												{playerInfo[key[0]]}
 											</td>
 										</tr>
@@ -94,11 +93,11 @@ export const GkSkillsNew = ({playerInfo}) => {
 								}
 								<tr><td>&nbsp;</td></tr>
 								{ 
-									Object.entries(playerInfo).slice(50,55).map((key, i) => (
+									Object.entries(playerInfo).slice(52,57).map((key, i) => (
 										<tr key={i}>
 											 <td style={{
 												color: playerInfo[key[0]] > 15? 'var(--excel)': playerInfo[key[0]] > 10? 'var(--good)':
-												playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
+															 playerInfo[key[0]] > 5? 'var(--badly)': 'var(--bad)'}}>
 												{playerInfo[key[0]]}
 											</td>
 										</tr>
