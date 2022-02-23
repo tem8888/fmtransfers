@@ -22,7 +22,7 @@ export const AuthSuccess = ({club, money, username, submitLogoutHandler}) => {
       </div>
       <h6 className="col s6 center-align">
 				<div>{club}</div>
-				<div style={{marginTop: '0.8rem', fontSize: '1.5rem'}}>{money}</div>
+				<div style={{marginTop: '0.8rem', fontSize: '1.5rem'}}>{money.toFixed(2)}</div>
 			</h6>
     </div>
   )
