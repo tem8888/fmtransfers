@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { sellSquadPlayer } from '../store/actions/playerListActions'
+import { sellSquadPlayer } from '../../store/actions/playerListActions'
 import { updateUser } from '../store/actions/bidActions'
-import { discordSendMessage } from './functions/discordSendMessage'
+import { discordSendMessage } from '../functions/discordSendMessage'
 
 const SellForm = (props) => {
 	const {auth, club, userId, updateUser, price, playerId, playerName, sellSquadPlayer} = props

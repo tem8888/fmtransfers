@@ -1,5 +1,5 @@
 import React from 'react'
-import {Radar} from 'react-chartjs-2'
+import { Radar } from 'react-chartjs-2'
 
 export const RadarAnalyzer = ({pi}) => {
 	let data = {}
@@ -89,7 +89,8 @@ export const RadarAnalyzer = ({pi}) => {
 
 	return (
 
-		<div style={{ margin: '20px 0 0 -20px' }}>
+		<div style={{ //margin: '20px 0 0 -20px'
+		 }}>
 			<Radar data={data} options={options} width={200} height={200}/>
 			{/* <div>CD % {rating}</div> */}
 		</div>

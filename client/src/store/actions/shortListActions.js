@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 /* Предварительный запрос на загрузку всех бидов */
-export const loadBids = (userTeam) => async (dispatch) => {
+export const loadShortList = (userTeam) => async (dispatch) => {
 
 	await axios({
 		method: 'get',
@@ -11,7 +11,7 @@ export const loadBids = (userTeam) => async (dispatch) => {
 	})
 		.then(res => {
 			dispatch({
-				type: 'BID_LOADED',
+				type: 'SHORTLIST_LOADED',
 				payload: res.data
 			})
 		})
@@ -22,53 +22,10 @@ export const loadBids = (userTeam) => async (dispatch) => {
 		})
 }
 
-/* Запрашиваем у сервера информацию о наличии бида у выбранного игрока */
-export const loadCurrentBid = (playerId) => async (dispatch) => {
-
-	await axios({
-		url: '/api/loadcurrentbid',
-		method: 'get',
-		params: {bidId: playerId}
-	})
-	.then(res => {
-		dispatch({
-			type: 'BID_CURRENT_LOADED',
-			payload: res.data
-		})
-	})
-	.catch((err) => {
-		dispatch({
-			type: 'AUTH_ERROR'
-		})
-	})
-}
-
-/* Отправление бида в БД */
-export const saveBid = (playerBid) => async (dispatch) => {
-
-	await axios({
-		url: '/api/bidsend',
-		method: 'post',
-		params: {bidId: playerBid.bidId},
-		data: playerBid
-	})
-	.then((response) => {
-		if (response.data === 'tooLateError')
-			dispatch({
-				type: 'BID_LATE_ERROR'
-			})
-		else
-			dispatch({
-				type: 'BID_LIST_UPDATE',
-				payload: {bidData: response.data.value, isExisting: response.data.lastErrorObject.updatedExisting}
-			})
-			//console.log(response)
-
-		})
-	.catch(() => {
-			dispatch({
-				type: 'BID_ERROR'
-			})
+export const showPlayer = (playerId) => (dispatch) => {
+	dispatch({
+		type: 'SHOW_SHORTLIST_PLAYER',
+		payload: { playerId: playerId }
 	})
 }
 
@@ -79,22 +36,20 @@ export const shortListUpdate = (playerInfo, club) => async (dispatch) => {
 
 	//await axios.post('/api/shortlistupdate', data)
 	await axios({
-		url: '/api/shortlistupdate',
+		url: '/api/shortlistadd',
 		method: 'post',
 		//params: {uid: 1},
 		data: data
 	})
 	.then(res => {
-		console.log('response '+{res})
-		console.log('response value '+res.data)
 		dispatch({
-			type: 'BID_LIST_UPDATE',
+			type: 'SHORTLIST_ADD',
 			payload: {playerShortlistData: res.data}
 		})
 		})
 	.catch(() => {
 			dispatch({
-				type: 'BID_ERROR'
+				type: 'SHORTLIST_ERROR'
 			})
 	})
 }
@@ -109,13 +64,13 @@ export const shortListRemove = (playerId, club) => async (dispatch) => {
 	})
 	.then((res) => {
 		dispatch({
-			type: 'BID_LIST_REMOVE',
+			type: 'SHORTLIST_REMOVE',
 			payload: {uid: playerId, club: club}
 		})
 	})
 	.catch(() => {
 		dispatch({
-			type: 'BID_ERROR'
+			type: 'SHORTLIST_ERROR'
 		})
 	})
 }

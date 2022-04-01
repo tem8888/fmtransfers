@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Loader } from './Loader/Loader.js'
+import { Loader } from '../Loader/Loader.js'
 const {
   sortPlayers,
   loadPlayers,
-} = require('../store/actions/playerListActions.js')
-const { loadBids } = require('../store/actions/bidActions')
+} = require('../../store/actions/playerListActions.js')
+const { loadBids } = require('../../store/actions/bidActions')
 
 const PlayersList = (props) => {
   const {

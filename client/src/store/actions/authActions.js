@@ -7,10 +7,11 @@ export const loadUser = () => async (dispatch) => {
 	//User loading
 	dispatch({ type: 'USER_LOADING'})
 	await axios.get('/auth/user', tokenConfig())
-		.then(res => dispatch({
-			type: 'USER_LOADED',
-			payload: res.data
-		}))
+			
+		.then(res => { 
+			dispatch({type: 'USER_LOADED', payload: res.data})
+
+		})
 		.catch((err) => {
 			dispatch({ type: 'AUTH_ERROR' })
 		})
@@ -24,22 +25,22 @@ export const login = ({ username, password }) => async (dispatch) => {
   };
 
   // Request body
-  const body = JSON.stringify({ username, password });
-
-  await axios
-    .post('/auth/login', body, config)
-		.then(res => {
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: res.data
+	const body = JSON.stringify({ username, password });
+  	dispatch({ type: 'USER_LOADING'})
+	await axios
+		.post('/auth/login', body, config)
+			.then(res => {
+				dispatch({
+					type: 'LOGIN_SUCCESS',
+					payload: res.data
+				})
 			})
-		})
-    .catch((err) => {
-      dispatch({ 
-				type: 'LOGIN_FAIL',
-				payload: {errorMsg: err.response.data.msg}
+			.catch((err) => {
+				dispatch({ 
+					type: 'LOGIN_FAIL',
+					payload: {errorMsg: err.response.data.msg}
+				})
 			})
-    })
 }
 
 // Logout User

@@ -3,8 +3,8 @@ import Cookies from 'js-cookie'
 const initialState = {
 	token: Cookies.get('token'),
 	isAuthenticated: null,
-	isLoading: false,
-	user: null,
+	isLoading: true,
+	user: {club: ''},
 	errorMsg: ''
 }
 
@@ -47,7 +47,7 @@ export default function(state = initialState, action) {
 				token: null,
 				user: null,
 				isAuthenticated: false,
-				isLoading: false,
+				isLoading: true,
 			}
 
 		case 'LOGIN_FAIL':

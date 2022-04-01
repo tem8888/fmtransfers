@@ -30,25 +30,6 @@ export const sortSquadPlayers = (sortKey) => dispatch => {
 	})
 }
 
-/*-----------------*/
-/* Фильтр игроков */
-/*---------------*/
-export const setFilter = (inputFilter) => dispatch => {
-	if (inputFilter.name || inputFilter.ca.atleast || inputFilter.ca.atmost || 
-			inputFilter.pa.atleast ||	inputFilter.pa.atmost || 
-			inputFilter.age.atleast ||	inputFilter.age.atmost || 
-			inputFilter.price.atleast ||	inputFilter.price.atmost || 
-			inputFilter.position !== '') {
-	dispatch({
-		type: 'FILTER_SQUAD',
-		payload: {inputFilter: inputFilter}
-	}) 
-}
-	else {
-		dispatch({ type: 'GET_FULL_SQUAD' })
-	}
-}
-
 /*----------------------------*/
 /* Отчисление игрока состава */
 /*--------------------------*/

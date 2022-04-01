@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //Check token and load user
-export const loadPlayers = () => async (dispatch, getState) => {
+export const loadPlayers = (userTeam) => async (dispatch, getState) => {
 
 	await axios.get('/api/load', getState)
 		.then(res => {
@@ -43,8 +43,8 @@ export const loadSquadPlayers = (userTeam) => async (dispatch, getState) => {
 /*-------------------*/
 export const sortPlayers = (sortKey) => dispatch => {
 	dispatch({
-		type: 'SORT',
-		payload: { key: sortKey.key, orderby: sortKey.orderby }
+		type: 'SORT_PLAYERS',
+		payload: { key: sortKey }
 	})
 }
 
@@ -53,44 +53,31 @@ export const sortPlayers = (sortKey) => dispatch => {
 /*---------------*/
 export const setFilter = (inputFilter) => dispatch => {
 	
-	if (inputFilter.name || inputFilter.ca.atleast || inputFilter.ca.atmost || 
-			inputFilter.pa.atleast ||	inputFilter.pa.atmost || 
-			inputFilter.age.atleast ||	inputFilter.age.atmost || 
-			inputFilter.price.atleast ||	inputFilter.price.atmost ||	
-			inputFilter.preferredFoot !== '' || inputFilter.position !== '' || inputFilter.side !== '' ||
-			inputFilter.skill !== '' || inputFilter.skillNum !== ''
-			) {
 	dispatch({
 		type: 'FILTER',
 		payload: {inputFilter: inputFilter}
 	}) 
 }
-	else {
-		dispatch({ type: 'GET_FULL_LIST' })
-	}
-}
 
 /*----------------------------*/
 /* Отчисление игрока состава */
 /*--------------------------*/
-export const sellSquadPlayer = (playerId, club) => async dispatch => {
-	await axios({
-		method: 'get',
-		url: '/api/sellsquadplayer',
-		params: { uid: playerId , club: club}
-	})
-		.then(res => {
-			dispatch({
-				type: 'SELL_SQUAD_PLAYER',
-				payload: res.data
-			})
+
+export const showPlayer = (player) => async (dispatch) => {
+
+	if (typeof player === 'object')
+		await dispatch({
+			type: 'SHOW_SQUAD_PLAYER',
+			payload: { playerInfo: player }
 		})
-		.catch((err) => {
-			dispatch({
-				type: 'AUTH_ERROR'
-			})
+	else
+		await dispatch({
+			type: 'SHOW_LIST_PLAYER',
+			payload: { playerId: player }
 		})
+	
 }
+
 
 /* Обновления поля ActiveBidStatus в БД */
 export const updatePlayerBidStatus = (playerId, status) => async (dispatch) => {
