@@ -14,6 +14,7 @@ function App() {
   return (
 	<Router history={Router.browserHistory}>
 		<div className="App">
+			{console.log('render-app')}
 			<div className="container">
 				<div className="row">
 					<div className="col l3 m12 s12">

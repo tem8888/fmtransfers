@@ -41,8 +41,8 @@ const playerListReducer = (state = initialState, action) => {
 		case 'PLAYERS_LOADED':
 			return { 
 				...state, 
-				initial: action.payload.slice(0,150), 
-				filtered: action.payload.slice(0,150), 
+				initial: action.payload, 
+				filtered: action.payload, 
 				loading: false, 
 				activePlayer: {} 
 			}
