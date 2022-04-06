@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { Loader } from '../Loader/Loader.js';
 const { sortSquadPlayers } = require('../../store/actions/squadListActions.js')
@@ -10,25 +10,10 @@ const SquadList = (props) => {
 		sortSquadPlayers, squadList, idPlayer, auth, isLoading, showPlayer
 	} = props
 
-	const [sortKey, setSortKey] = useState({ // состояние ключа сортировки
-		key: '',
-		orderby: ''
-	})
-
-	/*  При изменении ключа sortKey выполняем сортировку. Пропускаем первый рендер  */
-	useEffect(() => {
-		if (sortKey.key) 
-		sortSquadPlayers(sortKey)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [sortKey])
-
 	/*  Устанавливаем ключ и порядок сортировки  */
 	const sortHandler = (e) => { // [хендлер сортировки по столбцам]
 		e.preventDefault()
-		if (sortKey.orderby !== 'asc')
-			setSortKey({key: e.target.id, orderby: 'asc'})
-		else
-			setSortKey({key: e.target.id, orderby: 'desc'})
+		sortSquadPlayers(e.target.id)
 	}
 
 /* Функция вывода списка всех отфильтрованных игроков */
@@ -58,7 +43,7 @@ const SquadList = (props) => {
 
 /* RETURN RENDER */
 	return (
-		<>
+		<div className="table-wrapper scrollbar">
 	{!auth.isAuthenticated ? <div className='help-msg'>Необходима авторизация</div> : 
 	isLoading ? 
 		<Loader /> :
@@ -84,14 +69,15 @@ const SquadList = (props) => {
 			</tbody>
 		</table>
 	}
-		</>
+		</div>
 	)
 }
 
 const mapStateToProps = state => ({
 	squadList: state.squadList.filtered,
 	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : '',
-	auth: state.auth
+	auth: state.auth,
+	sort: state.squadList.sort
 })
 
 const mapDispatchToProps = (dispatch) => ({

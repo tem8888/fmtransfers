@@ -26,7 +26,7 @@ export const loadSquad = (userTeam) => async (dispatch) => {
 export const sortSquadPlayers = (sortKey) => dispatch => {
 	dispatch({
 		type: 'SORT_SQUAD',
-		payload: { key: sortKey.key, orderby: sortKey.orderby }
+		payload: { key: sortKey }
 	})
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Loader } from '../Loader/Loader.js'
 const { loadBids } = require('../../store/actions/shortListActions')
@@ -8,32 +8,16 @@ const { sortShortList } = require('../../store/actions/shortListActions.js')
 const ShortList = (props) => {
 
 	const {isLoading, sortShortList, shortList, idPlayer, auth, showPlayer} = props
-	const [sortKey, setSortKey] = useState({
-		// состояние ключа сортировки
-		key: '',
-		orderby: '',
-	})
 
 	/*  Устанавливаем ключ и порядок сортировки  */
 	const sortHandler = (e) => { // [хендлер сортировки по столбцам]
 		e.preventDefault()
-		if (sortKey.orderby !== 'asc')
-			setSortKey({key: e.target.id, orderby: 'asc'})
-		else
-			setSortKey({key: e.target.id, orderby: 'desc'})
+		sortShortList(e.target.id)
 	}
-
-	/*  При изменении ключа sortKey выполняем сортировку. Пропускаем первый рендер  */
-	useEffect(() => {
-		if (sortKey.key) 
-			sortShortList(sortKey)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [sortKey])
 
 	/* Функция вывода списка игроков, по которым авторизованный пользователь сделал бид  */
 	const displayShortList = (shortList) => {
 		
-
 		if (!shortList.length || !auth.isAuthenticated) return null
 
 		const setClass = (playerBidStatus, idPlayer, playerUid) => {
@@ -67,39 +51,42 @@ const ShortList = (props) => {
 		</tr>
 	) }
 
-/* RETURN RENDER */
 	return (
-	<>
-	{!auth.isAuthenticated ? <div className='help-msg'>Необходима авторизация</div> : 
-	isLoading ? 
-		<Loader /> :
-		<table className="striped players-table">
-			<thead>
-				<tr>
-					<th>UID</th>
-					<th>Nat</th>
-					<th>Name</th>
-					<th>Position</th>
-					<th id="age" className='sort-col' onClick={sortHandler}>Age</th>
-					<th id="ca" className='sort-col' onClick={sortHandler}>CA</th>
-					<th id="pa" className='sort-col' onClick={sortHandler}>PA</th>
-					<th className='hide-on-small-only'>Height</th>
-					<th className='hide-on-small-only'>Weight</th>
-					<th>Foot</th>
-					<th>WP</th>
-					<th id='price' className='sort-col' onClick={sortHandler}>Price</th>
-				</tr>
-			</thead>
-			<tbody>
-				{displayShortList(shortList)}
-			</tbody>
-		</table>
-	}
-		</>
+		<div className="table-wrapper scrollbar">
+			
+		 {!auth.isAuthenticated ? <div className='help-msg'>Необходима авторизация</div> : 
+			isLoading ? 
+			<Loader /> :
+			<table className="striped players-table">
+				<thead>
+					<tr>
+						<th>UID</th>
+						<th>Nat</th>
+						<th>Name</th>
+						<th>Position</th>
+						<th id="age" className='sort-col' onClick={sortHandler}>Age</th>
+						<th id="ca" className='sort-col' onClick={sortHandler}>CA</th>
+						<th id="pa" className='sort-col' onClick={sortHandler}>PA</th>
+						<th className='hide-on-small-only'>Height</th>
+						<th className='hide-on-small-only'>Weight</th>
+						<th>Foot</th>
+						<th>WP</th>
+						<th id='price' className='sort-col' onClick={sortHandler}>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					{displayShortList(shortList)}
+				</tbody>
+			</table>
+	} 
+		</div>
 	)
 }
 
+
 const mapStateToProps = state => ({
+	sortOrder: state.shortState.sortOrder,
+	sortKey: state.shortState.sortKey,
 	shortList: state.shortState.list,
 	isLoading: state.playersList.loading,
 	auth: state.auth,

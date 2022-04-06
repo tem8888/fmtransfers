@@ -11,7 +11,6 @@ import AddToList from './AddToList.js'
 import CopyUID from './CopyUID.js'
 
 const PlayerProfile = ({ 
-	auth, 
 	playerInfo,
 	isLoading
 	}) => {
@@ -31,22 +30,21 @@ const PlayerProfile = ({
 				<div className="col s6 offset-s3 m3">
 					<div className={styles.profile}>
 						<img src={playerImg} alt=""/>
-					<div className={styles.name}>
-								{playerInfo.name}
-					</div>
-					<div>
-						{playerInfo.position}
-					</div><hr/>
-					<div>
-						Age: {playerInfo.age}
-					</div><hr/>
-					<div>
-						CA: {playerInfo.ca}&nbsp;&nbsp; PA: {playerInfo.pa}
-					</div>
-					{/* <hr/>
-					<div>
-						Foot: {playerInfo.preferredfoot}
-					</div> */}
+						<div className={styles.name}>
+							{playerInfo.name}
+						</div>
+						<div>
+							{console.log('render-profile')}
+							{playerInfo.position}
+						</div>
+						<hr/>
+						<div>
+							Age: {playerInfo.age}
+						</div>
+						<hr/>
+						<div>
+							CA: {playerInfo.ca}&nbsp;&nbsp; PA: {playerInfo.pa}
+						</div>
 					</div>
 				</div>
 				<div className="col s12 m9">
@@ -81,7 +79,6 @@ const PlayerProfile = ({
 
 
 const mapStateToProps = state => ({
-	auth: state.auth,
 	isLoading: state.playersList.loading,
 	playerInfo : state.playersList.activePlayer || {},
 })

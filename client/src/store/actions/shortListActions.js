@@ -22,13 +22,6 @@ export const loadShortList = (userTeam) => async (dispatch) => {
 		})
 }
 
-export const showPlayer = (playerId) => (dispatch) => {
-	dispatch({
-		type: 'SHOW_SHORTLIST_PLAYER',
-		payload: { playerId: playerId }
-	})
-}
-
 /* Добавление игрока в шортлист */
 export const shortListUpdate = (playerInfo, club) => async (dispatch) => {
 
@@ -100,6 +93,6 @@ export const updateUser = (price, userId) => async (dispatch) => {
 export const sortShortList = (sortKey) => dispatch => {
 	dispatch({
 		type: 'SORT_SHORTLIST',
-		payload: { key: sortKey.key, orderby: sortKey.orderby }
+		payload: { key: sortKey}
 	})
 }

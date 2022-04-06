@@ -207,7 +207,10 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 .td-price {
 	font-weight: bold;
 }
-
+.table-wrapper {
+	height: 448px;
+	overflow: auto;
+}
 
 /*  PLAYERPROFILE  */
 /*-----------------*/

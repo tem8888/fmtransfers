@@ -1,6 +1,8 @@
 const initialState = {
   list: {},
-  activePlayer: null,
+  sorted: {},
+  sortOrder: '',
+  sortKey: '',
   loading: true
 }
 
@@ -9,8 +11,8 @@ const shortListReducer = (state = initialState, action) => {
 
     /* Загрузка всех игроков добавленных в шортлист определенным клубом */
     case 'SHORTLIST_LOADED': 
-      state.list = action.payload
-      return { ...state, loading: false }
+   //   state.list = action.payload
+      return { ...state, list: action.payload, loading: false }
 
     /* Добавляем игрока в шортлист */
     case 'SHORTLIST_ADD':
@@ -27,21 +29,14 @@ const shortListReducer = (state = initialState, action) => {
       }
 
     case 'SORT_SHORTLIST':
-      if (action.payload.orderby === 'asc')
+      if (state.sortOrder !== 'asc' && action.payload.key === state.sortKey)
         return {
-          ...state, list: state.list.sort((a,b) => a[action.payload.key] - b[action.payload.key])
+          ...state, sortKey: action.payload.key, sortOrder: 'asc', list: state.list.sort((a,b) => b[action.payload.key] - a[action.payload.key])
         }
       else
         return {
-          ...state, 
-          list: state.list.sort((a,b) => b[action.payload.key] - a[action.payload.key])
+          ...state, sortKey: action.payload.key, sortOrder: 'desc', list: state.list.sort((a,b) => a[action.payload.key] - b[action.payload.key])
         }
-
-    case 'SHOW_SHORTLIST_PLAYER':
-      return {
-        ...state, 
-        activePlayer: state.list.filter((player) => player.uid === action.payload.playerId)[0]
-      }
 
     case 'SHORTLIST_ERROR':
       return state
