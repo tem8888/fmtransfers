@@ -2,21 +2,19 @@
 import { connect } from 'react-redux'
 import { useTable, useBlockLayout, useSortBy } from 'react-table'
 import { FixedSizeList } from "react-window"
-//import scrollbarWidth from '../functions/scrollbarWidth'
 const { showPlayer} = require('../../store/actions/playerListActions')
 
 
-const Table = ({ columns, data, idPlayer, showPlayer, width }) => {
+const Table = ({ columns, data, idPlayer, showPlayer }) => {
 
 	const defaultColumn = React.useMemo(() => ({ width: 55, }), [])
-//	const scrollBarSize = React.useMemo(() => scrollbarWidth(), [])
+
 	// Use the state and functions returned from useTable to build your UI
 	const {
 		getTableProps,
 		getTableBodyProps,
 		headerGroups,
 		rows,
-	//	totalColumnsWidth,
 		prepareRow,
 	} = useTable({
 		columns, 
