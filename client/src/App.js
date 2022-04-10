@@ -1,7 +1,3 @@
-
-// навести порядок в стилях
-// настроить поиск по позициям
-
 import React from 'react'
 import { BrowserRouter as Router } from "react-router-dom"
 import PlayerProfile from './components/PlayerProfile/PlayerProfile.js'
