@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-export const loadSquadPlayers = (userTeam) => async (dispatch) => {
-
+export const loadSquad = (userTeam) => async (dispatch) => {
 	await axios({
 		method: 'get',
 		url: '/api/loadsquad',
@@ -27,27 +26,8 @@ export const loadSquadPlayers = (userTeam) => async (dispatch) => {
 export const sortSquadPlayers = (sortKey) => dispatch => {
 	dispatch({
 		type: 'SORT_SQUAD',
-		payload: { key: sortKey.key, orderby: sortKey.orderby }
+		payload: { key: sortKey }
 	})
-}
-
-/*-----------------*/
-/* Фильтр игроков */
-/*---------------*/
-export const setFilter = (inputFilter) => dispatch => {
-	if (inputFilter.name || inputFilter.ca.atleast || inputFilter.ca.atmost || 
-			inputFilter.pa.atleast ||	inputFilter.pa.atmost || 
-			inputFilter.age.atleast ||	inputFilter.age.atmost || 
-			inputFilter.price.atleast ||	inputFilter.price.atmost || 
-			inputFilter.position !== '') {
-	dispatch({
-		type: 'FILTER_SQUAD',
-		payload: {inputFilter: inputFilter}
-	}) 
-}
-	else {
-		dispatch({ type: 'GET_FULL_SQUAD' })
-	}
 }
 
 /*----------------------------*/

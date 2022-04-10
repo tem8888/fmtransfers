@@ -1,6 +1,7 @@
 @namespace url("http://www.w3.org/1999/xhtml");
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;500;600&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import "~materialize-css/dist/css/materialize.min.css";
 
 :root {
 	--moredark: #202225;
@@ -17,38 +18,43 @@
 	--good: #F3CF52;
 	--badly: #b9bbbe;
 	--bad: #72757b;
-	scrollbar-color: #7289d9 #1E232D !important;
-  scrollbar-width: thin !important;
-}
-* {
-	scrollbar-width: thin !important;
-}
+} 
+
+/* Общие стили */
 html {
 	color: var(--white) !important;
 	background-color: var(--dark) !important;
 	font-family: 'Exo 2', sans-serif !important;
+	font-weight: normal !important;
 }
+
 button {
 	font-family: 'Exo 2', sans-serif !important;
 }
+
 table {
 	border-collapse: inherit !important;
 	position: relative;
 }
+
 img {
 	width: 100%;
 }
+
 td, th {
-	padding-top: 5px !important;
-	padding-bottom: 5px !important;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
 }
+
 input {
 	height: 2rem !important;
 	margin: 0 !important;
 }
+
 input[type=text] {
 	color: var(--white);
 }
+
 hr {
 	width: 70%;
 	margin: 0.4rem auto;
@@ -57,111 +63,255 @@ hr {
 	border-top: 1px solid #626262;
 	box-sizing: border-box;
 }
+
+form {
+	font-size: 14px;
+}
+
 select {
 	padding: 0 !important;
 	height: 1.5rem !important;
 	border: none !important;
 	color: var(--white);
 	background: none !important;
+	font-family: 'Exo 2', sans-serif !important;
 }
+
 option {
 	color: var(--dark);
 }
+
 select:focus {
 	outline: 1px solid rgba(255,255,255,0.2) !important;
 }
+
+/* Кастомный скроллбар для большинства браузеров */
+.scrollbar::-webkit-scrollbar {
+    height: 12px;
+    width: 9px;
+    background: #1E232D;
+} 
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #7289d9;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+} 
+.scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 5px;
+} 
+
+/* скроллбар для Firefox  */
+.scrollbar {
+	scrollbar-width: thin; 
+	scrollbar-color: #7289d9 #1E232D;
+}
+
+/* Плейсхолдеры для всех инпутов  */
+::placeholder {
+	color: rgb(175, 175, 175) !important;
+	font-size: 0.95em;
+}
+
+
+/*  Основная сетка  */
+/*------------------*/
 .container {
 	min-width: 470px;
+	width: 100%;
 }
-.row {
-	position: relative;
-}
-.input-row {
-	margin-bottom: 10px !important;
+ .row .col {
+	padding: 0 0.6rem !important;
 }
 
-.table-skill-value {
-	width: 5.33% !important;
-}
-.table-skill-name {
-	width: 27% !important;
-}
 
-.players-table tr {
-	height: 28px; 
-	font-weight: 300;
-}
-.skills-table {
-	font-weight: 300;
-}
-.players-table, .skills-table, .skills {
-	font-size: 0.8rem;
-	user-select: none;
-}
-.skills td {
-	padding: 2px 5px 4px !important;
-	line-height: 1.4;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-table.striped > tbody > tr:nth-child(2n+1) {
-	background-color: rgb(65, 67, 72) !important;
-}
-table.striped > tbody > tr.active-player {
-	background-color: var(--blue) !important;
-}
-
-.table-container {
-	height: 450px;
-	overflow-y: scroll;
-	overflow-x: hidden;
-}
-.players-count {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	right: 20px;
-	top: 485px;
-	font-size: 0.8rem;
-}
+/*  Buttons  */
+/*-----------*/
 .btn, .btn-large, .btn-small {
 	background-color: var(--blue) !important;
 }
 .btn:hover, .btn-large:hover, .btn-small:hover {
 	filter: brightness(115%) !important;
 }
+.btn-floating i {
+	font-size: 1.4rem !important;
+}
+.btn-small i {
+	font-size: 2rem !important;
+}
+.btn-floating.btn-esmall {
+	width: 22px;
+	height: 22px;
+	font-size: 6px;
+}
+.btn-floating.btn-esmall i {
+	line-height: 22px;
+}
 
+
+/*  SEARCHFORM  */
+/*--------------*/
+.search-button {
+	display: flex;
+	justify-content: space-around;
+}
+.input-row {
+	margin-bottom: 10px !important;
+}
+.input-field {
+	margin: 0 !important;
+}
+.input-field-name {
+	padding: 5px 0px 5px 0px !important;
+}
+
+
+/*  PLAYERS TABLE  */
+/*-----------------*/
+.table-container {
+	font-size: 0.8rem;
+	cursor: default;
+	height: 448px;
+	margin-bottom: 2rem;
+	line-height: 2;
+}
+.active-player {
+	background-color: var(--blue) !important;
+}
+.bid-finished {
+	color: #480000;
+}
+.players-table tr {
+	height: 28px; 
+	font-weight: 300;
+}
 .sort-col {
 	cursor: pointer;
 }
 
-.success-transfer {
-	color: #3aff59;
+.players-table, .skills-table, .skills {
+	font-size: 0.8rem;
+	user-select: none;
 }
-.hide {
-	display: none;
+.uid-col {
+	user-select: text;
+}
+
+table.striped>tbody>tr:nth-child(odd) {
+	background-color: rgb(65, 67, 72) !important;
+}
+table.striped>tbody>tr.active-player:nth-child(odd) {
+	background-color: var(--blue) !important;
+}
+.td-price {
+	font-weight: bold;
+}
+.table-wrapper {
+	height: 448px;
+	overflow: auto;
+}
+
+/*  PLAYERPROFILE  */
+/*-----------------*/
+
+.skills-table {
+	font-weight: 300;
+}
+.table-skill-value {
+	width: 5.33% !important;
+}
+.table-skill-name {
+	width: 27% !important;
+	overflow: hidden;
+}
+.skills td {
+	padding: 2px 5px 4px !important;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+.skills-margin {
+	margin-left: -10px;
+}
+.skills th {
+	margin-bottom: 5px;
+}
+
+/* Modal block */
+/*-------------*/
+.modal {
+	border: 1px solid var(--blue);
+}
+.modal select {
+	display: inline-block;
+}
+.modal .modal-footer {
+	text-align: center !important;
+}
+.attribute-select {
+	width: 200px;
+}
+.attribute-input-row {
+	margin: 5px 0;
+}
+
+/* Toast block */
+/*-------------*/
+#toast-container {
+	top: auto !important;
+	right: auto !important;
+	bottom: 4%;
+	right: 7% !important;
+}
+
+.my-toast {
+	background-color: var(--blue) !important;
+	left: 15%;
+}
+
+/*  Подсказки  */
+/*-------------*/
+.tooltip {
+	position: relative;
+}
+.tooltip .tooltiptext {
+	background-color: rgba(0, 0, 0, 0.75);
+	color: #fff;
+	text-align: center;
+	padding: 4px 0;
+  	border-radius: 6px;
+	position: absolute;
+  	z-index: 1;
+	width: 240px;
+	bottom: 130%;
+	left: 0;
+	margin-left: -56px;
+	visibility: hidden;
+	font-weight: normal;
+	transition: 0.3s;
+	opacity: 0;
+}
+.tooltip:hover .tooltiptext  {
+	visibility: visible;
+	opacity: 1;
+}
+.help-msg {
+	padding: 5rem 0;
+	text-align: center;
+	font-size: 1.5rem;
 }
 .error-msg {
 	font-size: 0.8rem;
 	color: var(--red);
 	padding: 0.2rem;
 }
-.sell-price, .sell-msg {
-	font-size: 1.2rem;
-	text-align: center;
-}
 
-.help-msg {
-	margin-top: 10rem;
-	height: 10rem;
-	text-align: center;
-	font-size: 1.5rem;
-}
 
-@media only screen and (max-width: 1440px) {
+/*  MEDIA  */
+/*---------*/
+@media only screen and (max-width: 1540px) {
 	.container {
-		width: 85% !important;
+		width: 90% !important;
 	}
 }
 @media only screen and (max-width: 992px) {
@@ -171,14 +321,18 @@ table.striped > tbody > tr.active-player {
 	}
 }
 @media only screen and (max-width: 600px) {
-	
+	.tabs {
+		height: auto !important;
+	}
+	.tabs.tabs-fixed-width {
+		flex-direction: column;
+	}
 }
 @media only screen and (max-width: 484px) {
 	.skills td {
 		padding: 2px 1px !important;
 	}
+	.attribute-select {
+		width: 150px;
+	}
 }
-
-
-@import "~materialize-css/dist/css/materialize.min.css"
-

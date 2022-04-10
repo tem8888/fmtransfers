@@ -3,14 +3,17 @@ const {Schema, model} = require('mongoose')
 const schema = new Schema({
 	uid: {type: String, required: true},
 	name: {type: String, required: true},
-	nation: {type: String},
+	nat: {type: String},
+	nat2: {type: String},
 	ca: {type: Number},
 	pa: {type: Number},
 	age: {type: Number},
 	position: {type: String},
+	height: {type: String},
+	weight: {type: String},
 	preferredfoot: {type: String},
 	price: {type: Number, required: true},
-	bidStatus: {type: String},
+	status: {type: String},
 	skillsTec: {
 		cor: {type: String},
 		cro: {type: String},
@@ -22,7 +25,7 @@ const schema = new Schema({
 		lon: {type: String},
 		lth: {type: String},
 		mar: {type: String},
-		pas: {type: String},
+		pas: {type: Number},
 		pen: {type: String},
 		tck: {type: String},
 		tec: {type: String}
