@@ -176,6 +176,9 @@ select:focus {
 	margin-bottom: 2rem;
 	line-height: 2;
 }
+.tabs .tab {
+	height: 36px !important;
+}
 .active-player {
 	background-color: var(--blue) !important;
 }
@@ -304,6 +307,19 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	font-size: 0.8rem;
 	color: var(--red);
 	padding: 0.2rem;
+}
+
+/*  Focus Outlines for a11y   */
+/*---------*/
+button:focus-visible, .btn:focus-visible, .btn-large:focus-visible, .btn-small:focus-visible {
+	outline: 1px solid !important;
+	outline-offset: 2px;
+} 
+.waves-effect {
+	transition-property: background-color, filter !important;
+} 
+.tabs .tab a:focus-visible {
+	border-bottom: 2px solid;
 }
 
 
