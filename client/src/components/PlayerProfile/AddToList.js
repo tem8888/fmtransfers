@@ -17,9 +17,14 @@ const AddToList = ({
 
     const addToListHandler = (e) => {
 		e.preventDefault()
+
+        if (!e.target.className.includes('disabled')) {
+            shortListUpdate(playerInfo, club) /* Обновляем шорт */
+            M.toast({html: 'Игрок добавлен в список', classes: 'my-toast'})
+        } else {
+            M.toast({html: 'Нужна авторизация', classes: 'my-toast'})
+        }
         
-        shortListUpdate(playerInfo, club) /* Обновляем шорт */
-        M.toast({html: 'Игрок добавлен в список', classes: 'my-toast'})
 	}
 
     const removeHandler = (e) => {
