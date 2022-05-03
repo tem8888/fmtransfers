@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 
 import M from 'materialize-css'
@@ -8,9 +8,11 @@ const { setFilter } = require('../../store/actions/playerListActions.js')
 const SearchForm = (props) => {
 	const { setFilter, isLoading } = props
 	const [inputFilter, setInputFilter] = useState({})
+	let inputRef = useRef()
 
 	const inputHandler = (e) => {
-		const { value, id, name } = e.target
+		const { value, id, name, type } = e.target
+		inputRef.current = type
 		// Дожидаемся загрузки данных, преждем чем пользоваться формой
 		// В зависимости от типа инпута создаем свойство объекта: {prp: {min: 'val', max: 'val'}} или {prp: 'val'}
 		if (!isLoading) 
@@ -21,12 +23,24 @@ const SearchForm = (props) => {
 	}
 
 	useEffect(() => {
-		setFilter(inputFilter)
+
+		// через useRef и setTimeout оптимизируем работу фильтра
+		// для текстовых и числовых полей выставляем задержку, прежде чем менять данные
+		// в inputRef храним текущий тип инпута
+		if (inputRef.current === 'number' || inputRef.current === 'text') {
+			let timeoutID = setTimeout(() => setFilter(inputFilter), 600)
+			return () => {
+				clearTimeout(timeoutID)
+			}
+		} else {
+			setFilter(inputFilter)
+		}
 	}, [setFilter, inputFilter])
 
 
 	const clearInputs = (e) => { // Очистка всей формы
 		e.preventDefault()
+		inputRef.current = ''
 		setInputFilter({})
 	}
 
@@ -39,7 +53,7 @@ const SearchForm = (props) => {
 	return (
 		<div className='row'>
 			<form className='col s12'>
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='input-field-name col s4'>Name &nbsp;</div>
 					<div className='input-field inline col s8'>
 						<input
@@ -47,21 +61,19 @@ const SearchForm = (props) => {
 							name='name'
 							id='name'
 							type='text'
-							className='validate blue-text text-lighten-4'
 							value={inputFilter.name || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div>
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>CA &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
 							placeholder='min'
 							id='ca_1'
 							name='min'
-							type='text'
-							className='validate'
+							type='number'
 							value={inputFilter?.ca?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -70,23 +82,21 @@ const SearchForm = (props) => {
 						<input
 							placeholder='max'
 							id='ca_2'
-							type='text'
+							type='number'
 							name='max'
-							className='validate'
 							value={inputFilter?.ca?.max || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div> 
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>PA &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
 							placeholder='min'
 							id='pa_1'
 							name='min'
-							type='text'
-							className='validate'
+							type='number'
 							value={inputFilter?.pa?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -96,22 +106,20 @@ const SearchForm = (props) => {
 							placeholder='max'
 							id='pa_2'
 							name='max'
-							type='text'
-							className='validate'
+							type='number'
 							value={inputFilter?.pa?.max || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div>
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>Price &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
 							placeholder='min'
 							id='price_1'
-							type='text'
+							type='number'
 							name='min'
-							className='validate'
 							value={inputFilter?.price?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -120,24 +128,22 @@ const SearchForm = (props) => {
 						<input
 							placeholder='max'
 							id='price_2'
-							type='text'
+							type='number'
 							name='max'
-							className='validate'
 							value={inputFilter?.price?.max || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div>
 
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>Age &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
 							placeholder='min'
 							id='age_1'
-							type='text'
+							type='number'
 							name='min'
-							className='validate'
 							value={inputFilter?.age?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -146,9 +152,8 @@ const SearchForm = (props) => {
 					<input
 						placeholder='max'
 						id='age_2'
-						type='text'
+						type='number'
 						name='max'
-						className='validate'
 						value={inputFilter?.age?.max || ''}
 						onChange={inputHandler}
 					/>
