@@ -155,6 +155,7 @@ select:focus {
 .search-button {
 	display: flex;
 	justify-content: space-around;
+	margin: 15px 0;
 }
 .input-row {
 	margin-bottom: 10px !important;

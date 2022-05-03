@@ -53,7 +53,7 @@ const SearchForm = (props) => {
 	return (
 		<div className='row'>
 			<form className='col s12'>
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='input-field-name col s4'>Name &nbsp;</div>
 					<div className='input-field inline col s8'>
 						<input
@@ -61,13 +61,12 @@ const SearchForm = (props) => {
 							name='name'
 							id='name'
 							type='text'
-							className='validate blue-text text-lighten-4'
 							value={inputFilter.name || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div>
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>CA &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
@@ -75,7 +74,6 @@ const SearchForm = (props) => {
 							id='ca_1'
 							name='min'
 							type='number'
-							className='validate'
 							value={inputFilter?.ca?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -86,13 +84,12 @@ const SearchForm = (props) => {
 							id='ca_2'
 							type='number'
 							name='max'
-							className='validate'
 							value={inputFilter?.ca?.max || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div> 
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>PA &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
@@ -100,7 +97,6 @@ const SearchForm = (props) => {
 							id='pa_1'
 							name='min'
 							type='number'
-							className='validate'
 							value={inputFilter?.pa?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -111,13 +107,12 @@ const SearchForm = (props) => {
 							id='pa_2'
 							name='max'
 							type='number'
-							className='validate'
 							value={inputFilter?.pa?.max || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div>
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>Price &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
@@ -125,7 +120,6 @@ const SearchForm = (props) => {
 							id='price_1'
 							type='number'
 							name='min'
-							className='validate'
 							value={inputFilter?.price?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -136,14 +130,13 @@ const SearchForm = (props) => {
 							id='price_2'
 							type='number'
 							name='max'
-							className='validate'
 							value={inputFilter?.price?.max || ''}
 							onChange={inputHandler}
 						/>
 					</div>
 				</div>
 
-				<div className='row input-row'>
+				<div className='row input-row valign-wrapper'>
 					<div className='col s4'>Age &nbsp;</div>
 					<div className='col s4 input-field inline'>
 						<input
@@ -151,7 +144,6 @@ const SearchForm = (props) => {
 							id='age_1'
 							type='number'
 							name='min'
-							className='validate'
 							value={inputFilter?.age?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -162,7 +154,6 @@ const SearchForm = (props) => {
 						id='age_2'
 						type='number'
 						name='max'
-						className='validate'
 						value={inputFilter?.age?.max || ''}
 						onChange={inputHandler}
 					/>
