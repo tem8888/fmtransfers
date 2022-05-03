@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 
 import M from 'materialize-css'
@@ -8,9 +8,11 @@ const { setFilter } = require('../../store/actions/playerListActions.js')
 const SearchForm = (props) => {
 	const { setFilter, isLoading } = props
 	const [inputFilter, setInputFilter] = useState({})
+	let inputRef = useRef()
 
 	const inputHandler = (e) => {
-		const { value, id, name } = e.target
+		const { value, id, name, type } = e.target
+		inputRef.current = type
 		// Дожидаемся загрузки данных, преждем чем пользоваться формой
 		// В зависимости от типа инпута создаем свойство объекта: {prp: {min: 'val', max: 'val'}} или {prp: 'val'}
 		if (!isLoading) 
@@ -21,12 +23,24 @@ const SearchForm = (props) => {
 	}
 
 	useEffect(() => {
-		setFilter(inputFilter)
+
+		// через useRef и setTimeout оптимизируем работу фильтра
+		// для текстовых и числовых полей выставляем задержку, прежде чем менять данные
+		// в inputRef храним текущий тип инпута
+		if (inputRef.current === 'number' || inputRef.current === 'text') {
+			let timeoutID = setTimeout(() => setFilter(inputFilter), 600)
+			return () => {
+				clearTimeout(timeoutID)
+			}
+		} else {
+			setFilter(inputFilter)
+		}
 	}, [setFilter, inputFilter])
 
 
 	const clearInputs = (e) => { // Очистка всей формы
 		e.preventDefault()
+		inputRef.current = ''
 		setInputFilter({})
 	}
 
@@ -60,7 +74,7 @@ const SearchForm = (props) => {
 							placeholder='min'
 							id='ca_1'
 							name='min'
-							type='text'
+							type='number'
 							className='validate'
 							value={inputFilter?.ca?.min || ''}
 							onChange={inputHandler}
@@ -70,7 +84,7 @@ const SearchForm = (props) => {
 						<input
 							placeholder='max'
 							id='ca_2'
-							type='text'
+							type='number'
 							name='max'
 							className='validate'
 							value={inputFilter?.ca?.max || ''}
@@ -85,7 +99,7 @@ const SearchForm = (props) => {
 							placeholder='min'
 							id='pa_1'
 							name='min'
-							type='text'
+							type='number'
 							className='validate'
 							value={inputFilter?.pa?.min || ''}
 							onChange={inputHandler}
@@ -96,7 +110,7 @@ const SearchForm = (props) => {
 							placeholder='max'
 							id='pa_2'
 							name='max'
-							type='text'
+							type='number'
 							className='validate'
 							value={inputFilter?.pa?.max || ''}
 							onChange={inputHandler}
@@ -109,7 +123,7 @@ const SearchForm = (props) => {
 						<input
 							placeholder='min'
 							id='price_1'
-							type='text'
+							type='number'
 							name='min'
 							className='validate'
 							value={inputFilter?.price?.min || ''}
@@ -120,7 +134,7 @@ const SearchForm = (props) => {
 						<input
 							placeholder='max'
 							id='price_2'
-							type='text'
+							type='number'
 							name='max'
 							className='validate'
 							value={inputFilter?.price?.max || ''}
@@ -135,7 +149,7 @@ const SearchForm = (props) => {
 						<input
 							placeholder='min'
 							id='age_1'
-							type='text'
+							type='number'
 							name='min'
 							className='validate'
 							value={inputFilter?.age?.min || ''}
@@ -146,7 +160,7 @@ const SearchForm = (props) => {
 					<input
 						placeholder='max'
 						id='age_2'
-						type='text'
+						type='number'
 						name='max'
 						className='validate'
 						value={inputFilter?.age?.max || ''}
