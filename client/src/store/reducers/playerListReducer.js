@@ -72,16 +72,16 @@ const playerListReducer = (state = initialState, action) => {
 				return {
 					...state,
 					initial: state.initial,
-					filtered: state.filtered.filter(
+					filtered: state.initial.filter(
 						(player) => {
 							for (let key in filters) {
 								if (player[key] === undefined) {
 									return false;
 								} else
 								if (minmaxFields.includes(key)) {
-									if (filters[key]['min'] !== null && player[key] < filters[key]['min'])
+									if (filters[key]['min'] !== '' && player[key] < filters[key]['min'])
 										return false
-									if (filters[key]['max'] !== null && player[key] > filters[key]['max'])
+									if (filters[key]['max'] !== '' && player[key] > filters[key]['max'])
 										return false
 								} else if (textFields.includes(key)){
 									if (!player[key].toLowerCase().includes(filters[key].toLowerCase()))
