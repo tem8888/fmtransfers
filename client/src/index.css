@@ -49,9 +49,6 @@ td, th {
 input {
 	height: 2rem !important;
 	margin: 0 !important;
-}
-
-input[type=text] {
 	color: var(--white);
 }
 

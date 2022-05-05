@@ -8,7 +8,7 @@ import Lists from './components/Lists/Lists.js'
 function App() {
 
   return (
-	<Router history={Router.browserHistory} basename='/'>
+	<Router history={Router.browserHistory} basename="/">
 		<div className="App">
 			<div className="container">
 				<div className="row">
