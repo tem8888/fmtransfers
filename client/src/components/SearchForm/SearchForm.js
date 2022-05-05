@@ -8,11 +8,11 @@ const { setFilter } = require('../../store/actions/playerListActions.js')
 const SearchForm = (props) => {
 	const { setFilter, isLoading } = props
 	const [inputFilter, setInputFilter] = useState({})
-	let inputRef = useRef()
+	let inputRef = useRef([])
 
 	const inputHandler = (e) => {
 		const { value, id, name, type } = e.target
-		inputRef.current = type
+		inputRef.current = [type, value]
 		// Дожидаемся загрузки данных, преждем чем пользоваться формой
 		// В зависимости от типа инпута создаем свойство объекта: {prp: {min: 'val', max: 'val'}} или {prp: 'val'}
 		if (!isLoading) 
@@ -26,8 +26,9 @@ const SearchForm = (props) => {
 
 		// через useRef и setTimeout оптимизируем работу фильтра
 		// для текстовых и числовых полей выставляем задержку, прежде чем менять данные
-		// в inputRef храним текущий тип инпута
-		if (inputRef.current === 'number' || inputRef.current === 'text') {
+		// в inputRef храним текущий тип инпута и его значение (когда пользователь очищает инпут, задержка не нужна)
+
+		if ((inputRef.current[0] === 'number' || inputRef.current[0] === 'text') && inputRef.current[1] !== '') {
 			let timeoutID = setTimeout(() => setFilter(inputFilter), 600)
 			return () => {
 				clearTimeout(timeoutID)
@@ -40,7 +41,7 @@ const SearchForm = (props) => {
 
 	const clearInputs = (e) => { // Очистка всей формы
 		e.preventDefault()
-		inputRef.current = ''
+		inputRef.current = [] // При сбросе инпутов очищаем Ref, чтобы фильтр применился без задержки
 		setInputFilter({})
 	}
 

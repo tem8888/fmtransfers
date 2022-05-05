@@ -58,6 +58,6 @@ export const tokenConfig = () => {
 
 	// If token, add to headers
 	if (token) {config.headers['x-auth-token'] = token}
-
+console.log(config)
 	return config
 }

@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
 
 					jwt.sign(
 						{id: user.userId},
-						process.env.jwtSecret,
+						process.env.REACT_APP_jwtSecret,
 						{expiresIn: 7200},
 						(err, token) => {
 							if (err) throw err
