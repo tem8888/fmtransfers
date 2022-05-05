@@ -1,5 +1,3 @@
-// После показа профиля игрока, если переходить по вкладкам, то происходит ререндер профиля
-
 import React from 'react';
 import {connect} from 'react-redux'
 import styles from '../../assets/styles/playerprofile.module.css'
@@ -34,7 +32,6 @@ const PlayerProfile = ({
 							{playerInfo.name}
 						</div>
 						<div>
-							{console.log('render-profile')}
 							{playerInfo.position}
 						</div>
 						<hr/>

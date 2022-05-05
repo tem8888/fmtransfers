@@ -1,3 +1,5 @@
 node_modules
-client/node_modules
 .env
+.vercel
+client/build
+client/node_modules
