@@ -4,6 +4,7 @@ import PlayerProfile from './components/PlayerProfile/PlayerProfile.js'
 import SearchForm from './components/SearchForm/SearchForm.js'
 import Auth from './components/Auth/Auth.js'
 import Lists from './components/Lists/Lists.js'
+import "@fontsource/exo-2"
 
 function App() {
 
