@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import styles from '../../assets/styles/playerprofile.module.css'
+import styles from './playerprofile.module.css'
 import playerImg from '../../assets/img/player.png'
 
 import { RadarAnalyzer } from './RadarAnalyzer.js'

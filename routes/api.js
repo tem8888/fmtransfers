@@ -6,7 +6,6 @@ const Player = require('../models/Player') // модель игрока
 const Shortlist= require('../models/Shortlist') // модель бида
 const Transferlist= require('../models/Transferlist') // модель бида
 const Squadlist = require('../models/Squadlist')  // модель игрока состава
-const discordSendMessage = require('../middleware/discordSendMessage') // функция отправки сообщения в дискорд
 
 /* -------------------------------------- */
 /* Возвращает список всех игроков в базе */
