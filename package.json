@@ -2,7 +2,7 @@
   "name": "fmtransfers",
   "version": "1.0.0",
   "description": "Transfers app for FM",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
