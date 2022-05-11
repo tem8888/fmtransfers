@@ -75,6 +75,9 @@ const SearchForm = (props) => {
 							id='ca_1'
 							name='min'
 							type='number'
+							min='0'
+							max='200'
+							step='1'
 							value={inputFilter?.ca?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -85,6 +88,9 @@ const SearchForm = (props) => {
 							id='ca_2'
 							type='number'
 							name='max'
+							min='0'
+							max='200'
+							step='1'
 							value={inputFilter?.ca?.max || ''}
 							onChange={inputHandler}
 						/>
@@ -98,6 +104,9 @@ const SearchForm = (props) => {
 							id='pa_1'
 							name='min'
 							type='number'
+							min='0'
+							max='200'
+							step='1'
 							value={inputFilter?.pa?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -108,6 +117,9 @@ const SearchForm = (props) => {
 							id='pa_2'
 							name='max'
 							type='number'
+							min='0'
+							max='200'
+							step='1'
 							value={inputFilter?.pa?.max || ''}
 							onChange={inputHandler}
 						/>
@@ -121,6 +133,8 @@ const SearchForm = (props) => {
 							id='price_1'
 							type='number'
 							name='min'
+							min='0'
+							step='0.5'
 							value={inputFilter?.price?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -131,6 +145,8 @@ const SearchForm = (props) => {
 							id='price_2'
 							type='number'
 							name='max'
+							min='0'
+							step='0.5'
 							value={inputFilter?.price?.max || ''}
 							onChange={inputHandler}
 						/>
@@ -145,6 +161,9 @@ const SearchForm = (props) => {
 							id='age_1'
 							type='number'
 							name='min'
+							min='14'
+							max='50'
+							step='1'
 							value={inputFilter?.age?.min || ''}
 							onChange={inputHandler}
 						/>
@@ -155,6 +174,9 @@ const SearchForm = (props) => {
 						id='age_2'
 						type='number'
 						name='max'
+						min='14'
+						max='50'
+						step='1'
 						value={inputFilter?.age?.max || ''}
 						onChange={inputHandler}
 					/>

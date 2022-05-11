@@ -73,6 +73,9 @@ const FilterAttribute = ({
                                 <input 
                                     disabled={attr[index].val1 === '' ? true : false} // Разрешаем вводить значения только если выбран атрибут
                                     type='number' 
+                                    min='0'
+							        max='20'
+							        step='1'
                                     placeholder='0' 
                                     id={attr[index].val1}
                                     name='min'
@@ -82,7 +85,10 @@ const FilterAttribute = ({
                                 />&nbsp;—&nbsp; 
                                 <input 
                                     disabled={attr[index].val1 === '' ? true : false}
-                                    type='number' 
+                                    type='number'
+                                    min='0'
+							        max='20'
+							        step='1' 
                                     placeholder='20' 
                                     id={attr[index].val2}
                                     name='max'
