@@ -8,7 +8,7 @@ const initialState = {
 	errorMsg: ''
 }
 
-export default function(state = initialState, action) {
+const auth = (state = initialState, action) => {
 	switch(action.type) {
 		case 'USER_LOADING':
 			return {
@@ -57,3 +57,5 @@ export default function(state = initialState, action) {
 			return state
 	}
 }
+
+export default auth

@@ -4,13 +4,13 @@ const server = express()
 const path = require('path')
 require('dotenv/config')
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.REACT_APP_PORT || 5000
 const apiRoutes = require('./routes/api')
 const authRoutes = require('./routes/auth')
 
 async function start() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(process.env.REACT_APP_MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
@@ -23,7 +23,7 @@ async function start() {
     server.use('/auth', authRoutes)
     server.use('/api', apiRoutes)
 
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.REACT_APP_NODE_ENV === 'production') {
       server.use(express.static(path.join(__dirname, '/client/build')))
       server.get('*', (req, res) => {
         res.sendFile(path.join(__dirname + '/client/build/index.html'))

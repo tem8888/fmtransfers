@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { useTable, useBlockLayout, useSortBy } from 'react-table'
 import { FixedSizeList } from "react-window"
@@ -83,7 +83,7 @@ const Table = ({ columns, data, idPlayer, showPlayer }) => {
 		<div {...getTableProps()} className="table">
 			<div>
 				{headerGroups.map(headerGroup => (
-				<div {...headerGroup.getHeaderGroupProps()} className="tr" style={{display:'flex', padding:'3px 0'}}>
+				<div {...headerGroup.getHeaderGroupProps()} className="tr" style={{padding:'3px 0'}}>
 					{headerGroup.headers.map(column => (
 					
 					<div {...column.getHeaderProps(column.getSortByToggleProps())} className="th">

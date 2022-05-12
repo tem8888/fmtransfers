@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import M from 'materialize-css'
 const { shortListUpdate, shortListRemove } = require('../../store/actions/shortListActions')

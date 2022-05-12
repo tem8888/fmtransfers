@@ -16,7 +16,7 @@ function App() {
 						<Auth/> 
 						<SearchForm />
 					</div>
-					<div className="col l9 m12 s12">
+					<div className="col l9 m12 s12 hidden">
 						<Lists />
 					</div>
 				</div>
