@@ -23,12 +23,13 @@ async function start() {
     server.use('/auth', authRoutes)
     server.use('/api', apiRoutes)
 
-    if (process.env.REACT_APP_NODE_ENV === 'production') {
+   // if (process.env.REACT_APP_NODE_ENV === 'production') {
       server.use(express.static(path.join(__dirname, '/client/build')))
-      server.get('*', (req, res) => {
+      
+      server.get('/*', (req, res) => {
         res.sendFile(path.join(__dirname + '/client/build/index.html'))
       })
-    }
+  //  }
 
     server.listen(PORT, () =>
       console.log(`App has been started on port ${PORT}...`)
