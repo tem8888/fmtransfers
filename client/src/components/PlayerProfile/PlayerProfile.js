@@ -26,8 +26,8 @@ const PlayerProfile = ({
 		<div className='help-msg'>Выберите игрока</div>
 			:
 		<>
-			<div className="col l9 m12 skills">
-				<div className="col s6 offset-s3 m3">
+			{/* <div className="col l9 m12 skills"> */}
+				<div className="col s6 m4 offset-m2 l2">
 					<div className={styles.profile}>
 						<img src={playerImg} alt=""/>
 						<div className={styles.name}>
@@ -47,30 +47,32 @@ const PlayerProfile = ({
 						</div>
 					</div>
 				</div>
-				<div className="col s12 m9">
+				<div className="col s6 m4 l3">
+					<RadarAnalyzer pi={playerInfo} /> 
+					{
+						// Добавлять игроков в список могут только авторизованные пользователи
+						(!isLoading ) ? 
+							
+						// Для игроков своего состава показывать кнопку не нужно, свойство wpneeded у них отсутствует
+							playerInfo.wpneeded ? 
+								<AddToList /> : null	
+							: 
+							<div className='center-align'>Добавление в список для авторизованных пользователей</div>
+					} 
+					{!isLoading ?
+						<CopyUID 
+							playerId={playerInfo.uid}  
+						/>
+						: null
+					} 
+				
+			</div>
+				<div className="col s12 m12 l7">
 					<PlayerSkillsNew playerInfo={playerInfo}/> 
 				</div>
-			</div>
-			<div className="col l3 m5 s7">
-				<RadarAnalyzer pi={playerInfo} /> 
-				{
-					// Добавлять игроков в список могут только авторизованные пользователи
-					(!isLoading ) ? 
-						
-					// Для игроков своего состава показывать кнопку не нужно, свойство wpneeded у них отсутствует
-						playerInfo.wpneeded ? 
-							<AddToList /> : null	
-						: 
-						<div className='center-align'>Добавление в список для авторизованных пользователей</div>
-				} 
-				{!isLoading ?
-					<CopyUID 
-						playerId={playerInfo.uid}  
-					/>
-					: null
-				} 
 				
-			</div>	
+			{/* </div> */}
+				
 		</>
 		}
 		</>

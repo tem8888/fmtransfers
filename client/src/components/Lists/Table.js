@@ -23,6 +23,7 @@ const Table = ({ columns, data, idPlayer, showPlayer }) => {
 		initialState: {
 		hiddenColumns: [
 			'status', 
+			window.innerWidth < 660 ? 'nation' : '',
 			window.innerWidth < 760 ? 'height' : '', 
 			window.innerWidth < 760 ? 'weight' : '', 
 			window.innerWidth < 660 ? 'uid' : '',
@@ -48,7 +49,7 @@ const Table = ({ columns, data, idPlayer, showPlayer }) => {
 		prepareRow(row)
 		
 		const backgroundColor = index % 2 === 0 ? 'rgb(65, 67, 72)' : null
-		style = {...style, backgroundColor}
+		style = {...style, backgroundColor, overflowY:"hidden"}
 
 		return (
 			<div
@@ -83,7 +84,7 @@ const Table = ({ columns, data, idPlayer, showPlayer }) => {
 		<div {...getTableProps()} className="table">
 			<div>
 				{headerGroups.map(headerGroup => (
-				<div {...headerGroup.getHeaderGroupProps()} className="tr" style={{padding:'3px 0'}}>
+				<div {...headerGroup.getHeaderGroupProps()} className="tr" style={{display: "flex", padding:'3px 0'}}>
 					{headerGroup.headers.map(column => (
 					
 					<div {...column.getHeaderProps(column.getSortByToggleProps())} className="th">

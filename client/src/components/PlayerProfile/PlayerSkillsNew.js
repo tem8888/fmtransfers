@@ -73,17 +73,22 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 
 	return (
 		<table className="skills-table">
-			<thead>
+			{/* <thead>
 				<tr>
 					<th className="col s4 center-align">Технические</th>
 					<th className="col s4 center-align">Психологические</th>
 					<th className="col s4 center-align">Физические</th>
 				</tr>
-			</thead>
+			</thead> */}
 			<tbody>
 				<tr>
-					<td className="col s4">
+					<td className="col s6 m4">
 						<table className="striped">
+						<thead>
+							<tr>
+								<th colspan='2' className="center-align skills-table-title">Технические</th>
+							</tr>
+						</thead>
 							<tbody>
 								{playerInfo.position === 'GK' ? 
 									gk.map((attr,i) =>(
@@ -121,8 +126,13 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 							</tbody>
 						</table>
 					</td>
-					<td className="col s4">
+					<td className="col s6 m4">
 						<table className="striped">
+						<thead>
+							<tr>
+								<th colspan='2' className="center-align skills-table-title">Психологические</th>
+							</tr>
+						</thead>
 							<tbody>
 								{mental.map((attr,i) =>(
 									<tr key={i}>
@@ -142,8 +152,13 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 							</tbody>
 						</table>
 					</td>
-					<td className="col s4">
+					<td className="col s6 m4">
 						<table className="striped">
+							<thead>
+								<tr>
+									<th colspan='2' className="center-align skills-table-title">Физические</th>
+								</tr>
+							</thead>
 							<tbody>
 								{physics.map((attr,i) =>(
 									<tr key={i}>

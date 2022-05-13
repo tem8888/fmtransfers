@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import M from 'materialize-css'
+import { useEffect } from 'react'
 const { shortListUpdate, shortListRemove } = require('../../store/actions/shortListActions')
 
 const AddToList = ({
@@ -41,6 +42,23 @@ const AddToList = ({
             return null
     }
 
+    const tapHandler = (tooltip) => {
+        console.log('TAP')
+        tooltip.className = 'tooltiptext hide-on-med-and-down'
+    }
+
+    useEffect(() => {
+        const addbtn = document.getElementById('addtolist')
+        const tooltip = document.getElementById('tooltiptext')
+        console.log(addbtn)
+
+        addbtn.addEventListener('touchstart', console.log('this is TAP'))
+        return () => 
+            addbtn.removeEventListener('touchstart', console.log('this is TAP'))
+    },[])
+
+    
+
     return (
         
         <div className="col s6 m6 center-align">
@@ -55,11 +73,12 @@ const AddToList = ({
         : 
            <div className="tooltip">
              <a href="/#" 
+                id="addtolist"
                 className={auth.isAuthenticated ? "btn waves-effect waves-light teal lighten-2" : "btn waves-effect waves-light teal lighten-2 disabled"} 
                 onClick={addToListHandler}>  
                 Add to list
             </a>
-            <span className={!auth.isAuthenticated ? "tooltiptext hide-on-med-and-down" : 'hide'}>Только для авторизованных пользователей</span>
+            <span id="tooltiptext" className={!auth.isAuthenticated ? "tooltiptext hide-on-med-and-down" : 'hide'}>Только для авторизованных пользователей</span>
             </div>
         }
         </div>

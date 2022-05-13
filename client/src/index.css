@@ -118,7 +118,7 @@ select:focus {
 /*  Основная сетка  */
 /*------------------*/
 .container {
-	min-width: 470px;
+	/* min-width: 470px; */
 	width: 100%;
 }
  .row .col {
@@ -228,16 +228,16 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	width: 27% !important;
 	overflow: hidden;
 }
-.skills td {
+.skills-table-title {
+	height: 30px;
+}
+.skills-table td {
 	padding: 2px 5px 4px !important;
 	line-height: 1.4;
 	white-space: nowrap;
 }
 .skills-margin {
 	margin-left: -10px;
-}
-.skills th {
-	margin-bottom: 5px;
 }
 
 /* Modal block */
@@ -343,9 +343,12 @@ button:focus-visible, .btn:focus-visible, .btn-large:focus-visible, .btn-small:f
 	.tabs.tabs-fixed-width {
 		flex-direction: column;
 	}
+	.container {
+		width: 95% !important;
+	}
 }
 @media only screen and (max-width: 484px) {
-	.skills td {
+	.skills-table td {
 		padding: 2px 1px !important;
 	}
 	.attribute-select {
