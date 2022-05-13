@@ -24,31 +24,26 @@ const PlayerProfile = ({
 		<div className='help-msg'>Выберите игрока</div>
 			:
 		<>
-			<div className="col l9 m12 skills">
-				<div className="col s6 offset-s3 m3">
-					<div className={styles.profile}>
-						<img src={playerImg} alt=""/>
-						<div className={styles.name}>
-							{playerInfo.name}
-						</div>
-						<div>
-							{playerInfo.position}
-						</div>
-						<hr/>
-						<div>
-							Age: {playerInfo.age}
-						</div>
-						<hr/>
-						<div>
-							CA: {playerInfo.ca}&nbsp;&nbsp; PA: {playerInfo.pa}
-						</div>
+			<div className="col s6 m4 offset-m2 l2">
+				<div className={styles.profile}>
+					<img src={playerImg} alt=""/>
+					<div className={styles.name}>
+						{playerInfo.name}
+					</div>
+					<div>
+						{playerInfo.position}
+					</div>
+					<hr/>
+					<div>
+						Age: {playerInfo.age}
+					</div>
+					<hr/>
+					<div>
+						CA: {playerInfo.ca}&nbsp;&nbsp; PA: {playerInfo.pa}
 					</div>
 				</div>
-				<div className="col s12 m9">
-					<PlayerSkillsNew playerInfo={playerInfo}/> 
-				</div>
 			</div>
-			<div className="col l3 m5 s7">
+			<div className="col s6 m4 l3">
 				<RadarAnalyzer pi={playerInfo} /> 
 				{
 					// Добавлять игроков в список могут только авторизованные пользователи
@@ -66,8 +61,10 @@ const PlayerProfile = ({
 					/>
 					: null
 				} 
-				
-			</div>	
+			</div>
+			<div className="col s12 m9">
+				<PlayerSkillsNew playerInfo={playerInfo}/> 
+			</div>
 		</>
 		}
 		</>

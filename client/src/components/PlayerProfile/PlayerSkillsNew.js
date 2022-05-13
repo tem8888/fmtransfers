@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const PlayerSkillsNew = React.memo(({playerInfo}) => {
+export const PlayerSkillsNew = ({playerInfo}) => {
 
-	const gk = React.useMemo(() => [
+	const gk = [
         { name: 'Ввод мяча', id: 'thr' },
 		{ name: 'Взаимодействие', id: 'com' },
 		{ name: 'Выбивание',  id: 'kic' },
@@ -16,9 +16,9 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 		{ name: 'Реакция', id: 'ref' },
 		{ name: 'Игра в воздухе',   id: 'aer' },
 		{ name: 'Эксцентричность',   id: 'ecc' }
-    ], [])
+    ]
 
-	const technique = React.useMemo(() => [
+	const technique =[
         { name: 'Вброс из-за боковой', id: 'lth' },
 		{ name: 'Дальние удары', id: 'lon' },
 		{ name: 'Дриблинг',  id: 'dri' },
@@ -33,9 +33,9 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 		{ name: 'Первое касание',   id: 'fir' },
 		{ name: 'Техника',   id: 'tec' },
 		{ name: 'Угловые',   id: 'cor' }
-    ], [])
+    ]
 
-	const mental = React.useMemo(() => [
+	const mental = [
         { name: 'Агрессивность', id: 'agg' },
 		{ name: 'Видение поля', id: 'vis' },
 		{ name: 'Выбор позиции',  id: 'pos' },
@@ -50,9 +50,9 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 		{ name: 'Решительность',   id: 'det' },
 		{ name: 'Самообладание',   id: 'cmp' },
 		{ name: 'Храбрость',   id: 'bra' }
-    ], [])
+    ]
 
-	const physics = React.useMemo(() => [
+	const physics = [
         { name: 'Выносливость', id: 'sta' },
 		{ name: 'Высота прыжка',      id: 'jum' },
 		{ name: 'Координация', id: 'bal' },
@@ -61,29 +61,27 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 		{ name: 'Сила', id: 'str' },
 		{ name: 'Скорость',   id: 'pac' },
 		{ name: 'Ускорение',   id: 'acc' }
-    ], [])
+    ]
 
-	const hidden = React.useMemo(() => [
+	const hidden = [
         { name: 'Амбиции', id: 'amb' },
 		{ name: 'Ключевые матчи',      id: 'impm' },
 		{ name: 'Профессионализм', id: 'prof' },
 		{ name: 'Травматизм',   id: 'injpr' },
 		{ name: 'Стабильность',      id: 'cons' }
-    ], [])
+    ]
 
 	return (
 		<table className="skills-table">
-			<thead>
-				<tr>
-					<th className="col s4 center-align">Технические</th>
-					<th className="col s4 center-align">Психологические</th>
-					<th className="col s4 center-align">Физические</th>
-				</tr>
-			</thead>
 			<tbody>
 				<tr>
-					<td className="col s4">
+					<td className="col s6 m4">
 						<table className="striped">
+							<thead>
+								<tr>
+									<th colSpan="2" className="center-align skills-table-title">Технические</th>
+								</tr>
+							</thead>
 							<tbody>
 								{playerInfo.position === 'GK' ? 
 									gk.map((attr,i) =>(
@@ -121,8 +119,13 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 							</tbody>
 						</table>
 					</td>
-					<td className="col s4">
+					<td className="col s6 m4">
 						<table className="striped">
+							<thead>
+								<tr>
+									<th colSpan="2" className="center-align skills-table-title">Психологические</th>
+								</tr>
+							</thead>
 							<tbody>
 								{mental.map((attr,i) =>(
 									<tr key={i}>
@@ -142,8 +145,13 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 							</tbody>
 						</table>
 					</td>
-					<td className="col s4">
+					<td className="col s6 m4">
 						<table className="striped">
+							<thead>
+								<tr>
+									<th colSpan="2" className="center-align skills-table-title">Физические</th>
+								</tr>
+							</thead>
 							<tbody>
 								{physics.map((attr,i) =>(
 									<tr key={i}>
@@ -186,4 +194,4 @@ export const PlayerSkillsNew = React.memo(({playerInfo}) => {
 			</tbody>
 		</table>
 		)
-})
+}

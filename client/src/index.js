@@ -5,6 +5,7 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import allReducers from './store/reducers'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk';
+import "@fontsource/exo-2"
 import App from './App';
 import './index.css';
 
