@@ -16,7 +16,7 @@ const AuthSuccess = ({auth, loadUser, logout}) => {
 			<div className="auth__succes valign-wrapper" >
 
 				<div className="col s6 center-align">
-					Hello, {auth.user.username}
+					<div>Hello, <b>{auth.user.username}</b></div>
 					<button className="waves-effect waves-light btn-small btn-logout" type="submit" onClick={submitLogoutHandler}>Logout</button>
 				</div>
 				<h6 className="col s6 center-align">

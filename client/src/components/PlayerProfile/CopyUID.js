@@ -22,7 +22,7 @@ const CopyUID = ({ playerId }) => {
 
     return (
         
-        <div className="col s6 m6 center-align">
+        <div className="col s12 m6 center-align button-margin">
              <a href="/#" className={"btn waves-effect waves-light teal lighten-2"} onClick={(e) => {copyHandler(e)}}>
                 Copy ID
             </a>

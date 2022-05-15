@@ -346,6 +346,9 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	.container {
 		width: 95% !important;
 	}
+	.button-margin {
+		margin: 10px 0;
+	}
 }
 @media only screen and (max-width: 484px) {
 	.skills-table td {

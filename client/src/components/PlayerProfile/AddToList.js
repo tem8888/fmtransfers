@@ -38,7 +38,7 @@ const AddToList = ({
 
     return (
         
-        <div className="col s6 m6 center-align">
+        <div className="col s12 m6 center-align button-margin">
 
         {/* Содержится ли игрок в шортлисте ? */}
         { isInShortlist(playerInfo.uid) ? 
