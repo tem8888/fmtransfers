@@ -1,7 +1,22 @@
 @namespace url("http://www.w3.org/1999/xhtml");
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;500;600&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import "~materialize-css/dist/css/materialize.min.css";
+
+@font-face {
+	font-family: "Exo 2";
+	src: url(assets/fonts/Exo_2/static/Exo2-Medium.ttf);
+	font-weight: 500;
+}
+@font-face {
+	font-family: "Exo 2";
+	src: url(assets/fonts/Exo_2/static/Exo2-Regular.ttf);
+	font-weight: 400;
+}
+@font-face {
+	font-family: "Exo 2";
+	src: url(assets/fonts/Exo_2/static/Exo2-Light.ttf);
+	font-weight: 300;
+}
 
 :root {
 	--moredark: #202225;
@@ -25,16 +40,11 @@ html {
 	color: var(--white) !important;
 	background-color: var(--dark) !important;
 	font-family: 'Exo 2', sans-serif !important;
-	font-weight: normal !important;
+	font-weight: 300;
 }
 
 button {
 	font-family: 'Exo 2', sans-serif !important;
-}
-
-table {
-	border-collapse: inherit !important;
-	position: relative;
 }
 
 img {
@@ -125,6 +135,7 @@ select:focus {
 /*  Buttons  */
 /*-----------*/
 .btn, .btn-large, .btn-small {
+	font-weight: 400;
 	background-color: var(--blue) !important;
 }
 .btn:hover, .btn-large:hover, .btn-small:hover {
@@ -144,6 +155,12 @@ select:focus {
 .btn-floating.btn-esmall i {
 	line-height: 22px;
 }
+.btn:focus-visible, .btn-large:focus-visible, .btn-small:focus-visible, .btn-esmall:focus-visible {
+	outline: 2px solid var(--white);
+}
+.waves-effect {
+	transition: background-color 0.3s ease-out !important;
+}
 
 /*  SEARCHFORM  */
 /*--------------*/
@@ -153,18 +170,18 @@ select:focus {
 	margin: 15px 0;
 }
 .input-row {
+	font-weight: 500;
 	margin-bottom: 10px !important;
 }
 .input-field {
 	margin: 0 !important;
 }
-.input-field-name {
-	padding: 5px 0px 5px 0px !important;
-}
-
 
 /*  PLAYERS TABLE  */
 /*-----------------*/
+.tabs {
+	font-weight: bold;
+}
 .table-container {
 	font-size: 0.8rem;
 	cursor: default;
@@ -180,7 +197,6 @@ select:focus {
 }
 .players-table tr {
 	height: 28px; 
-	font-weight: 300;
 }
 .sort-col {
 	cursor: pointer;
@@ -201,7 +217,7 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	background-color: var(--blue) !important;
 }
 .td-price {
-	font-weight: bold;
+	font-weight: 400;
 }
 .table-wrapper {
 	height: 448px;
@@ -210,9 +226,14 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 
 /*  PLAYERPROFILE  */
 /*-----------------*/
-
-.skills-table {
-	font-weight: 300;
+.playerprofile {
+	text-align: center;
+	font-size: 0.9rem;
+}
+.playerprofile__name {
+	font-size: 1.14rem;
+	padding: 0.5rem 0;
+	font-weight: 400;
 }
 .table-skill-value {
 	width: 5.33% !important;
@@ -225,6 +246,9 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	padding: 2px 5px 4px !important;
 	line-height: 1.4;
 	white-space: nowrap;
+}
+.skills-table-title {
+	height: 30px;
 }
 .skills-margin {
 	margin-left: -10px;
@@ -251,15 +275,14 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 /* Toast block */
 /*-------------*/
 #toast-container {
-	top: auto !important;
-	right: auto !important;
+	top: auto; 
+	right: auto;
 	bottom: 4%;
-	right: 7% !important;
+	left: 4%;
 }
 
 .my-toast {
 	background-color: var(--blue) !important;
-	left: 15%;
 }
 
 /*  Подсказки  */
@@ -280,7 +303,7 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	left: 0;
 	margin-left: -56px;
 	visibility: hidden;
-	font-weight: normal;
+	font-weight: 400;
 	transition: 0.3s;
 	opacity: 0;
 }
@@ -330,5 +353,10 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	}
 	.attribute-select {
 		width: 150px;
+	}
+}
+@media only screen and (max-width: 414px) {
+	.attribute-select {
+		width: 110px;
 	}
 }

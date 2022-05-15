@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import styles from './playerprofile.module.css'
 import playerImg from '../../assets/img/player.png'
 
 import { RadarAnalyzer } from './RadarAnalyzer.js'
@@ -24,10 +23,10 @@ const PlayerProfile = ({
 		<div className='help-msg'>Выберите игрока</div>
 			:
 		<>
-			<div className="col s6 m4 offset-m2 l2">
-				<div className={styles.profile}>
+			<div className="col s6 m4 offset-m1 l2">
+				<div className="playerprofile">
 					<img src={playerImg} alt=""/>
-					<div className={styles.name}>
+					<div className="playerprofile__name">
 						{playerInfo.name}
 					</div>
 					<div>
@@ -41,9 +40,10 @@ const PlayerProfile = ({
 					<div>
 						CA: {playerInfo.ca}&nbsp;&nbsp; PA: {playerInfo.pa}
 					</div>
+					<hr/>
 				</div>
 			</div>
-			<div className="col s6 m4 l3">
+			<div className="col s6 m5 offset-m1 l3">
 				<RadarAnalyzer pi={playerInfo} /> 
 				{
 					// Добавлять игроков в список могут только авторизованные пользователи
@@ -62,7 +62,8 @@ const PlayerProfile = ({
 					: null
 				} 
 			</div>
-			<div className="col s12 m9">
+			
+			<div className="col s12 m12 l7">
 				<PlayerSkillsNew playerInfo={playerInfo}/> 
 			</div>
 		</>
