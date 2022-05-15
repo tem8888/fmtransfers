@@ -6,7 +6,17 @@ const CopyUID = ({ playerId }) => {
     const copyHandler = (e) => {
 		e.preventDefault()
 
-        navigator.clipboard.writeText(playerId)
+        // Говорят, такие манипуляции позволяют работать кнопке копирования в браузерах не поддерживающих Clipboard API
+        const el = document.createElement('textarea');
+        el.value = playerId;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+
         M.toast({html: 'ID скопирован', classes: 'my-toast'})
 	}
 
