@@ -4,6 +4,7 @@ import PlayerProfile from './components/PlayerProfile/PlayerProfile.js'
 import SearchForm from './components/SearchForm/SearchForm.js'
 import Auth from './components/Auth/Auth.js'
 import Lists from './components/Lists/Lists.js'
+import NavLinks  from './components/NavLinks/NavLinks.js'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 						<SearchForm />
 					</div>
 					<div className="col l9 m12 s12">
+						<NavLinks />
 						<Lists />
 					</div>
 				</div>

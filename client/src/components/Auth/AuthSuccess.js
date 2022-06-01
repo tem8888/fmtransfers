@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {connect} from 'react-redux'
-const {logout, loadUser} = require('../../store/actions/authActions.js')
+const {logout} = require('../../store/actions/authActions.js')
 
 const AuthSuccess = ({auth, loadUser, logout}) => {
 
@@ -11,7 +11,7 @@ const AuthSuccess = ({auth, loadUser, logout}) => {
 	}
 
 	return (
-		!auth.isLoading ?
+		!auth.isLoading &&
 
 			<div className="auth__succes valign-wrapper" >
 
@@ -23,12 +23,7 @@ const AuthSuccess = ({auth, loadUser, logout}) => {
 					<div>{auth.user.club}</div>
 					<div className="auth__money">{auth.user.money.toFixed(2)}</div>
 				</h6>
-			</div>
-
-		:
-		null
-
-		
+			</div>	
 	)
 }
 
@@ -37,8 +32,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchtoProps = (dispatch) => ({
-	logout: () => dispatch(logout()),
-	loadUser: () => dispatch(loadUser())
+	logout: () => dispatch(logout())
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(AuthSuccess)

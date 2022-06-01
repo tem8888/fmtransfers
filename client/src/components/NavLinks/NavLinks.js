@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 import './navlinks.css'
 
 const NavLinks = ({auth, playerList, shortList, squadlist}) => {
-  console.log("NavLinks")
+
   return (
     <ul className="tabs tabs-fixed-width">
       <li className="tab">
