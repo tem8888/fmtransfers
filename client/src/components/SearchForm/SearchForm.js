@@ -3,7 +3,40 @@ import { connect } from 'react-redux'
 
 import M from 'materialize-css'
 import ModalAttributeSearch from './ModalAttributeSearch.js'
+import MinMaxInput from './MinMaxInput'
+import DropDown from './DropDown.js'
+
 const { setFilter } = require('../../store/actions/playerListActions.js')
+
+const preferredFootOptions = [
+	{label: 'Any', value: ''},
+	{label: 'Left', value: 'left'},
+	{label: 'Right', value: 'right'},
+	{label: 'Either', value: 'either'},
+]
+
+const positionOptions = [
+	{label: 'Any', value: ''},
+	{label: 'Goalkeaper', value: 'gk'},
+	{label: 'Right Defender', value: 'dr'},
+	{label: 'Central Defender', value: 'dc'},
+	{label: 'Left Defender', value: 'dl'},
+	{label: 'Right Wing-Back', value: 'wbr'},
+	{label: 'Left Wing-Back', value: 'wbl'},
+	{label: 'Defensive Midfielder', value: 'dm'},
+	{label: 'Central Midfield', value: 'mc'},
+	{label: 'Right Midfielder', value: 'mr'},
+	{label: 'Left Midfielder', value: 'ml'},
+	{label: 'Central Attacking Midfielder', value: 'amc'},
+	{label: 'Right Attacking Midfielder', value: 'amr'},
+	{label: 'Left Attacking Midfielder', value: 'aml'},
+	{label: 'Striker', value: 'stc'},
+]
+const wpneededOptions = [
+	{label: 'Any', value: ''},
+	{label: 'Needed', value: 'yes'},
+	{label: 'Not Needed', value: 'no'},
+]
 
 const SearchForm = (props) => {
 	const { setFilter, isLoading } = props
@@ -67,180 +100,62 @@ const SearchForm = (props) => {
 						/>
 					</div>
 				</div>
-				<div className='row input-row valign-wrapper'>
-					<div className='col s4'>CA &nbsp;</div>
-					<div className='col s4 input-field inline'>
-						<input
-							placeholder='min'
-							id='ca_1'
-							name='min'
-							type='number'
-							min='0'
-							max='200'
-							step='1'
-							value={inputFilter?.ca?.min || ''}
-							onChange={inputHandler}
-						/>
-					</div>
-					<div className='col s4 input-field inline'>
-						<input
-							placeholder='max'
-							id='ca_2'
-							type='number'
-							name='max'
-							min='0'
-							max='200'
-							step='1'
-							value={inputFilter?.ca?.max || ''}
-							onChange={inputHandler}
-						/>
-					</div>
-				</div> 
-				<div className='row input-row valign-wrapper'>
-					<div className='col s4'>PA &nbsp;</div>
-					<div className='col s4 input-field inline'>
-						<input
-							placeholder='min'
-							id='pa_1'
-							name='min'
-							type='number'
-							min='0'
-							max='200'
-							step='1'
-							value={inputFilter?.pa?.min || ''}
-							onChange={inputHandler}
-						/>
-					</div>
-					<div className='col s4 input-field inline'>
-						<input
-							placeholder='max'
-							id='pa_2'
-							name='max'
-							type='number'
-							min='0'
-							max='200'
-							step='1'
-							value={inputFilter?.pa?.max || ''}
-							onChange={inputHandler}
-						/>
-					</div>
-				</div>
-				<div className='row input-row valign-wrapper'>
-					<div className='col s4'>Price &nbsp;</div>
-					<div className='col s4 input-field inline'>
-						<input
-							placeholder='min'
-							id='price_1'
-							type='number'
-							name='min'
-							min='0'
-							step='0.5'
-							value={inputFilter?.price?.min || ''}
-							onChange={inputHandler}
-						/>
-					</div>
-					<div className='col s4 input-field inline'>
-						<input
-							placeholder='max'
-							id='price_2'
-							type='number'
-							name='max'
-							min='0'
-							step='0.5'
-							value={inputFilter?.price?.max || ''}
-							onChange={inputHandler}
-						/>
-					</div>
-				</div>
-
-				<div className='row input-row valign-wrapper'>
-					<div className='col s4'>Age &nbsp;</div>
-					<div className='col s4 input-field inline'>
-						<input
-							placeholder='min'
-							id='age_1'
-							type='number'
-							name='min'
-							min='14'
-							max='50'
-							step='1'
-							value={inputFilter?.age?.min || ''}
-							onChange={inputHandler}
-						/>
-					</div>
-					<div className='col s4 input-field inline'>
-					<input
-						placeholder='max'
-						id='age_2'
-						type='number'
-						name='max'
-						min='14'
-						max='50'
-						step='1'
-						value={inputFilter?.age?.max || ''}
-						onChange={inputHandler}
-					/>
-					</div>
-				</div>
-				<div className='row input-row'>
-					<div className='col s4'>Foot &nbsp;</div>
-					<div className='col s8'>
-						<select
-							className='input-field inline'
-							value={inputFilter.preferredfoot || ''}
-							onChange={inputHandler}
-							id='preferredfoot'
-						>
-							<option value=''>Any</option>
-							<option value='left'>Left</option>
-							<option value='right'>Right</option>
-							<option value='either'>Either</option>
-						</select>
-					</div>
-				</div>
-				<div className='row input-row'>
-					<div className='col s4'>Position &nbsp;</div>
-					<div className='col s8'>
-						<select
-							className='input-field inline'
-							value={inputFilter.position || ''}
-							onChange={inputHandler}
-							id='position'
-						>
-							<option value=''>Any</option>
-							<option value='gk'>Goalkeaper</option>
-							<option value='dr'>Right Defender</option>
-							<option value='dc'>Central Defender</option>
-							<option value='dl'>Left Defender</option>
-							<option value='wbr'>Right Wing-Back</option>
-							<option value='wbl'>Left Wing-Back</option>
-							<option value='dm'>Defensive Midfielder</option>
-							<option value='mc'>Central Midfield</option>
-							<option value='mr'>Right Midfielder</option>
-							<option value='ml'>Left Midfielder</option>
-							<option value='amc'>Central Attacking Midfielder</option>
-							<option value='amr'>Right Attacking Midfielder</option>
-							<option value='aml'>Left Attacking Midfielder</option>
-							<option value='stc'>Striker</option>
-						</select>					
-					</div>
-				</div>
-				<div className='row input-row'>
-					<div className='col s4'>WP &nbsp;</div>
-					<div className='col s8'>
-						<select
-							className='input-field inline'
-							value={inputFilter.wpneeded || ''}
-							onChange={inputHandler}
-							id='wpneeded'
-						>
-							<option value=''>Any</option>
-							<option value='yes'>Needed</option>
-							<option value='no'>Not needed</option>
-						</select>
-					</div>
-				</div>
-				
+				<MinMaxInput 
+					label={'CA'}
+					id={'ca'}
+					min={0}
+					max={200}
+					step={1}
+					inputFilter={inputFilter}
+					inputHandler={inputHandler}
+				/>
+				<MinMaxInput 
+					label={'PA'}
+					id={'pa'}
+					min={0}
+					max={200}
+					step={1}
+					inputFilter={inputFilter}
+					inputHandler={inputHandler}
+				/>
+				<MinMaxInput 
+					label={'Price'}
+					id={'price'}
+					min={0}
+					step={0.5}
+					inputFilter={inputFilter}
+					inputHandler={inputHandler}
+				/>
+				<MinMaxInput 
+					label={'Age'}
+					id={'age'}
+					min={14}
+					max={50}
+					step={1}
+					inputFilter={inputFilter}
+					inputHandler={inputHandler}
+				/>
+				<DropDown 
+					label='Foot'
+					id='preferredfoot'
+					options={preferredFootOptions} 
+					inputFilter={inputFilter} 
+					inputHandler={inputHandler}
+				/>
+				<DropDown 
+					label='Position'
+					id='position'
+					options={positionOptions} 
+					inputFilter={inputFilter} 
+					inputHandler={inputHandler}
+				/>
+				<DropDown 
+					label='WP'
+					id='wpneeded'
+					options={wpneededOptions} 
+					inputFilter={inputFilter} 
+					inputHandler={inputHandler}
+				/>
 				<div className='col s12 m12 search-button'>
 					<a
 						href="/#" 
