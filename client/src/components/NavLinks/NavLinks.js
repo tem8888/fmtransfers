@@ -28,7 +28,7 @@ const NavLinks = ({auth, playerList, shortList, squadlist}) => {
 
 const mapStateToProps = state => ({
 	auth: state.auth,
-  squadlist: state.squadList.filtered,
+  squadlist: state.squadList.list,
 	playerList: state.playersList.filtered,
 	shortList: state.shortState.list
 })

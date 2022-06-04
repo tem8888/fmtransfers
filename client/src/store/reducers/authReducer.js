@@ -10,10 +10,6 @@ const initialState = {
 
 const authReducer = function(state = initialState, action) {
 	switch(action.type) {
-		case 'USER_LOADING':
-			return {
-				...state, isLoading: true
-			};
 
 		case "USER_LOADED":
 			return {

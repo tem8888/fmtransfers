@@ -1,5 +1,15 @@
 import convertPositions from '../../helpers/convertPositions'
 
+const minmaxFields = [
+	'ca', 'pa', 'age', 'price',
+	'lth', 'lon', 'dri', 'fin', 'hea', 'fre', 'cro', 'mar', 'tck', 'pas', 'pen', 'fir', 'tec', 'cor', 'agg', 'vis', 'pos', 'otb', 'fla', 'ant', 'tea', 'con', 'lead', 'dec', 'wor', 'det', 'cmp', 'bra', 'sta', 'jum', 'bal', 'agi', 'nat', 'str', 'pace', 'acc', 'amb', 'impm', 'prof', 'injpr', 'cons', 'thr', 'com', 'kic', 'cmd', 'tro', 'han', 'ovo', 'pun', 'ref', 'aer', 'ecc'
+]
+const textFields = [
+	'name',
+	'preferredfoot',
+	'wpneeded',
+]
+
 const initialState = {
 	initial: {},
 	filtered: {},
@@ -19,9 +29,6 @@ const playerListReducer = (state = initialState, action) => {
 				activePlayer: {} 
 			}
 
-		case 'GET_FULL_LIST':
-			return { ...state, initial: state.initial, filtered: state.initial }
-
 		case 'FILTER':
 			{
 				const filters = action.payload.inputFilter
@@ -29,21 +36,11 @@ const playerListReducer = (state = initialState, action) => {
 				if (Object.keys(filters).length === 0)
 					return {
 						...state,
-						initial: state.initial,
 						filtered: state.initial
 					}
-				const minmaxFields = [
-					'ca', 'pa', 'age', 'price',
-					'lth', 'lon', 'dri', 'fin', 'hea', 'fre', 'cro', 'mar', 'tck', 'pas', 'pen', 'fir', 'tec', 'cor', 'agg', 'vis', 'pos', 'otb', 'fla', 'ant', 'tea', 'con', 'lead', 'dec', 'wor', 'det', 'cmp', 'bra', 'sta', 'jum', 'bal', 'agi', 'nat', 'str', 'pace', 'acc', 'amb', 'impm', 'prof', 'injpr', 'cons', 'thr', 'com', 'kic', 'cmd', 'tro', 'han', 'ovo', 'pun', 'ref', 'aer', 'ecc'
-				]
-				const textFields = [
-					'name',
-					'preferredfoot',
-					'wpneeded',
-				]
+				
 				return {
 					...state,
-					initial: state.initial,
 					filtered: state.initial.filter(
 						(player) => {
 							for (let key in filters) {
@@ -77,11 +74,16 @@ const playerListReducer = (state = initialState, action) => {
 			
 		case 'SORT_PLAYERS':
 			{
-				console.log(action.payload.key)
-			if (state.sorted)
-				return {...state, sorted: false, filtered: state.filtered.sort((a,b) => b[action.payload.key] - a[action.payload.key])}
-			else
-				return {...state, sorted: true, filtered: state.filtered.sort((a,b) => a[action.payload.key] - b[action.payload.key])}
+				if (state.sorted)
+					return {
+						...state, 
+						sorted: false, 
+						filtered: state.filtered.sort((a,b) => b[action.payload.key] - a[action.payload.key])}
+				else
+					return {
+						...state, 
+						sorted: true, 
+						filtered: state.filtered.sort((a,b) => a[action.payload.key] - b[action.payload.key])}
 			}
 
 		case 'SHOW_SQUAD_PLAYER':
@@ -93,17 +95,8 @@ const playerListReducer = (state = initialState, action) => {
 		case 'SHOW_LIST_PLAYER':
 			return {
 				...state, 
-				activePlayer: state.initial.filter((player) => player.uid === action.payload.playerId)[0]
+				activePlayer: state.initial.find((player) => player.uid === action.payload.playerId)
 			}
-
-		case 'BID_PLAYER_STATUS':
-			state.filtered.map((player) => {
-				if (player.uid === action.payload.uid) {
-					player.bidStatus = action.payload.bidStatus
-				}
-				return player
-			})
-			return state
 
 		default:
 			return state
