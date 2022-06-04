@@ -1,37 +1,35 @@
 import axios from 'axios'
 
 /* Предварительный запрос на загрузку всех бидов */
-export const loadShortList = (userTeam) => async (dispatch) => {
+export const loadShortList = (userTeam) => (dispatch) => {
 
-	await axios({
+	axios({
 		method: 'get',
 		url: '/api/loadbid',
 		params: { club: userTeam },
 		headers: { 'Content-Type': 'application/json; charset=utf-8' } 
 	})
-		.then(res => {
-			dispatch({
-				type: 'SHORTLIST_LOADED',
-				payload: res.data
-			})
+	.then(res => {
+		dispatch({
+			type: 'SHORTLIST_LOADED',
+			payload: res.data
 		})
-		.catch((err) => {
-			dispatch({
-				type: 'AUTH_ERROR'
-			})
+	})
+	.catch((err) => {
+		dispatch({
+			type: 'AUTH_ERROR'
 		})
+	})
 }
 
 /* Добавление игрока в шортлист */
-export const shortListUpdate = (playerInfo, club) => async (dispatch) => {
+export const shortListUpdate = (playerInfo, club) => (dispatch) => {
 
 	const data = {...playerInfo, club: club}
 
-	//await axios.post('/api/shortlistupdate', data)
-	await axios({
+	axios({
 		url: '/api/shortlistadd',
 		method: 'post',
-		//params: {uid: 1},
 		data: data
 	})
 	.then(res => {
@@ -39,18 +37,18 @@ export const shortListUpdate = (playerInfo, club) => async (dispatch) => {
 			type: 'SHORTLIST_ADD',
 			payload: {playerShortlistData: res.data}
 		})
-		})
+	})
 	.catch(() => {
-			dispatch({
-				type: 'SHORTLIST_ERROR'
-			})
+		dispatch({
+			type: 'SHORTLIST_ERROR'
+		})
 	})
 }
 
 /* Удаление игрока из шортлиста */
-export const shortListRemove = (playerId, club) => async (dispatch) => {
+export const shortListRemove = (playerId, club) => (dispatch) => {
 
-	await axios({
+	axios({
 		url: '/api/shortlistremove',
 		method: 'post',
 		params: {uid: playerId, club: club},
@@ -69,9 +67,9 @@ export const shortListRemove = (playerId, club) => async (dispatch) => {
 }
 
 /* Обновление данных пользователя в БД после сделанного бида  */
-export const updateUser = (price, userId) => async (dispatch) => {
+export const updateUser = (price, userId) => (dispatch) => {
 
-	await axios({
+	axios({
 		url: '/api/changeuser',
 		method: 'post',
 		params: {userId: userId},

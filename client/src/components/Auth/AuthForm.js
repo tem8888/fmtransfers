@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-const {login} = require('../../store/actions/authActions.js')
+import { LoginAndFetchSquad } from '../../store/actions/index.js'
 
-const AuthForm = ({	auth, login	}) => {
+const AuthForm = ({	auth, LoginAndFetchSquad }) => {
 
 	const [inputLogin, setInputLogin] = useState({
 			username: '',
@@ -30,7 +30,7 @@ const AuthForm = ({	auth, login	}) => {
 		if (inputLogin.password === '') 
 			return setErrors({...errors, password: "Не введен пароль"})
 
-		login(inputLogin)
+		LoginAndFetchSquad(inputLogin)
 	}
 
 	return (
@@ -70,8 +70,4 @@ const mapStateToProps = state => ({
 	auth: state.auth,
 });
 
-const mapDispatchtoProps = (dispatch) => ({
-	login: (inputLogin) => dispatch(login(inputLogin))
-})
-
-export default connect(mapStateToProps, mapDispatchtoProps)(AuthForm)
+export default connect(mapStateToProps, {LoginAndFetchSquad})(AuthForm)

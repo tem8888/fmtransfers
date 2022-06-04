@@ -4,28 +4,13 @@ import { Switch, Route, Redirect } from "react-router-dom"
 import PlayersList from './PlayersList.js'
 import Shortlist from './Shortlist.js';
 import SquadList from './SquadList.js';
-const { loadPlayers } = require('../../store/actions/playerListActions.js')
-const { loadSquad } = require('../../store/actions/squadListActions.js')
-const { loadShortList } = require('../../store/actions/shortListActions')
-const { loadUser } = require('../../store/actions/authActions.js')
+import { initialFetch } from '../../store/actions'
 
-const Lists = ({
-	auth, 
-	loadUser,
-	loadPlayers,
-	loadShortList,
-	loadSquad,
-	}) => {
+const Lists = ({ initialFetch }) => {
 
-	useEffect(() => { loadUser() }, [loadUser]); /* Загрузка данных авторизации пользователя */
-	useEffect(() => { loadPlayers() }, [loadPlayers])
-	useEffect(() => { 
-		if (auth.isAuthenticated) {
-			loadSquad(auth.user.club)
-			loadShortList(auth.user.club)
-		}
-			 }, 
-	[loadShortList, loadSquad, auth])
+	useEffect(() => {
+		initialFetch()
+	},[initialFetch])
 
   	return (
 	<>
@@ -47,20 +32,4 @@ const Lists = ({
 	)
 }
 
-
-const mapStateToProps = state => ({
-	auth: state.auth,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-	loadPlayers: () => dispatch(loadPlayers()),
-	loadUser: () => dispatch(loadUser()),
-	// load: () => {
-	// 	dispatch(loadUser())
-	// 	dispatch(loadPlayers())
-	// },
-	loadSquad: (userTeam) => dispatch(loadSquad(userTeam)),
-	loadShortList: (userTeam) => dispatch(loadShortList(userTeam))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Lists)
+export default connect(null, { initialFetch })(Lists)

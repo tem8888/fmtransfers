@@ -1,9 +1,10 @@
 import axios from 'axios'
 
 //Check token and load user
-export const loadPlayers = (userTeam) => async (dispatch, getState) => {
+export const loadPlayers = () => (dispatch) => {
 
-	await axios.get('/api/load', getState)
+	axios
+		.get('/api/load')
 		.then(res => {
 			dispatch({
 				type: 'PLAYERS_LOADED',
@@ -17,9 +18,9 @@ export const loadPlayers = (userTeam) => async (dispatch, getState) => {
 		})
 }
 
-export const loadSquadPlayers = (userTeam) => async (dispatch, getState) => {
+export const loadSquadPlayers = (userTeam) => (dispatch) => {
 
-	await axios({
+	axios({
 		method: 'get',
 		url: '/api/loadsquad',
 		params: { club: userTeam },
@@ -80,9 +81,9 @@ export const showPlayer = (player) => async (dispatch) => {
 
 
 /* Обновления поля ActiveBidStatus в БД */
-export const updatePlayerBidStatus = (playerId, status) => async (dispatch) => {
+export const updatePlayerBidStatus = (playerId, status) => (dispatch) => {
 
-	await axios({
+	axios({
 		url: '/api/setbidstatus',
 		method: 'post',
 		params: {uid: playerId},
@@ -90,15 +91,15 @@ export const updatePlayerBidStatus = (playerId, status) => async (dispatch) => {
 	})
 	.then((response) => {
 
-			dispatch({
-				type: 'BID_PLAYER_STATUS',
-				payload: response.data
-			})
-
+		dispatch({
+			type: 'BID_PLAYER_STATUS',
+			payload: response.data
 		})
-	.catch(() => {
-			dispatch({
-				type: 'BID_ERROR'
-			})
+
 	})
+	.catch(() => {
+		dispatch({
+			type: 'BID_ERROR'
+		})
+})
 }

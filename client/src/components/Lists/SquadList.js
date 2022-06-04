@@ -74,15 +74,10 @@ const SquadList = (props) => {
 }
 
 const mapStateToProps = state => ({
-	squadList: state.squadList.filtered,
+	squadList: state.squadList.list,
 	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : '',
 	auth: state.auth,
 	sort: state.squadList.sort
 })
 
-const mapDispatchToProps = (dispatch) => ({
-	showPlayer: (player) => dispatch(showPlayer(player)),
-	sortSquadPlayers: (sortKey) => dispatch(sortSquadPlayers(sortKey))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SquadList)
+export default connect(mapStateToProps, {showPlayer, sortSquadPlayers})(SquadList)
