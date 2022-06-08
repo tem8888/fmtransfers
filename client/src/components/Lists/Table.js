@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { useTable, useBlockLayout, useSortBy } from 'react-table'
 import { FixedSizeList } from "react-window"
-const { showPlayer} = require('../../store/actions/playerListActions')
+import { showPlayer} from '../../store/actions/playerListActions'
 
 
 const Table = ({ columns, data, idPlayer, showPlayer }) => {

@@ -1,16 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Loader } from '../Loader/Loader.js'
-const { loadBids } = require('../../store/actions/shortListActions')
-const { showPlayer } = require('../../store/actions/playerListActions')
-const { sortShortList } = require('../../store/actions/shortListActions.js')
+import { showPlayer } from '../../store/actions/playerListActions'
+import { sortShortList } from '../../store/actions/shortListActions.js'
 
 const ShortList = (props) => {
 
-	const {isLoading, sortShortList, shortList, idPlayer, auth, showPlayer} = props
+	const {isLoading, errorMessage, sortShortList, shortList, idPlayer, isAuthenticated, showPlayer} = props
 
-	/*  Устанавливаем ключ и порядок сортировки  */
-	const sortHandler = (e) => { // [хендлер сортировки по столбцам]
+	/*  Устанавливаем ключ сортировки  */
+	const sortHandler = (e) => {
 		e.preventDefault()
 		sortShortList(e.target.id)
 	}
@@ -18,7 +17,7 @@ const ShortList = (props) => {
 	/* Функция вывода списка игроков, по которым авторизованный пользователь сделал бид  */
 	const displayShortList = (shortList) => {
 		
-		if (!shortList.length || !auth.isAuthenticated) return null
+		if (!shortList.length || !isAuthenticated) return null
 
 		const setClass = (playerBidStatus, idPlayer, playerUid) => {
 			switch (playerBidStatus) {
@@ -51,35 +50,37 @@ const ShortList = (props) => {
 		</tr>
 	) }
 
+	if (!isAuthenticated)
+		return <div className='help-msg'>Необходима авторизация</div>
+	else if (isLoading)
+		return <Loader />
+	else if (shortList.length === 0)
+		return <div className='help-msg'>Нет игроков в шортлисте</div>
+	else if (errorMessage)
+		return <div className='help-msg'>{errorMessage}</div>
+
 	return (
-		<div className="table-wrapper scrollbar">
-			
-		 {!auth.isAuthenticated ? <div className='help-msg'>Необходима авторизация</div> : 
-			isLoading ? 
-			<Loader /> :
-			<table className="striped players-table">
-				<thead>
-					<tr>
-						<th>UID</th>
-						<th>Nat</th>
-						<th>Name</th>
-						<th>Position</th>
-						<th id="age" className='sort-col' onClick={sortHandler}>Age</th>
-						<th id="ca" className='sort-col' onClick={sortHandler}>CA</th>
-						<th id="pa" className='sort-col' onClick={sortHandler}>PA</th>
-						<th className='hide-on-small-only'>Height</th>
-						<th className='hide-on-small-only'>Weight</th>
-						<th>Foot</th>
-						<th>WP</th>
-						<th id='price' className='sort-col' onClick={sortHandler}>Price</th>
-					</tr>
-				</thead>
-				<tbody>
-					{displayShortList(shortList)}
-				</tbody>
-			</table>
-	} 
-		</div>
+		<table className="striped players-table">
+			<thead>
+				<tr>
+					<th>UID</th>
+					<th>Nat</th>
+					<th>Name</th>
+					<th>Position</th>
+					<th id="age" className='sort-col' onClick={sortHandler}>Age</th>
+					<th id="ca" className='sort-col' onClick={sortHandler}>CA</th>
+					<th id="pa" className='sort-col' onClick={sortHandler}>PA</th>
+					<th className='hide-on-small-only'>Height</th>
+					<th className='hide-on-small-only'>Weight</th>
+					<th>Foot</th>
+					<th>WP</th>
+					<th id='price' className='sort-col' onClick={sortHandler}>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				{displayShortList(shortList)}
+			</tbody>
+		</table>
 	)
 }
 
@@ -88,15 +89,10 @@ const mapStateToProps = state => ({
 	sortOrder: state.shortState.sortOrder,
 	sortKey: state.shortState.sortKey,
 	shortList: state.shortState.list,
+	errorMessage: state.shortState.errorMessage,
 	isLoading: state.playersList.loading,
-	auth: state.auth,
+	isAuthenticated: state.auth.isAuthenticated,
 	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : ''
 })
 
-const mapDispatchToProps = (dispatch) => ({
-	showPlayer: (playerId) => dispatch(showPlayer(playerId)),
-	loadBids: (team) => dispatch(loadBids(team)),
-	sortShortList: ((sortKey) => dispatch(sortShortList(sortKey)))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShortList)
+export default connect(mapStateToProps, {showPlayer, sortShortList})(ShortList)

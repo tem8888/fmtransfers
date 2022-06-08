@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { Loader } from '../Loader/Loader.js'
 import Table from './Table.js'
 
-
-const PlayersList = (props) => {
-	const { filterList, isLoading } = props
+const PlayersList = ({ filterList, isLoading, errorMessage }) => {
 
 	const columns = useMemo(
 		() => [
@@ -73,22 +71,21 @@ const PlayersList = (props) => {
 
 	const data = useMemo(() => filterList, [filterList])
 
-/* RETURN RENDER */
-	return (
-		<>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<Table columns={columns} data={data}/>
-			)}
-		</>
-	)
+
+	if (isLoading)
+		return <Loader />
+	
+	if (!errorMessage) 
+		return <Table columns={columns} data={data}/>
+	else
+		return <div className='help-msg'>{errorMessage}</div>	
 }
 
 const mapStateToProps = (state) => ({
 	filterList: state.playersList.filtered,
 	isLoading: state.playersList.loading,
-	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : ''
+	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : '',
+	errorMessage: state.playersList.errorMessage
 })
 
 export default connect(mapStateToProps)(PlayersList)

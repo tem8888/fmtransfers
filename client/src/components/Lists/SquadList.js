@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Loader } from '../Loader/Loader.js';
-const { sortSquadPlayers } = require('../../store/actions/squadListActions.js')
-const { showPlayer } = require('../../store/actions/playerListActions')
+import { sortSquadPlayers } from '../../store/actions/squadListActions.js'
+import { showPlayer } from '../../store/actions/playerListActions'
 
 const SquadList = (props) => {
 
