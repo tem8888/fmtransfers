@@ -82,6 +82,7 @@ select {
 	color: var(--white);
 	background: none !important;
 	font-family: 'Exo 2', sans-serif !important;
+	cursor: pointer;
 }
 
 option {
@@ -271,12 +272,6 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 .modal .modal-footer {
 	text-align: center !important;
 }
-.attribute-select {
-	width: 200px;
-}
-.attribute-input-row {
-	margin: 5px 0;
-}
 
 /* Toast block */
 /*-------------*/
@@ -328,6 +323,35 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	padding: 0.2rem;
 }
 
+/*  Модальное окно  */
+/*-----------------*/
+.modal-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+.modal.modal-fixed-footer {
+	height: 50%;
+}
+.modal {
+	display: block;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+}
+.modal .modal-footer {
+	height: auto;
+}
+.modal-footer a {
+	width: 100%;
+}
+
+
 
 /*  MEDIA  */
 /*---------*/
@@ -363,9 +387,34 @@ table.striped>tbody>tr.active-player:nth-child(odd) {
 	.attribute-select {
 		width: 150px;
 	}
+	.modal .modal-content {
+		padding: 10px;
+	}
+	.modal.modal-fixed-footer {
+		height: 80%;
+	}
 }
 @media only screen and (max-width: 414px) {
 	.attribute-select {
-		width: 110px;
+		width: 100%;
+	}
+	.modal {
+		width: 90%;
+	}
+}
+@media only screen and (max-width: 780px) and (orientation: landscape) { 
+
+	.modal.modal-fixed-footer .modal-footer {
+		right: 0;
+	}
+	.modal .modal-footer {
+		width: auto;
+	}
+	.modal.modal-fixed-footer .modal-content {
+		height: 100%;
+	}
+	.modal {
+		min-height: 90%;
+		top: 50%;
 	}
 }

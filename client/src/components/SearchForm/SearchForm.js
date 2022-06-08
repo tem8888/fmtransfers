@@ -1,46 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 
-import M from 'materialize-css'
 import ModalAttributeSearch from './ModalAttributeSearch.js'
 import MinMaxInput from './MinMaxInput'
 import DropDown from './DropDown.js'
+import { preferredFootOptions, positionOptions, wpneededOptions } from '../../assets/data/select-options'
+import { setFilter } from '../../store/actions/playerListActions.js'
 
-const { setFilter } = require('../../store/actions/playerListActions.js')
+const SearchForm = ({ setFilter, isLoading }) => {
 
-const preferredFootOptions = [
-	{label: 'Any', value: ''},
-	{label: 'Left', value: 'left'},
-	{label: 'Right', value: 'right'},
-	{label: 'Either', value: 'either'},
-]
-
-const positionOptions = [
-	{label: 'Any', value: ''},
-	{label: 'Goalkeaper', value: 'gk'},
-	{label: 'Right Defender', value: 'dr'},
-	{label: 'Central Defender', value: 'dc'},
-	{label: 'Left Defender', value: 'dl'},
-	{label: 'Right Wing-Back', value: 'wbr'},
-	{label: 'Left Wing-Back', value: 'wbl'},
-	{label: 'Defensive Midfielder', value: 'dm'},
-	{label: 'Central Midfield', value: 'mc'},
-	{label: 'Right Midfielder', value: 'mr'},
-	{label: 'Left Midfielder', value: 'ml'},
-	{label: 'Central Attacking Midfielder', value: 'amc'},
-	{label: 'Right Attacking Midfielder', value: 'amr'},
-	{label: 'Left Attacking Midfielder', value: 'aml'},
-	{label: 'Striker', value: 'stc'},
-]
-const wpneededOptions = [
-	{label: 'Any', value: ''},
-	{label: 'Needed', value: 'yes'},
-	{label: 'Not Needed', value: 'no'},
-]
-
-const SearchForm = (props) => {
-	const { setFilter, isLoading } = props
 	const [inputFilter, setInputFilter] = useState({})
+	const [isModalOpen, setIsModalOpen] = useState(false)
 	let inputRef = useRef([])
 
 	const inputHandler = (e) => {
@@ -78,11 +48,10 @@ const SearchForm = (props) => {
 		setInputFilter({})
 	}
 
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.modal');
-		// eslint-disable-next-line
-		var instances = M.Modal.init(elems);
-	});
+	const openModal = (e) => {
+		e.preventDefault()
+		setIsModalOpen(true)
+	}
 
 	return (
 		<div className='row'>
@@ -167,18 +136,19 @@ const SearchForm = (props) => {
 					<a
 						href="/#" 
 						data-target="modal1" 
+						onClick={openModal}
 						className='btn-small modal-trigger waves-effect waves-light deep-purple lighten-2'
 					>
 						Attributes+
 					</a>
 				</div>
-
 				<ModalAttributeSearch 
+					isModalOpen={isModalOpen}
 					inputFilter={inputFilter} 
 					inputHandler={inputHandler} 
 					setInputFilter={setInputFilter} 
+					closeModal={() => setIsModalOpen(false)}
 				/>
-
 			</form>
 		</div>
 	)
@@ -189,8 +159,4 @@ const mapStateToProps = (state) => ({
 	isLoading: state.playersList.loading,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-	setFilter: (inputFilter) => dispatch(setFilter(inputFilter)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchForm)
+export default connect(mapStateToProps, {setFilter})(SearchForm)
