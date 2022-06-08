@@ -27,7 +27,6 @@ export const RadarAnalyzer = ({pi}) => {
 					borderWidth: '5px',
 					backgroundColor: 'rgba(244, 255, 129, .1)',
 					borderColor: 'rgba(244, 255, 129, .95)'
-					//  borderColor: 'rgba(255, 255, 255, .9)'
 				},
 			]
 		}
@@ -55,7 +54,6 @@ export const RadarAnalyzer = ({pi}) => {
 					borderWidth: '5px',
 					backgroundColor: 'rgba(244, 255, 129, .1)',
 					borderColor: 'rgba(244, 255, 129, .95)'
-					//  borderColor: 'rgba(255, 255, 255, .9)'
 				},
 			]
 		}
@@ -89,10 +87,8 @@ export const RadarAnalyzer = ({pi}) => {
 
 	return (
 
-		<div style={{ //margin: '20px 0 0 -20px'
-		 }}>
+		<div>
 			<Radar data={data} options={options} width={200} height={200}/>
-			{/* <div>CD % {rating}</div> */}
 		</div>
 	)
 }

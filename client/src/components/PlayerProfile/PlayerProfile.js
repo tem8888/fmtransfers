@@ -1,75 +1,39 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import playerImg from '../../assets/img/player.png'
 
 import { RadarAnalyzer } from './RadarAnalyzer.js'
-import { PlayerSkillsNew } from './PlayerSkillsNew.js'
+import PlayerSkills from './PlayerSkillsTable.js'
 import AddToList from './AddToList.js'
 import CopyUID from './CopyUID.js'
+import PlayerShortInfo from './PlayerShortInfo';
 
-const PlayerProfile = ({ 
-	playerInfo,
-	isLoading
-	}) => {
+const PlayerProfile = ({ playerInfo }) => {
 
 	function isEmptyObject(value) {
 		return Object.keys(value).length === 0 && value.constructor === Object;
 	}
 
-	return (
-		<>
-		{isEmptyObject(playerInfo) ? 
-		
-		<div className='help-msg'>Выберите игрока</div>
-			:
-		<>
+	if (isEmptyObject(playerInfo))
+		return <div className='help-msg'>Выберите игрока</div>
+	else
+		return (
+			<>
 			<div className="col s6 m4 offset-m1 l2">
-				<div className="playerprofile">
-					<img src={playerImg} alt=""/>
-					<div className="playerprofile__name">
-						{playerInfo.name}
-					</div>
-					<div>
-						{playerInfo.position}
-					</div>
-					<hr/>
-					<div>
-						Age: {playerInfo.age}
-					</div>
-					<hr/>
-					<div>
-						CA: {playerInfo.ca}&nbsp;&nbsp; PA: {playerInfo.pa}
-					</div>
-					<hr/>
-				</div>
+				<PlayerShortInfo playerInfo={playerInfo}/>
 			</div>
 			<div className="col s6 m5 offset-m1 l3">
 				<RadarAnalyzer pi={playerInfo} /> 
-				{
-					// Добавлять игроков в список могут только авторизованные пользователи
-					(!isLoading ) ? 
-						
-					// Для игроков своего состава показывать кнопку не нужно, свойство wpneeded у них отсутствует
-						playerInfo.wpneeded ? 
-							<AddToList /> : null	
-						: 
-						<div className='center-align'>Добавление в список для авторизованных пользователей</div>
-				} 
-				{!isLoading ?
-					<CopyUID 
-						playerId={playerInfo.uid}  
-					/>
-					: null
-				} 
+				{/* Для игроков своего состава показывать кнопку добавления игрока в шортлист не нужно, 
+					свойство wpneeded у них отсутствует */}
+				{playerInfo.wpneeded ? <AddToList /> : null}
+				<CopyUID playerId={playerInfo.uid} />
 			</div>
 			
 			<div className="col s12 m12 l7">
-				<PlayerSkillsNew playerInfo={playerInfo}/> 
+				<PlayerSkills playerInfo={playerInfo}/> 
 			</div>
-		</>
-		}
-		</>
-	);
+			</>
+		)
 }
 
 
