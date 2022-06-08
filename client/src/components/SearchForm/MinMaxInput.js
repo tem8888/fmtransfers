@@ -22,6 +22,7 @@ const MinMaxInput = ({
                 min={min}
                 max={max}
                 step={step}
+                autoComplete='off'
                 value={inputFilter?.[id]?.min || ''}
                 onChange={inputHandler}
             />
@@ -35,6 +36,7 @@ const MinMaxInput = ({
                 min={min}
                 max={max}
                 step={step}
+                autoComplete='off'
                 value={inputFilter?.[id]?.max || ''}
                 onChange={inputHandler}
             />
