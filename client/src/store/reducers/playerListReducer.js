@@ -1,4 +1,12 @@
 import convertPositions from '../../helpers/convertPositions'
+import { 
+	PLAYERS_LOADED,
+	LOAD_PLAYERS_ERROR,
+	SORT_PLAYERS,
+	FILTER,
+	SHOW_SQUAD_PLAYER,
+	SHOW_LIST_PLAYER,
+	} from '../actions/types'
 
 const minmaxFields = [
 	'ca', 'pa', 'age', 'price',
@@ -11,25 +19,25 @@ const textFields = [
 ]
 
 const initialState = {
-	initial: {},
-	filtered: {},
+	initial: [],
+	filtered: [],
 	activePlayer: null,
 	loading: true,
-	sorted: false
+	sorted: false,
+	errorMessage: null
 }
 
 const playerListReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case 'PLAYERS_LOADED':
+		case PLAYERS_LOADED:
 			return { 
 				...state, 
 				initial: action.payload, 
 				filtered: action.payload, 
-				loading: false, 
-				activePlayer: {} 
+				loading: false
 			}
 
-		case 'FILTER':
+		case FILTER:
 			{
 				const filters = action.payload.inputFilter
 				// Если произошел сброс фильтра и пришел пустой объект, то возвращаем начальный список
@@ -72,7 +80,7 @@ const playerListReducer = (state = initialState, action) => {
 				}
 			}
 			
-		case 'SORT_PLAYERS':
+		case SORT_PLAYERS:
 			{
 				if (state.sorted)
 					return {
@@ -86,17 +94,20 @@ const playerListReducer = (state = initialState, action) => {
 						filtered: state.filtered.sort((a,b) => a[action.payload.key] - b[action.payload.key])}
 			}
 
-		case 'SHOW_SQUAD_PLAYER':
+		case SHOW_SQUAD_PLAYER:
 			return {
 				...state, 
 				activePlayer: action.payload.playerInfo
 			}
 		
-		case 'SHOW_LIST_PLAYER':
+		case SHOW_LIST_PLAYER:
 			return {
 				...state, 
 				activePlayer: state.initial.find((player) => player.uid === action.payload.playerId)
 			}
+
+		case LOAD_PLAYERS_ERROR:
+			return {...state, loading: false, errorMessage: action.payload}
 
 		default:
 			return state

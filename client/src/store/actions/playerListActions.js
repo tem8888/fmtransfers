@@ -1,21 +1,28 @@
 import axios from 'axios'
+import { 
+	PLAYERS_LOADED,
+	LOAD_PLAYERS_ERROR,
+	SQUAD_PLAYERS_LOADED,
+	SORT_PLAYERS,
+	FILTER,
+	SHOW_SQUAD_PLAYER,
+	SHOW_LIST_PLAYER,
+	} from './types'
 
-//Check token and load user
-export const loadPlayers = () => (dispatch) => {
+//Check token and load players
+export const loadPlayers = () => async (dispatch) => {
 
-	axios
-		.get('/api/load')
-		.then(res => {
-			dispatch({
-				type: 'PLAYERS_LOADED',
-				payload: res.data
-			})
-		})
-		.catch((err) => {
-			dispatch({
-				type: 'AUTH_ERROR'
-			})
-		})
+	try {
+		const response = await axios.get('/api/load')
+
+		if (response.data.length > 0)
+			dispatch({type: PLAYERS_LOADED,	payload: response.data})
+		else
+			dispatch({type: LOAD_PLAYERS_ERROR, payload: 'Игроки в базе отсуствуют'})
+		
+	} catch (err) {
+		dispatch({type: LOAD_PLAYERS_ERROR, payload: 'Ошибка получения списка игроков'})
+	}
 }
 
 export const loadSquadPlayers = (userTeam) => (dispatch) => {
@@ -28,7 +35,7 @@ export const loadSquadPlayers = (userTeam) => (dispatch) => {
 	})
 		.then(res => {
 			dispatch({
-				type: 'SQUAD_PLAYERS_LOADED',
+				type: SQUAD_PLAYERS_LOADED,
 				payload: res.data
 			})
 		})
@@ -44,7 +51,7 @@ export const loadSquadPlayers = (userTeam) => (dispatch) => {
 /*-------------------*/
 export const sortPlayers = (sortKey) => dispatch => {
 	dispatch({
-		type: 'SORT_PLAYERS',
+		type: SORT_PLAYERS,
 		payload: { key: sortKey }
 	})
 }
@@ -55,7 +62,7 @@ export const sortPlayers = (sortKey) => dispatch => {
 export const setFilter = (inputFilter) => dispatch => {
 	
 	dispatch({
-		type: 'FILTER',
+		type: FILTER,
 		payload: {inputFilter: inputFilter}
 	}) 
 }
@@ -68,12 +75,12 @@ export const showPlayer = (player) => async (dispatch) => {
 
 	if (typeof player === 'object')
 		await dispatch({
-			type: 'SHOW_SQUAD_PLAYER',
+			type: SHOW_SQUAD_PLAYER,
 			payload: { playerInfo: player }
 		})
 	else
 		await dispatch({
-			type: 'SHOW_LIST_PLAYER',
+			type: SHOW_LIST_PLAYER,
 			payload: { playerId: player }
 		})
 	

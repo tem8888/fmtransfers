@@ -1,4 +1,12 @@
 import Cookies from 'js-cookie'
+import { 
+	USER_LOADED,
+	LOGIN_SUCCESS,
+	LOGIN_FAIL,
+	LOGOUT_SUCCESS,
+	USER_UPDATE,
+	CLEAR_ERROR,
+	} from '../actions/types'
 
 const initialState = {
 	token: Cookies.get('token'),
@@ -11,7 +19,7 @@ const initialState = {
 const authReducer = function(state = initialState, action) {
 	switch(action.type) {
 
-		case "USER_LOADED":
+		case USER_LOADED:
 			return {
 				...state,
 				isAuthenticated: true,
@@ -19,13 +27,13 @@ const authReducer = function(state = initialState, action) {
 				user: action.payload
 			};
 
-		case "USER_UPDATE":
+		case USER_UPDATE:
 			return {
 				...state,
 				user: {...state.user, money: action.payload.money}
 			};
 
-		case 'LOGIN_SUCCESS':
+		case LOGIN_SUCCESS:
 			Cookies.set('token', action.payload.token, { expires: 7, sameSite:'Strict', secure: true});
 			return {
 				...state,
@@ -35,8 +43,7 @@ const authReducer = function(state = initialState, action) {
 				errorMsg: ''
 			};
 
-		case 'AUTH_ERROR':
-		case 'LOGOUT_SUCCESS':
+		case LOGOUT_SUCCESS:
 			Cookies.remove('token', { path: '', secure: true });
 			return {
 				...state,
@@ -46,8 +53,11 @@ const authReducer = function(state = initialState, action) {
 				isLoading: true,
 			}
 
-		case 'LOGIN_FAIL':
+		case LOGIN_FAIL:
 			return {...state, errorMsg: action.payload.errorMsg}
+		
+		case CLEAR_ERROR:
+			return {...state, errorMsg: ''}
 
 		default:
 			return state

@@ -1,53 +1,53 @@
 import axios from 'axios'
+import { 
+	SHORTLIST_LOADED,
+	SHORTLIST_ERROR,
+	SHORTLIST_ADD,
+	SHORTLIST_REMOVE,
+	SORT_SHORTLIST,
+	} from '../actions/types'
 
 /* Предварительный запрос на загрузку всех бидов */
-export const loadShortList = (userTeam) => (dispatch) => {
+export const loadShortList = (userTeam) => async (dispatch) => {
 
-	axios({
-		method: 'get',
-		url: '/api/loadbid',
-		params: { club: userTeam },
-		headers: { 'Content-Type': 'application/json; charset=utf-8' } 
-	})
-	.then(res => {
-		dispatch({
-			type: 'SHORTLIST_LOADED',
-			payload: res.data
+	try {
+		const response = await axios.get('/api/loadbid', {
+			params: { club: userTeam },
+			headers: { 'Content-Type': 'application/json; charset=utf-8' } 
 		})
-	})
-	.catch((err) => {
-		dispatch({
-			type: 'AUTH_ERROR'
-		})
-	})
+		dispatch({type: SHORTLIST_LOADED,	payload: response.data})
+		
+	} catch (err) {
+		dispatch({type: SHORTLIST_ERROR, payload: 'Ошибка получения списка игроков'})
+	}
 }
 
 /* Добавление игрока в шортлист */
-export const shortListUpdate = (playerInfo, club) => (dispatch) => {
+export const shortListAddPlayer = (playerInfo) => (dispatch, getState) => {
 
-	const data = {...playerInfo, club: club}
-
+	const club = getState().auth.user.club
 	axios({
 		url: '/api/shortlistadd',
 		method: 'post',
-		data: data
+		data: { ...playerInfo, club: club}
 	})
 	.then(res => {
 		dispatch({
-			type: 'SHORTLIST_ADD',
+			type: SHORTLIST_ADD,
 			payload: {playerShortlistData: res.data}
 		})
 	})
 	.catch(() => {
 		dispatch({
-			type: 'SHORTLIST_ERROR'
+			type: SHORTLIST_ERROR
 		})
 	})
 }
 
 /* Удаление игрока из шортлиста */
-export const shortListRemove = (playerId, club) => (dispatch) => {
+export const shortListRemovePlayer = (playerId) => (dispatch, getState) => {
 
+	const club = getState().auth.user.club
 	axios({
 		url: '/api/shortlistremove',
 		method: 'post',
@@ -55,42 +55,44 @@ export const shortListRemove = (playerId, club) => (dispatch) => {
 	})
 	.then((res) => {
 		dispatch({
-			type: 'SHORTLIST_REMOVE',
+			type: SHORTLIST_REMOVE,
 			payload: {uid: playerId, club: club}
 		})
 	})
 	.catch(() => {
 		dispatch({
-			type: 'SHORTLIST_ERROR'
+			type: SHORTLIST_ERROR
 		})
 	})
-}
-
-/* Обновление данных пользователя в БД после сделанного бида  */
-export const updateUser = (price, userId) => (dispatch) => {
-
-	axios({
-		url: '/api/changeuser',
-		method: 'post',
-		params: {userId: userId},
-		data: {money: price}
-	})
-	.then((response) => {
-		if (response)
-			dispatch({
-				type: 'USER_UPDATE',
-				payload: {money: response.data}
-			})
-	})
-	.catch(() => { console.log("Something wrong.") })	
 }
 
 /*---------------------*/
 /* Сортировка игроков */
 /*-------------------*/
-export const sortShortList = (sortKey) => dispatch => {
-	dispatch({
-		type: 'SORT_SHORTLIST',
+export const sortShortList = (sortKey) => {
+
+	return {
+		type: SORT_SHORTLIST,
 		payload: { key: sortKey}
-	})
+	}
 }
+
+/* Обновление данных пользователя в БД после сделанного бида  */
+/* Добавить отчисление игрока из состава */
+// export const updateUser = (price, userId) => (dispatch) => {
+
+// 	axios({
+// 		url: '/api/changeuser',
+// 		method: 'post',
+// 		params: {userId: userId},
+// 		data: {money: price}
+// 	})
+// 	.then((response) => {
+// 		if (response)
+// 			dispatch({
+// 				type: 'USER_UPDATE',
+// 				payload: {money: response.data}
+// 			})
+// 	})
+// 	.catch(() => { console.log("Something wrong.") })	
+// }
