@@ -4,22 +4,18 @@ import AuthForm from './AuthForm.js'
 import AuthSuccess from './AuthSuccess.js'
 import './auth.css';
 
-const Auth = ({auth}) => {
+const Auth = ({isAuthenticated}) => {
 
 	return (
 		<div className='row'>
-			{!auth.isAuthenticated ? 
-					<AuthForm />
-			:
-					<AuthSuccess />
-			}
+			{isAuthenticated ? <AuthSuccess /> : <AuthForm /> }
     	</div>
 	)
 }
 
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+	isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(Auth)
