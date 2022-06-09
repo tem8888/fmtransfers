@@ -192,9 +192,10 @@ label {
 .table-container {
 	font-size: 0.8rem;
 	cursor: default;
-	height: 448px;
+	height: 450px;
 	margin-bottom: 2rem;
 	line-height: 2;
+	overflow-y: auto;
 }
 .active-player {
 	background-color: var(--blue) !important;
