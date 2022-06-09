@@ -35,7 +35,7 @@ const ModalAttributeSearch = (props) => {
     }
     
     return createPortal((
-        <div className={`modal-wrapper ${isModalOpen ? '' : 'hide'}`} onClick={closeModal}>
+        <div className={`modal-wrapper ${isModalOpen ? '' : 'hide-modal'}`} onClick={closeModal}>
         <div className="modal modal-fixed-footer" onClick={(e) => e.stopPropagation()}>
             <div className="modal-content deep-purple lighten-1 purple-text text-lighten-5">
                 <div className='row'>
