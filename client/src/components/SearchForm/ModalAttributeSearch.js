@@ -20,7 +20,7 @@ const ModalAttributeSearch = (props) => {
         setAttr(items)
       }
 
-    const RenderOptionSkills = ({skills, color, inp}) => {
+    const RenderOptionSkills = ({skills, color}) => {
         return skills.map((skill) => {
             return (
                 <option 
@@ -33,7 +33,7 @@ const ModalAttributeSearch = (props) => {
             )
         })
     }
-    
+
     return createPortal((
         <div className={`modal-wrapper ${isModalOpen ? '' : 'hide-modal'}`} onClick={closeModal}>
         <div className="modal modal-fixed-footer" onClick={(e) => e.stopPropagation()}>
@@ -58,7 +58,7 @@ const ModalAttributeSearch = (props) => {
                             <div className='col s5 m5 l3 attribute-input-row' >
                                 <select name={index} value={attr[index].val} onChange={(e) => changeSelectHandler(e)} className='attribute-select scrollbar'>
                                     <option value=''>Не выбрано</option>
-                                    <RenderOptionSkills skills={technique} color={'indigo lighten-3'} inp={inp}/>
+                                    <RenderOptionSkills skills={technique} color={'indigo lighten-3'}/>
                                     <RenderOptionSkills skills={mental} color={'light-blue lighten-3'}/>
                                     <RenderOptionSkills skills={physics} color={'teal lighten-3'}/>
                                     <RenderOptionSkills skills={hidden} color={'light-green lighten-3'}/>
