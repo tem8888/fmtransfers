@@ -5,7 +5,7 @@ import { FixedSizeList } from "react-window"
 import { showPlayer} from '../../store/actions/playerListActions'
 
 
-const Table = ({ columns, data, idPlayer, showPlayer }) => {
+const Table = ({ columns, data, idPlayer, showPlayer, shortlistIDs }) => {
 
 	const defaultColumn = React.useMemo(() => ({ width: 55, }), [])
 
@@ -48,43 +48,47 @@ const Table = ({ columns, data, idPlayer, showPlayer }) => {
 		const row = rows[index]
 		prepareRow(row)
 		
-		const backgroundColor = index % 2 === 0 ? 'rgb(65, 67, 72)' : null
-		style = {...style, backgroundColor, overflowY:"hidden"}
+		const oddRowsColor = index % 2 === 0 ? 'rgb(65, 67, 72)' : null
+		const isInShortList = shortlistIDs.includes(row.values.uid) ? 'rgb(255, 255, 155)' : null
+		style = {
+			...style, 
+			backgroundColor: oddRowsColor, 
+			color: isInShortList, 
+			overflowY: 'hidden',
+			paddingLeft: '5px'
+		}
 
 		return (
 			<div
-			{...row.getRowProps({
-				style,
-			})}
-			id={row.values.uid}
-			className={setClass(row.values.status, idPlayer, row.values.uid)}
-			onClick={(e) => showPlayer(e.currentTarget.id)} 
+				{...row.getRowProps({style})}
+				id={row.values.uid}
+				className={setClass(row.values.status, idPlayer, row.values.uid)}
+				onClick={(e) => showPlayer(e.currentTarget.id)} 
 			>
-			{row.cells.map(cell => {
-				return (
-				<div 
-					{...cell.getCellProps()} 
-					// для Price ставим отдельный стиль
-					className={
-						cell.column.Header === 'Price' ? 
-						"td td-price" : 'td'}
-				>
-					{cell.render('Cell')}
-				</div>
-				)
-			})}
+				{row.cells.map(cell => {
+					return (
+					<div 
+						{...cell.getCellProps()}
+						// для Price ставим отдельный стиль
+						className={
+							cell.column.Header === 'Price' ? "td td-price" : 'td'}
+					>
+						{cell.render('Cell')}
+					</div>
+					)
+				})}
 			</div>
 		)
 		},
-		[prepareRow, rows, showPlayer, idPlayer]
+		[prepareRow, rows, showPlayer, idPlayer, shortlistIDs]
 	)
 
 	// Render the UI for your table
 	return (
 		<div {...getTableProps()} className="table">
-			<div>
-				{headerGroups.map(headerGroup => (
-				<div {...headerGroup.getHeaderGroupProps()} className="tr" style={{display:'flex', padding:'3px 0'}}>
+
+			{headerGroups.map(headerGroup => (
+				<div {...headerGroup.getHeaderGroupProps()} className="tr" style={{display:'flex', padding:'3px 5px', fontWeight: 600}}>
 					{headerGroup.headers.map(column => (
 					
 					<div {...column.getHeaderProps(column.getSortByToggleProps())} className="th">
@@ -92,8 +96,7 @@ const Table = ({ columns, data, idPlayer, showPlayer }) => {
 					</div>
 					))}
 				</div>
-				))}
-			</div>
+			))}
 
 			<div {...getTableBodyProps()}>
 				<FixedSizeList
@@ -111,11 +114,8 @@ const Table = ({ columns, data, idPlayer, showPlayer }) => {
 }
 
 const mapStateToProps = (state) => ({
-	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : ''
+	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : '',
+	shortlistIDs: Object.keys(state.shortState.list) || []
 })
 
-const mapDispatchToProps = (dispatch) => ({
-	showPlayer: (playerId) => dispatch(showPlayer(playerId))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Table)
+export default connect(mapStateToProps, {showPlayer})(Table)
