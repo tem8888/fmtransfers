@@ -14,7 +14,7 @@ const NavLinks = ({auth, playerList, shortList, squadlist}) => {
       </li>
       <li className="tab">
         <NavLink to='/shortlist' activeClassName='active'>
-          Мой список ({auth.isAuthenticated && shortList.length})
+          Мой список ({auth.isAuthenticated && Object.keys(shortList).length})
         </NavLink>
       </li>
       <li className="tab">

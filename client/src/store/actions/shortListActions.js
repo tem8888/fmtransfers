@@ -45,25 +45,17 @@ export const shortListAddPlayer = (playerInfo) => (dispatch, getState) => {
 }
 
 /* Удаление игрока из шортлиста */
-export const shortListRemovePlayer = (playerId) => (dispatch, getState) => {
+export const shortListRemovePlayer = (playerId) => async (dispatch, getState) => {
 
 	const club = getState().auth.user.club
-	axios({
-		url: '/api/shortlistremove',
-		method: 'post',
-		params: {uid: playerId, club: club},
-	})
-	.then((res) => {
-		dispatch({
-			type: SHORTLIST_REMOVE,
-			payload: {uid: playerId, club: club}
-		})
-	})
-	.catch(() => {
-		dispatch({
-			type: SHORTLIST_ERROR
-		})
-	})
+
+	try {
+		await axios.post('/api/shortlistremove', {params: {uid: playerId, club: club}})
+
+		dispatch({type: SHORTLIST_REMOVE, payload: playerId})
+	} catch (err) {
+		dispatch({ type: SHORTLIST_ERROR })
+	}
 }
 
 /*---------------------*/

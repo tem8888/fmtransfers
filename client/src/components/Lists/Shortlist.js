@@ -88,7 +88,7 @@ const ShortList = (props) => {
 const mapStateToProps = state => ({
 	sortOrder: state.shortState.sortOrder,
 	sortKey: state.shortState.sortKey,
-	shortList: state.shortState.list,
+	shortList: Object.values(state.shortState.list),
 	errorMessage: state.shortState.errorMessage,
 	isLoading: state.playersList.loading,
 	isAuthenticated: state.auth.isAuthenticated,

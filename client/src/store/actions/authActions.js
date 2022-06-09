@@ -6,6 +6,7 @@ import {
 	LOGIN_FAIL,
 	LOGOUT_SUCCESS,
 	CLEAR_ERROR,
+	SHORTLIST_RESET,
 	} from './types'
 
 //Check token and load user
@@ -34,6 +35,7 @@ export const login = ({ username, password }) => async (dispatch) => {
 // Logout User
 export const logout = () => dispatch => {
 	dispatch({ type: LOGOUT_SUCCESS })
+	dispatch({ type: SHORTLIST_RESET })
 };
 
 export const cleanError = () => {

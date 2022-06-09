@@ -28,7 +28,8 @@ const AddToList = ({
 
     const renderButton = () => {
         // Если игрок уже находится в шортлисте, то показываем кнопку удаления
-        if (shortList.find((player) => player.uid === playerInfo.uid) && isAuthenticated)
+       // if (shortList.find((player) => player.uid === playerInfo.uid) && isAuthenticated)
+        if (Object.keys(shortList).find((keyID) => keyID === playerInfo.uid) && isAuthenticated)
             return (
                 <a href="/#" 
                     className={'btn waves-effect waves-light red lighten-2'} 
@@ -45,7 +46,9 @@ const AddToList = ({
                         onClick={addToListHandler}>  
                         Add to list
                     </a>
-                    <span className={!isAuthenticated ? 'tooltiptext hide-on-med-and-down' : 'hide'}>Только для авторизованных пользователей</span>
+                    {!isAuthenticated ? 
+                        <span className='tooltiptext hide-on-med-and-down'>Только для авторизованных пользователей</span>
+                    : null }
                 </div>
             )
     }
