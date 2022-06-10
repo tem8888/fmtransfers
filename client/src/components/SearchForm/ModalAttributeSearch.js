@@ -2,6 +2,7 @@ import React from 'react'
 import {createPortal} from 'react-dom'
 import generateKey from '../../helpers/generateKey'
 import {gk, technique, mental, physics, hidden} from '../../assets/data/skills'
+import Button from '../ui/Button'
 
 const ModalAttributeSearch = (props) => {
     const {inputFilter, inputHandler, setInputFilter, closeModal, isModalOpen} = props
@@ -38,17 +39,15 @@ const ModalAttributeSearch = (props) => {
         <div className={`modal-wrapper ${isModalOpen ? '' : 'hide-modal'}`} onClick={closeModal}>
         <div className="modal modal-fixed-footer" onClick={(e) => e.stopPropagation()}>
             <div className="modal-content deep-purple lighten-1 purple-text text-lighten-5">
-                <div className='row'>
+                <div className='row modal-header'>
                     <div className='col s12 m6 l4'>
-                        <h5 style={{margin: 0}}>Attribute Search</h5>
+                        <h5 style={{margin: '5px'}}>Attribute Search</h5>
                     </div>
                     <div className='col s6 m6 l8'>
-                        {/* Кнопка добавления нового инпута */}
-                        {/* ________________________________*/}
-                        <a href='#!' className="waves-effect waves-light btn btn-small" onClick={addFieldHandler}>
+                        <Button onClick={addFieldHandler}>
                             <i className="material-icons right">input</i>
                             ADD FIELD
-                        </a>
+                        </Button>
                     </div>
                 </div>
 

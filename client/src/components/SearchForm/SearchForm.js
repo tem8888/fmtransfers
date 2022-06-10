@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 
-import ModalAttributeSearch from './ModalAttributeSearch.js'
+import ModalAttributeSearch from './ModalAttributeSearch'
 import MinMaxInput from './MinMaxInput'
-import DropDown from './DropDown.js'
+import DropDown from './DropDown'
+import Button from '../ui/Button'
 import { preferredFootOptions, positionOptions, wpneededOptions } from '../../assets/data/select-options'
-import { setFilter } from '../../store/actions/playerListActions.js'
+import { setFilter } from '../../store/actions/playerListActions'
 
 const SearchForm = ({ setFilter, isLoading }) => {
 
@@ -57,7 +58,9 @@ const SearchForm = ({ setFilter, isLoading }) => {
 		<div className='row'>
 			<form className='col s12'>
 				<div className='row input-row valign-wrapper'>
-					<div className='input-field-name col s4'>Name &nbsp;</div>
+					<div className='input-field-name col s4'>
+						<label for='name'>Name &nbsp;</label>
+					</div>
 					<div className='input-field inline col s8'>
 						<input
 							placeholder='name'
@@ -126,21 +129,12 @@ const SearchForm = ({ setFilter, isLoading }) => {
 					inputHandler={inputHandler}
 				/>
 				<div className='col s12 m12 search-button'>
-					<a
-						href="/#" 
-						className={"btn-small waves-effect waves-light"}
-						onClick={clearInputs}
-					>
+					<Button onClick={clearInputs}>
 						Clear
-					</a>
-					<a
-						href="/#" 
-						data-target="modal1" 
-						onClick={openModal}
-						className='btn-small modal-trigger waves-effect waves-light deep-purple lighten-2'
-					>
+					</Button>
+					<Button onClick={openModal} color={'deep-purple lighten-2'}>
 						Attributes+
-					</a>
+					</Button>
 				</div>
 				<ModalAttributeSearch 
 					isModalOpen={isModalOpen}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import M from 'materialize-css'
+import Button from '../ui/Button'
 import { shortListAddPlayer, shortListRemovePlayer } from '../../store/actions/shortListActions'
 
 const AddToList = ({
@@ -31,21 +32,17 @@ const AddToList = ({
        // if (shortList.find((player) => player.uid === playerInfo.uid) && isAuthenticated)
         if (Object.keys(shortList).find((keyID) => keyID === playerInfo.uid) && isAuthenticated)
             return (
-                <a href="/#" 
-                    className={'btn waves-effect waves-light red lighten-2'} 
-                    onClick={removeHandler}>
+                <Button onClick={removeHandler} color={'red lighten-2'}>
                     Remove from list
-                </a>
+                </Button>
             )
         // Если игрока нет в шортлисте
         else
             return (
                 <div className="tooltip">
-                    <a href="/#" 
-                        className={`btn waves-effect waves-light teal lighten-2 ${!isAuthenticated ? 'disabled' : ''}`} 
-                        onClick={addToListHandler}>  
+                    <Button onClick={addToListHandler} color={'teal lighten-2'} disabled={!isAuthenticated ? 'disabled' : ''}>
                         Add to list
-                    </a>
+                    </Button>
                     {!isAuthenticated ? 
                         <span className='tooltiptext hide-on-med-and-down'>Только для авторизованных пользователей</span>
                     : null }
