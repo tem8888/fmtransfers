@@ -3,23 +3,23 @@ import { connect } from 'react-redux'
 import { NavLink } from "react-router-dom"
 import './navlinks.css'
 
-const NavLinks = ({auth, playerList, shortList, squadlist}) => {
+const NavLinks = ({auth, playerListLength, shortListLength, squadlistLength}) => {
 
   return (
     <ul className="tabs tabs-fixed-width">
       <li className="tab">
         <NavLink to='/transfers' activeClassName='active'>
-          Трансферный список ({playerList.length})
+          Трансферный список ({playerListLength})
         </NavLink>
       </li>
       <li className="tab">
         <NavLink to='/shortlist' activeClassName='active'>
-          Мой список ({auth.isAuthenticated && Object.keys(shortList).length})
+          Мой список ({auth.isAuthenticated && shortListLength})
         </NavLink>
       </li>
       <li className="tab">
         <NavLink to='/squad' activeClassName='active'>
-          Мой состав ({auth.isAuthenticated && squadlist.length})
+          Мой состав ({auth.isAuthenticated && squadlistLength})
         </NavLink>
       </li>
     </ul>
@@ -28,9 +28,9 @@ const NavLinks = ({auth, playerList, shortList, squadlist}) => {
 
 const mapStateToProps = state => ({
 	auth: state.auth,
-  squadlist: state.squadList.list,
-	playerList: state.playersList.filtered,
-	shortList: state.shortState.list
+  squadlistLength: state.squadList.list.length,
+	playerListLength: state.playersList.filtered.length,
+	shortListLength: Object.keys(state.shortState.list).length
 })
 
 
