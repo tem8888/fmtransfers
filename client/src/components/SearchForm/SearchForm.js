@@ -59,7 +59,7 @@ const SearchForm = ({ setFilter, isLoading }) => {
 			<form className='col s12'>
 				<div className='row input-row valign-wrapper'>
 					<div className='input-field-name col s4'>
-						<label for='name'>Name &nbsp;</label>
+						<label htmlFor='name'>Name &nbsp;</label>
 					</div>
 					<div className='input-field inline col s8'>
 						<input
