@@ -10,7 +10,7 @@ const PlayersList = ({ filterList, isLoading, errorMessage }) => {
 		{
 			Header: 'UID',
 			accessor: 'uid', // accessor is the "key" in the data
-			width: 80
+			width: 85
 		},
 		{
 			Header: 'Nat',
@@ -20,7 +20,7 @@ const PlayersList = ({ filterList, isLoading, errorMessage }) => {
 		{
 			Header: 'Name',
 			accessor: 'name',
-			width: 190
+			width: 185
 		},
 		{
 			Header: 'Position',
@@ -71,7 +71,6 @@ const PlayersList = ({ filterList, isLoading, errorMessage }) => {
 
 	const data = useMemo(() => filterList, [filterList])
 
-
 	if (isLoading)
 		return <Loader />
 	
@@ -84,7 +83,6 @@ const PlayersList = ({ filterList, isLoading, errorMessage }) => {
 const mapStateToProps = (state) => ({
 	filterList: state.playersList.filtered,
 	isLoading: state.playersList.loading,
-	idPlayer: state.playersList.activePlayer ? state.playersList.activePlayer.uid : '',
 	errorMessage: state.playersList.errorMessage
 })
 
