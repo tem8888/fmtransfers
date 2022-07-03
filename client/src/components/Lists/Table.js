@@ -48,12 +48,10 @@ const Table = ({ columns, data, idPlayer, showPlayer, shortlistIDs }) => {
 		const row = rows[index]
 		prepareRow(row)
 		
-		const oddRowsColor = index % 2 === 0 ? 'rgb(65, 67, 72)' : null
-		const isInShortList = shortlistIDs.includes(row.values.uid) ? 'rgb(255, 255, 155)' : null
 		style = {
 			...style, 
-			backgroundColor: oddRowsColor, 
-			color: isInShortList, 
+			backgroundColor: index % 2 === 0 && 'rgb(65, 67, 72)', 
+			color: shortlistIDs.includes(row.values.uid) && 'rgb(255, 255, 155)', 
 			overflowY: 'hidden',
 			paddingLeft: '5px'
 		}
@@ -63,15 +61,13 @@ const Table = ({ columns, data, idPlayer, showPlayer, shortlistIDs }) => {
 				{...row.getRowProps({style})}
 				id={row.values.uid}
 				className={setClass(row.values.status, idPlayer, row.values.uid)}
-				onClick={(e) => showPlayer(e.currentTarget.id)} 
 			>
 				{row.cells.map(cell => {
 					return (
 					<div 
 						{...cell.getCellProps()}
 						// для Price ставим отдельный стиль
-						className={
-							cell.column.Header === 'Price' ? "td td-price" : 'td'}
+						className={`td${cell.column.Header === 'Price' ? ' td-price' : ''}`}
 					>
 						{cell.render('Cell')}
 					</div>
@@ -80,7 +76,7 @@ const Table = ({ columns, data, idPlayer, showPlayer, shortlistIDs }) => {
 			</div>
 		)
 		},
-		[prepareRow, rows, showPlayer, idPlayer, shortlistIDs]
+		[prepareRow, rows, idPlayer, shortlistIDs]
 	)
 
 	// Render the UI for your table
@@ -98,7 +94,7 @@ const Table = ({ columns, data, idPlayer, showPlayer, shortlistIDs }) => {
 				</div>
 			))}
 
-			<div {...getTableBodyProps()}>
+			<div {...getTableBodyProps()} onClick={(e) => showPlayer(e.target.parentElement.id)}>
 				<FixedSizeList
 				height={420}
 				itemCount={rows.length}
