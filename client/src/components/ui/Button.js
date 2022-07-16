@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Button = (props) => {
+const Button = ({children, onClick, color = '', disabled= ''}) => {
     return (
         <a href="/#" 
-            className={`btn waves-effect waves-light ${props.color || ''} ${props.disabled || ''}`} 
-            onClick={props.onClick}
+            className={`btn waves-effect waves-light ${color} ${disabled}`} 
+            onClick={onClick}
         >  
-            {props.children}
+            {children}
         </a>
     )
 }
