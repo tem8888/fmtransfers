@@ -9,32 +9,37 @@
 
 ## General Info
 
-There is a Football Manager community, where we play network games. This app helps us to find neccessary players for our teams by many parameters. 
-List of the players can be very long, so the App has an infinite scroll and some optimizing for searching.
+I'm an admin in Football Manager community, where we play network games.
+This app helps us to find necessary players for our teams by many parameters without opening the game.
+The List of players can be very long, so the App has an infinite scroll and some optimization for searching.
 
 Built with MERN stack and Redux.
 
 ## Features
 
-- Authorization, Cookies
-- Infinite scroll
-- Optimized Search
-- Adding/Deleting players to/from the shortlist
-- Responsive design
+-   Authorization, Cookies
+-   Infinite scroll
+-   Optimized Search
+-   Adding/Deleting players to/from the shortlist
+-   Responsive design
 
 ## Technologies
+
 Project is created with:
-- **MongoDB** 
-- **Express** 
-- **React** 
-- **NodeJS** 
-- **Redux**
-- **Materialize CSS**  
+
+-   **MongoDB**
+-   **Express**
+-   **React**
+-   **NodeJS**
+-   **Redux**
+-   **Materialize CSS**
 
 ## Demo
-Here is a working live demo: https://fmtransfers-prod-tem8888.vercel.app/
+
+Here is a working live demo: https://fmtransfers-prod-tem8888.vercel.app/. login: tem, password: 1111
 
 ## Screenshots
+
 <p align="center">
   <img src = "https://i.ibb.co/9VMbDBT/FM-Transfers.png" width=700>
 </p>
