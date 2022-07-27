@@ -85,8 +85,11 @@ select {
 	cursor: pointer;
 }
 
-option {
+option, optgroup {
 	color: var(--dark);
+}
+option[disabled] {
+	background-color: #b9bbbe;
 }
 
 select:focus {
